@@ -3,8 +3,11 @@
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaEventoController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolController;
+use Spatie\Permission\Contracts\Permission;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,5 +30,5 @@ Route::group(['middelware'=>['auth']],function(){
     Route::resource('roles',RolController::class);
     Route::resource('usuarios',UsuarioController::class);
     Route::resource('categoriaEventos',CategoriaEventoController::class);
-
+    Route::resource('permisos',PermissionController::class);
 });

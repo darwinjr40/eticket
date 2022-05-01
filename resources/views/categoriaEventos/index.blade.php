@@ -7,37 +7,41 @@
         </div>
         <div class="section-body">
             <div class="row">
-                <div class="col-lg-15">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
                             @can('crear-rol')
                                 <a class="btn btn-primary" href="{{ route('categoriaEventos.create') }}"> Crear Rol</a>
                             @endcan
-                            <table class="table table-striped mt-2">
+                            <table class="table table-striped mt-2" style="width: 100%">
                                 <thead style="background-color: #6777eF">
-                                    <th style="color:#fff">Nombre</th>
-                                    <th style="color:#fff">Descripcion</th>
-                                    <th style="color: #fff">Acciones</th>
-
-                                    
+                                    <tr>
+                                        <th style="color:#fff">Nombre</th>
+                                        <th style="color:#fff">Descripcion</th>
+                                        <th style="color: #fff">Acciones</th>
+                                    </tr> 
                                 </thead>
                                 <tbody >
                                     @foreach ($categorias as $cat)
-                                        <td>{{$cat->nombre}}</td>
-                                        <td>{{$cat->descripcion}}</td>
-                                        <td>
-                                            @can('editar-categoriaEvento')
-                                                <a class="btn btn-info" href="{{ route('categoriaEventos.edit', $cat->id) }}">Editar</a>
-                                            @endcan
-                                            @can('borrar-categoriaEvento')
-                                                {!! Form::open(['method'=>'DELETE','route'=>['categoriaEventos.destroy',$cat->id],'style'=>'diplay:inline']) !!}
-                                                    {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
-                                                 {!! Form::close() !!}
-                                            @endcan
-                                        </td>
+                                        <tr>
+                                            <td>{{$cat->nombre}}</td>
+                                            <td style="text-overflow: ellipsis; overflow: hidden;">{{$cat->descripcion}}</td>
+                                            <td>
+                                                @can('editar-categoriaEvento')
+                                                    <a class="btn btn-info" href="{{ route('categoriaEventos.edit', $cat->id) }}">Editar</a>
+                                                @endcan
+                                                @can('borrar-categoriaEvento')
+                                                    {!! Form::open(['method'=>'DELETE','route'=>['categoriaEventos.destroy',$cat->id],'style'=>'display:inline']) !!}
+                                                        {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
+                                                    {!! Form::close() !!}
+                                                @endcan
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
+                                
                             </table>
+                            {{$categorias->links()}}
                         </div>
                     </div>
                 </div>

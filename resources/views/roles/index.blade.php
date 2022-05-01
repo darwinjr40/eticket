@@ -15,27 +15,32 @@
                             @endcan
                             <table class="table table-striped mt-2">
                                 <thead style="background-color: #6777eF">
-                                    <th style="color:#fff">Rol</th>
-                                    <th style="color:#fff">Acciones</th>
+                                    <tr>
+                                        <th style="color:#fff">Rol</th>
+                                        <th style="color:#fff">Acciones</th>
+                                    </tr>
 
                                     
                                 </thead>
                                 <tbody >
                                     @foreach ($roles as $rol)
-                                        <td>{{$rol->name}}</td>
-                                        <td>
-                                            @can('editar-rol')
-                                                <a class="btn btn-info" href="{{ route('roles.edit', $rol->id) }}">Editar</a>
-                                            @endcan
-                                            @can('borrar-rol')
-                                                {!! Form::open(['method'=>'DELETE','route'=>['roles.destroy',$rol->id],'style'=>'diplay:inline']) !!}
-                                                    {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
-                                                 {!! Form::close() !!}
-                                            @endcan
-                                        </td>
+                                        <tr>
+                                            <td>{{$rol->name}}</td>
+                                            <td>
+                                                @can('editar-rol')
+                                                    <a class="btn btn-info" href="{{ route('roles.edit', $rol->id) }}">Editar</a>
+                                                @endcan
+                                                @can('borrar-rol')
+                                                    {!! Form::open(['method'=>'DELETE','route'=>['roles.destroy',$rol->id],'style'=>'display:inline']) !!}
+                                                        {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
+                                                    {!! Form::close() !!}
+                                                @endcan
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{$roles->links()}}
                         </div>
                     </div>
                 </div>

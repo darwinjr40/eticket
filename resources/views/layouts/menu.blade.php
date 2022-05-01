@@ -8,6 +8,9 @@
     <a class="nav-link" href="/roles">
         <i class=" fas fa-user-lock"></i><span>Roles</span>
     </a>
+    <a class="nav-link" href="/permisos">
+        <i class=" fas fa-user-lock"></i><span>Permisos</span>
+    </a>
     <a class="nav-link" href="/categoriaEventos">
         <i class=" fas fa-bars"></i><span>Categoria Eventos</span>
     </a>

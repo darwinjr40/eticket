@@ -41,9 +41,11 @@
                                                 <i class="fa fa-lock"> Permisos</i>
                                             </span>
                                             <br/>
-                                            @foreach ($permission as $value)
-                                                <label for="">{{ Form::checkbox('permission[]', $value->id, false, array('class'=>'name')) }}{{$value->name}}</label>
-                                            @endforeach
+                                            <select class="js-example-basic-multiple js-states form-control"  name="permisos[]" multiple>
+                                                @foreach ($permission as $value)
+                                                    <option value="{{$value->id}}" {{(in_array($value->id, $rolePermissions)) ? 'selected':''}}>{{$value->name}}</option>
+                                                @endforeach
+                                            </select>
                                             <br/>   
                                         </div>
                                         <div class="form-group">
@@ -61,4 +63,11 @@
             </div>
         </div>
     </section>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>
 @endsection

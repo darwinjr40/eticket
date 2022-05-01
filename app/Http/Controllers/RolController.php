@@ -84,7 +84,8 @@ class RolController extends Controller
         $role=Role::find($id);
         $permission=Permission::get();
         $rolePermissions=DB::table('role_has_permissions')->where('role_has_permissions.role_id',$id)
-        ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')->all();
+        ->pluck('role_has_permissions.permission_id')->all();
+        // dd(in_array("1",$rolePermissions));
         return view('roles.edit',compact('role','permission','rolePermissions'));
     }
 
@@ -96,7 +97,7 @@ class RolController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   dd($request->permisos);
         $this->validate($request,[
             'name'=>'required',
             'permission'=>'required'
