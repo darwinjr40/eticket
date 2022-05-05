@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriaEventoController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolController;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Contracts\Permission;
 
 /*
