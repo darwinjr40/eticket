@@ -59,3 +59,4 @@ Route::group(['middelware'=>['auth']],function(){
 
 
 Route::resource('ubicacions', UbicacionController::class);
+Route::get('ubicacion', [UbicacionController::class, 'mapa'])->name('ubicacions.mapa');
