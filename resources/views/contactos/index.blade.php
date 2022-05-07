@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Categoria Eventos</h3>
+            <h3 class="page__heading">Contacto</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -11,37 +11,36 @@
                     <div class="card">
                         <div class="card-body">
                             @can('crear-rol')
-                                <a class="btn btn-primary" href="{{ route('categoriaEventos.create') }}"> Crear Categoria</a>
+                                <a class="btn btn-primary" href="{{ route('contactos.create') }}"> Crear Contacto</a>
                             @endcan
                             <table class="table table-striped mt-2" style="width: 100%">
                                 <thead style="background-color: #6777eF">
                                     <tr>
                                         <th style="color:#fff">Nombre</th>
-                                        <th style="color:#fff">Descripcion</th>
-                                        <th style="color: #fff">Acciones</th>
+                                        <th style="color:#fff">Celular/Telefono</th>
+                                        <th style="color: #fff">Correo</th>
+                                        <th style="color:#fff">Acciones</th>
                                     </tr> 
                                 </thead>
                                 <tbody >
-                                    @foreach ($categorias as $cat)
+                                    @foreach ($contactos as $can)
                                         <tr>
-                                            <td>{{$cat->nombre}}</td>
-                                            <td style="text-overflow: ellipsis; overflow: hidden;">{{$cat->descripcion}}</td>
+                                            <td>{{$can->nombre}}</td>
+                                            <td>{{$can->numero}}</td>
+                                            <td>{{$can->email}}</td>
                                             <td>
-                                                @can('editar-categoriaEvento')
-                                                    <a class="btn btn-info" href="{{ route('categoriaEventos.edit', $cat->id) }}">Editar</a>
-                                                @endcan
-                                                @can('borrar-categoriaEvento')
-                                                    {!! Form::open(['method'=>'DELETE','route'=>['categoriaEventos.destroy',$cat->id],'style'=>'display:inline']) !!}
+                                                <a class="btn btn-info" href="{{ route('contactos.edit', $can->id) }}">Editar</a>
+                                                    {!! Form::open(['method'=>'DELETE','route'=>['contactos.destroy',$can->id],'style'=>'display:inline']) !!}
                                                         {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
                                                     {!! Form::close() !!}
-                                                @endcan
+
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                                 
                             </table>
-                            {{$categorias->links()}}
+                            {{$contactos->links()}}
                         </div>
                     </div>
                 </div>

@@ -14,4 +14,8 @@
     <a class="nav-link" href="/categoriaEventos">
         <i class=" fas fa-bars"></i><span>Categoria Eventos</span>
     </a>
+    <a class="nav-link" href="/contactos">
+        <i class=" fas fa-bars"></i><span>Contactos</span>
+    </a>
+    
 </li>
