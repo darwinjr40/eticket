@@ -31,14 +31,8 @@ class Ubicacion extends Model
 		'latitud' => 'required',
 		'longitud' => 'required',
     ];
-
     protected $perPage = 20;
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
     protected $fillable = ['nombre','direccion','telefono','capacidad','latitud','longitud'];
 
 

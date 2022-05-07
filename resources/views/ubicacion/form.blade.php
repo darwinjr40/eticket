@@ -22,6 +22,10 @@
             {!! $errors->first('capacidad', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
+            {{ Form::label('ubicacion') }}
+            <div id="map" style="width: 100%; height: 500px;"></div>
+        </div>
+        <div class="form-group">
             {{ Form::label('latitud') }}
             {{ Form::text('latitud', $ubicacion->latitud, ['class' => 'form-control' . ($errors->has('latitud') ? ' is-invalid' : ''), 'placeholder' => 'Latitud']) }}
             {!! $errors->first('latitud', '<div class="invalid-feedback">:message</div>') !!}
@@ -31,9 +35,11 @@
             {{ Form::text('longitud', $ubicacion->longitud, ['class' => 'form-control' . ($errors->has('longitud') ? ' is-invalid' : ''), 'placeholder' => 'Longitud']) }}
             {!! $errors->first('longitud', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-
+        
     </div>
     <div class="box-footer mt20">
         <button type="submit" class="btn btn-primary">Guardar</button>
     </div>
+    <br>
+
 </div>

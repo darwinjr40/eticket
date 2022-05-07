@@ -15,7 +15,6 @@ class UbicacionController extends Controller
     public function index()
     {
         $ubicacions = Ubicacion::paginate();
-
         return view('ubicacion.index', compact('ubicacions'))
             ->with('i', (request()->input('page', 1) - 1) * $ubicacions->perPage());
     }
@@ -28,35 +27,30 @@ class UbicacionController extends Controller
     public function store(Request $request)
     {
         request()->validate(Ubicacion::$rules);
-
         $ubicacion = Ubicacion::create($request->all());
-
         return redirect()->route('ubicacions.index')
-            ->with('success', 'Ubicacion created successfully.');
+            ->with('success', 'Ubicacion creada.');
     }
 
     public function show($id)
     {
         $ubicacion = Ubicacion::find($id);
-
         return view('ubicacion.show', compact('ubicacion'));
     }
 
     public function edit($id)
     {
         $ubicacion = Ubicacion::find($id);
-
         return view('ubicacion.edit', compact('ubicacion'));
     }
 
     public function update(Request $request, Ubicacion $ubicacion)
     {
         request()->validate(Ubicacion::$rules);
-
         $ubicacion->update($request->all());
 
         return redirect()->route('ubicacions.index')
-            ->with('success', 'Ubicacion updated successfully');
+            ->with('success', 'Ubicacion actualizada');
     }
 
     public function destroy($id)
@@ -64,7 +58,7 @@ class UbicacionController extends Controller
         $ubicacion = Ubicacion::find($id)->delete();
 
         return redirect()->route('ubicacions.index')
-            ->with('success', 'Ubicacion deleted successfully');
+            ->with('success', 'Ubicacion eliminada');
     }
 
     public function mapa()

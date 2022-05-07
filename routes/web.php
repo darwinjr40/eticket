@@ -3,6 +3,7 @@
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaEventoController;
+use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolController;
@@ -60,3 +61,4 @@ Route::group(['middelware'=>['auth']],function(){
 
 Route::resource('ubicacions', UbicacionController::class);
 Route::get('ubicacion', [UbicacionController::class, 'mapa'])->name('ubicacions.mapa');
+Route::resource('imagens', ImagenController::class);
