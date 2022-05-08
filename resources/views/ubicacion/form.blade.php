@@ -27,12 +27,12 @@
         </div>
         <div class="form-group">
             {{ Form::label('latitud') }}
-            {{ Form::text('latitud', $ubicacion->latitud, ['class' => 'form-control' . ($errors->has('latitud') ? ' is-invalid' : ''), 'placeholder' => 'Latitud']) }}
+            {{ Form::text('latitud', $ubicacion->latitud, ['class' => 'form-control' . ($errors->has('latitud') ? ' is-invalid' : ''), 'placeholder' => 'Latitud', 'readonly' => 'true']) }}
             {!! $errors->first('latitud', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('longitud') }}
-            {{ Form::text('longitud', $ubicacion->longitud, ['class' => 'form-control' . ($errors->has('longitud') ? ' is-invalid' : ''), 'placeholder' => 'Longitud']) }}
+            {{ Form::text('longitud', $ubicacion->longitud, ['class' => 'form-control' . ($errors->has('longitud') ? ' is-invalid' : ''), 'placeholder' => 'Longitud', 'readonly' => 'true']) }}
             {!! $errors->first('longitud', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         

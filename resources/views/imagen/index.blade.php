@@ -59,7 +59,7 @@
             <div class="row">
                 <div class="col-sm-12">
 
-                    <table class="table table-striped" id="imagenes" border="3">
+                    <table class="table table-striped" id="imagenes" border="5">
                         <thead class="thead" style="background-color: #6777eF">
                             <tr >
                                 <th style="color:#fff">Nro</th>

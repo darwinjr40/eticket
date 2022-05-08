@@ -58,8 +58,8 @@
     <script type="text/javascript">
         const coordenada = { lat: {{ $ubicacion->latitud }}, lng: {{ $ubicacion->longitud }} }; 
     </script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=&callback=setMap"></script>
-    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD61XJZbxHDlLWATXSGIAX3c7OTgh5dgH4&callback=initMap&libraries=drawing&v=weekly"></script> --}}
     <script type="text/javascript" src="{{ asset('js/map/mapa2.js') }}"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=&callback=setMap"></script>
     {{-- <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvUexPfr0cJLlaF08zCb1X3aggukbaIAI&callback=setMap"></script> --}}
+    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD61XJZbxHDlLWATXSGIAX3c7OTgh5dgH4&callback=initMap&libraries=drawing&v=weekly"></script> --}}
 @endsection
