@@ -6,6 +6,8 @@ use App\Http\Controllers\CategoriaEventoController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolController;
+use App\Http\Controllers\SectorController;
+use App\Http\Controllers\EspacioController;
 use Spatie\Permission\Contracts\Permission;
 
 /*
@@ -31,4 +33,6 @@ Route::group(['middelware'=>['auth']],function(){
     Route::resource('usuarios',UsuarioController::class);
     Route::resource('categoriaEventos',CategoriaEventoController::class);
     Route::resource('permisos',PermissionController::class);
+    Route::resource('sectors',SectorController::class);
+    Route::resource('espacios',EspacioController::class);
 });

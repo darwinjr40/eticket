@@ -14,4 +14,10 @@
     <a class="nav-link" href="/categoriaEventos">
         <i class=" fas fa-bars"></i><span>Categoria Eventos</span>
     </a>
+    <a class="nav-link" href="/sectors">
+        <i class=" fas fa-bars"></i><span>Sectores del Eventos</span>
+    </a>
+    <a class="nav-link" href="/espacios">
+        <i class=" fas fa-bars"></i><span>Espacios de los Sectores</span>
+    </a>
 </li>
