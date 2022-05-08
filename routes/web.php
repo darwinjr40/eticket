@@ -10,6 +10,9 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\SectorController;
 use App\Models\Contacto;
+use App\Http\Controllers\ImagenController;
+use App\Http\Controllers\UbicacionController;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Contracts\Permission;
 
 /*
@@ -38,3 +41,30 @@ Route::group(['middelware'=>['auth']],function(){
     Route::resource('contactos',ContactoController::class);
     Route::resource('eventos',EventoController::class);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::resource('ubicacions', UbicacionController::class);
+Route::get('ubicacion', [UbicacionController::class, 'mapa'])->name('ubicacions.mapa');
+Route::resource('imagens', ImagenController::class);
