@@ -23,23 +23,18 @@ class ImagenController extends Controller
 
     public function store(Request $request)
     {
-
+        $evento_id = ($request->evento_id)? ($request->evento_id) : ('3');
         $files = $request->file('files'); //retorna un vector con los datos de los archivos
-   
-        $user_id = Auth::id();  
         if ($request->hasFile('files')) {  //existe un archivo con nombre <files>
             foreach ($files as $file) {
-                //para almacenar en services aws 
-                //  dd($file);
-                $carpeta = '3';
-                $pathPrivate = Storage::disk('s3')->put($carpeta, $file, 'public');
-                // $a = $pathPrivate;
+                
+                
+                $pathPrivate = Storage::disk('s3')->put($evento_id, $file, 'public');
                 $path= Storage::disk('s3')->url($pathPrivate);
-                // $a = $a . '|||'. $path;
-                // return $a;
                 Imagen::create([
                     'path' => $path,
                     'pathPrivate' => $pathPrivate,
+                    'evento_id' => $evento_id
                 ]);
             } 
             //Alert::success('Success Title', 'Success Message');

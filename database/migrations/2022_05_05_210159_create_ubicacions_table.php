@@ -15,14 +15,14 @@ class CreateUbicacionsTable extends Migration
     {
         Schema::create('ubicacions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('evento_id')->nullable();
             $table->string('nombre');
             $table->string('direccion');
             $table->string('telefono');
             $table->integer('capacidad');
             $table->string('latitud');
             $table->string('longitud');
-            // $table->unsignedBigInteger('inquiry_id')->nullable();
-            // $table->foreign('inquiry_id')->references('id')->on('inquiries')->onDelete('cascade');
+            $table->foreign('evento_id')->references('id')->on('eventos')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

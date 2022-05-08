@@ -33,8 +33,10 @@ class Ubicacion extends Model
     ];
     protected $perPage = 20;
 
-    protected $fillable = ['nombre','direccion','telefono','capacidad','latitud','longitud'];
+    protected $fillable = ['nombre', 'evento_id','direccion','telefono','capacidad','latitud','longitud'];
 
-
+	public function evento(){
+        return $this->belongsTo(Evento::class);
+    }
 
 }

@@ -40,6 +40,8 @@ Route::group(['middelware'=>['auth']],function(){
     Route::resource('permisos',PermissionController::class);
     Route::resource('contactos',ContactoController::class);
     Route::resource('eventos',EventoController::class);
+    // Route::Post('eventos', [EventoController::class, 'storeEvento'])->name('eventos.storeEvento');
+    
 });
 
 

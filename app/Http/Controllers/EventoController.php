@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evento;
 use App\Models\categoriaEvento;
 use App\Models\Contacto;
+use App\Models\Ubicacion;
 use Illuminate\Http\Request;
 
 class EventoController extends Controller
@@ -67,7 +68,7 @@ class EventoController extends Controller
         $evento->load('categoria_eventos','contactos');
         return view('eventos.show',compact('evento'));
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -76,9 +77,12 @@ class EventoController extends Controller
      */
     public function edit(Evento $evento)
     {
+        $ubicacions = $evento->ubicaciones;
+        $files = $evento->imagenes;
         $categorias=categoriaEvento::all();
         $contactos=Contacto::all();
-        return view('eventos.edit',compact('categorias','contactos','evento'));
+
+        return view('eventos.edit',compact('categorias','contactos','evento', 'ubicacions', 'files'));
     }
 
     /**

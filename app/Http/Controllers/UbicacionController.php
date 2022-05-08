@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evento;
 use App\Models\Ubicacion;
 use Illuminate\Http\Request;
 
@@ -15,12 +16,15 @@ class UbicacionController extends Controller
     public function index()
     {
         $ubicacions = Ubicacion::paginate();
+        // return $ubicacions;
         return view('ubicacion.index', compact('ubicacions'))
-            ->with('i', (request()->input('page', 1) - 1) * $ubicacions->perPage());
+            ->with('i');
+            // ->with('i', (request()->input('page', 1) - 1) * $ubicacions->perPage());
     }
     public function create()
     {
         $ubicacion = new Ubicacion();
+        // dd($ubicacion);
         return view('ubicacion.create', compact('ubicacion'));
     }
 
@@ -28,8 +32,14 @@ class UbicacionController extends Controller
     {
         request()->validate(Ubicacion::$rules);
         $ubicacion = Ubicacion::create($request->all());
-        return redirect()->route('ubicacions.index')
-            ->with('success', 'Ubicacion creada.');
+        if ($request->evento_id) {
+            $evento = Evento::find($request->evento_id);
+            return redirect()->route('eventos.edit', $evento);
+        } else {
+            return redirect()->route('ubicacions.index')
+                ->with('success', 'Ubicacion creada.');
+        }
+        
     }
 
     public function show($id)
