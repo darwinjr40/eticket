@@ -11,13 +11,12 @@
                 <span id="card_title">
                     <h3>Lista de Ubicaciones</h3>
                 </span>
-                <a href="{{ route('ubicacions.create') }}" class="btn btn-primary btn-sm "
-                data-placement="left">
-                <i class="fa fa-fw fa-plus"></i>
-                Ubicaciones
-            </a>
-            <br>
-            <br>
+                <a href="{{ route('ubicacions.create') }}" class="btn btn-primary btn-sm" >
+                    <i class="fa fa-fw fa-plus"></i>
+                    Ubicaciones
+                </a>
+                <br>
+                <br>
             </div>
 
             <div class="row">

@@ -13,9 +13,10 @@
                     <div class="container">
                         <h3 >Gestor de Imagenes</h3>
 
-                        <span class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarArchivos">
-                            <span class="fas fa-plus-circle"></span>
-                            Archivos
+                        <span class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalAgregarArchivos">
+                            <span class="fas fa-plus-circle"></span>                            
+                            {{-- <span class="fas fa-fw fa-plus"></span>                                                         --}}
+                            Imagenes
                         </span>
                         <hr>
                     </div>
