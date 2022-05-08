@@ -17,5 +17,11 @@
     <a class="nav-link" href="/contactos">
         <i class=" fas fa-bars"></i><span>Contactos</span>
     </a>
+    <a class="nav-link" href="{{ route('imagens.index') }}">
+        <i class=" fas fa-bars"></i><span>Imagenes</span>
+    </a>
+    <a class="nav-link" href="{{ route('ubicacions.index') }}">
+        <i class=" fas fa-bars"></i><span>Ubicacion</span>
+    </a>
     
 </li>
