@@ -8,12 +8,10 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolController;
-use App\Http\Controllers\SectorController;
-use App\Models\Contacto;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\UbicacionController;
 use Illuminate\Support\Facades\Auth;
-use Spatie\Permission\Contracts\Permission;
+
 
 /*
 |--------------------------------------------------------------------------

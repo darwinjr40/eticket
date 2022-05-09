@@ -24,6 +24,7 @@
                             @endif
 
                             <form action="{{ route('eventos.update', $evento->id) }}" method="POST">
+                                @method('PUT')
                                 @csrf
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-8">
