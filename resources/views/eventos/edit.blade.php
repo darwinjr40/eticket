@@ -104,6 +104,11 @@
 
     <div class="card">
         <div class="card-body">
+            @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
             <!--Modal para agregar archivos -->
             <div class="jumbtron jumbotron-fluid">
                 <h3 style="text-align: center">Lista de Ubicaciones</h3>
@@ -193,14 +198,6 @@
             <!-- Fin Modal para agregar archivos -->
 
             <div class="row">
-
-                @if ($message = Session::get('success'))
-                    <div class="alert alert-success">
-                        <p>{{ $message }}</p>
-                    </div>
-                @endif
-
-
                 <div class="col-sm-12">
                     <table class="table table-striped" id="ubicaciones" border="3">
                         <thead class="thead">

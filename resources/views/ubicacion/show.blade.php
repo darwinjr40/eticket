@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
     <section class="section">
         <div class="section-header">
             <h3 class="page__heading">Datos de Ubicacion</h3>
@@ -25,27 +26,27 @@
                         
                         <div class="form-group">
                             <strong>Nombre:</strong>
-                            {{ $ubicacion->nombre }}
+                            {{ $ubicacion['nombre'] }}
                         </div>
                         <div class="form-group">
                             <strong>Direccion:</strong>
-                            {{ $ubicacion->direccion }}
+                            {{ $ubicacion['direccion'] }}
                         </div>
                         <div class="form-group">
                             <strong>Telefono:</strong>
-                            {{ $ubicacion->telefono }}
+                            {{ $ubicacion['telefono'] }}
                         </div>
                         <div class="form-group">
                             <strong>Capacidad:</strong>
-                            {{ $ubicacion->capacidad }}
+                            {{ $ubicacion['capacidad'] }}
                         </div>
                         <div class="form-group">
                             <strong>Latitud:</strong>
-                            {{ $ubicacion->latitud }}
+                            {{ $ubicacion['latitud'] }}
                         </div>
                         <div class="form-group">
                             <strong>Longitud:</strong>
-                            {{ $ubicacion->longitud }}
+                            {{ $ubicacion['longitud'] }}
                         </div>
 
                         <div id="map" style="width: 100%; height: 500px;"></div>
@@ -55,9 +56,11 @@
             </div>
         </div>
     </section>
+    
     <script type="text/javascript">
-        const coordenada = { lat: {{ $ubicacion->latitud }}, lng: {{ $ubicacion->longitud }} }; 
+        const coordenada = { lat: (Number({{$ubicacion['latitud'] }})), lng: (Number({{$ubicacion['longitud']}})) };
     </script>
+   
     <script type="text/javascript" src="{{ asset('js/map/mapa2.js') }}"></script>
     <script async src="https://maps.googleapis.com/maps/api/js?key=&callback=setMap"></script>
     {{-- <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvUexPfr0cJLlaF08zCb1X3aggukbaIAI&callback=setMap"></script> --}}
