@@ -22,6 +22,18 @@
                                     </button>
                                 </div>
                             @endif
+                            
+                            <div style="margin-block: 10px">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCategoria">
+                                    <i class="fa fa-bars"></i><span> Categoria</span>
+                                </button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarContacto">
+                                    <i class="fa fa-users"></i><span> Contacto</span>
+                                </button>
+                                
+                            </div>
+                            
+                            
 
                             <form action="{{ route('eventos.store') }}" method="POST">
                                 @csrf
@@ -81,3 +93,98 @@
         </div>
     </section>
 @endsection
+<div class="modal fade" id="modalAgregarCategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crear Categoria</h5>
+            </div>
+            <div class="modal-body">
+
+                <form action="{{ route('categoriaEventos.store') }}" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-8">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-users"> Nombre</i>
+                                    </span>
+                                    <input type="text" id="nombre" name="nombre" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-users"> Descripcion</i>
+                                    </span>
+                                    <textarea name="descripcion" id="descripcion" style="height: 100px;width: 450PX;" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
+                                <button type="submit" class="btn btn-primary">guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form> 
+            </div>
+        </div>
+     </div>
+</div>
+
+<div class="modal fade" id="modalAgregarContacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crear Categoria</h5>
+            </div>
+            <div class="modal-body">
+
+                <form action="{{ route('contactos.store') }}" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-8">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-users"> Nombre</i>
+                                    </span>
+                                    <input type="text" id="nombre" name="nombre" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-mobile"> Celular</i>
+                                    </span>
+                                    <input type="text" id="numero" name="numero" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fa fa-envelope"> Correo</i>
+                                    </span>
+                                    <input type="text" id="email" name="email" class="form-control">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
+                                <button type="submit" class="btn btn-primary">guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form> 
+            </div>
+        </div>
+     </div>
+</div>
+
+
+
+@section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
+@stop

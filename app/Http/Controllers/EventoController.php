@@ -53,7 +53,7 @@ class EventoController extends Controller
         $evento->id_contacto=$request->get('id_contacto');
         $evento->estado="preparacion";
         $evento->save();
-        return redirect()->route('eventos.index');
+        return back();
 
     }
 
@@ -105,7 +105,7 @@ class EventoController extends Controller
         $evento->id_contacto=$request->get('id_contacto');
         $evento->estado=$request->get('estado');
         $evento->update();
-        return redirect()->route('eventos.index');
+        return back();
     }
 
     /**

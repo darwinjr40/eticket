@@ -19,9 +19,7 @@ function setMap(latitud = -17.783290, longitud = -63.182073) {
 }
 //------------------------------------------------------------------------------
 function generarMapa(coordenadas, zoom, desplazar) {
-    alert("no funciona")
-
-    var mapa = new google.maps.Map(mapDiv, {
+     var mapa = new google.maps.Map(mapDiv, {
         center: coordenadas,
         zoom: zoom,
     });

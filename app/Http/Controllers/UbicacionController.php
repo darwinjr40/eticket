@@ -43,7 +43,6 @@ class UbicacionController extends Controller
             return redirect()->route('ubicacions.index')
                 ->with('success', 'Ubicacion creada.');
         }
-
     }
 
     public function show($id)

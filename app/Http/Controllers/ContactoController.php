@@ -43,7 +43,7 @@ class ContactoController extends Controller
         ]);
 
         Contacto::create($request->all());
-        return redirect()->route('contactos.index');
+        return back();
     }
 
     /**
@@ -85,7 +85,7 @@ class ContactoController extends Controller
         ]);
         $contacto=Contacto::find($id);
         $contacto->update($request->all());
-        return redirect()->route('contactos.index');
+        return back();
     }
 
     /**
