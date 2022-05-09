@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Crear Categoria de Eventos</h3>
+            <h3 class="page__heading">Crear Contacto</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -23,7 +23,7 @@
                                 </div>
                             @endif
 
-                            <form action="{{ route('categoriaEventos.store') }}" method="POST">
+                            <form action="{{ route('contactos.store') }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-8">
@@ -38,19 +38,28 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-text">
-                                                    <i class="fa fa-users"> Descripcion</i>
+                                                    <i class="fa fa-mobile"> Celular</i>
                                                 </span>
-                                                <textarea name="descripcion" id="descripcion" style="height: 100px;width: 450PX;"></textarea>
+                                                <input type="text" id="numero" name="numero" class="form-control">
                                             </div>
                                         </div>
-
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-envelope"> Correo</i>
+                                                </span>
+                                                <input type="text" id="email" name="email" class="form-control">
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-primary">Guardar</button>
-                                            <a href="{{route('categoriaEventos.index')}}" class="btn btn-danger">Cancelar</a>
+                                            <a href="{{route('contactos.index')}}" class="btn btn-danger">Cancelar</a>
                                         </div>
                                     </div>
                                 </div>
                             </form>    
+
+
                         </div>
                     </div>
                 </div>

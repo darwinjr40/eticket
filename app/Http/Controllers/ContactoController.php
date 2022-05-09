@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Espacio;
+use App\Models\Contacto;
 use Illuminate\Http\Request;
 
-class EspacioController extends Controller
+class ContactoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,8 @@ class EspacioController extends Controller
      */
     public function index()
     {
-        $espacios['espacios'] = Espacio::join('sectors', 'sectors.id', '=', 'espacios.id_sector')
-        ->select('espacios.*','sectors.nombre')
-        ->get();
-        return view('espacios.index',compact('espacios'));
+        $contactos=Contacto::paginate(5);
+        return view('contactos.index',compact('contactos'));
     }
 
     /**
@@ -27,7 +25,7 @@ class EspacioController extends Controller
      */
     public function create()
     {
-        return view('espacios.create');
+        return view('contactos.create');
     }
 
     /**
@@ -39,22 +37,22 @@ class EspacioController extends Controller
     public function store(Request $request)
     {
         request()->validate([
+            'nombre'=>'required',
             'numero'=>'required',
-            'descripcion'=>'required',
-            'capacidad'=>'required'
+            'email'=>'required|email'
         ]);
 
-        Espacio::create($request->all());
-        return redirect()->route('espacios.index');
+        Contacto::create($request->all());
+        return redirect()->route('contactos.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Espacio  $espacio
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Espacio $espacio)
+    public function show($id)
     {
         //
     }
@@ -62,42 +60,44 @@ class EspacioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Espacio  $espacio
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Espacio $espacio)
+    public function edit($id)
     {
-        return view('espacios.edit',compact('espacio'));
+        $contacto=Contacto::find($id);
+        return view('contactos.edit',compact('contacto'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Espacio  $espacio
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Espacio $espacio)
+    public function update(Request $request, $id)
     {
         request()->validate([
+            'nombre'=>'required',
             'numero'=>'required',
-            'descripcion'=>'required',
-            'capacidad'=>'required'
+            'email'=>'required|mail'
         ]);
-
-        $espacio->update($request->all());
-        return redirect()->route('espacios.index');
+        $contacto=Contacto::find($id);
+        $contacto->update($request->all());
+        return redirect()->route('contactos.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Espacio  $espacio
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Espacio $espacio)
+    public function destroy($id)
     {
-        $espacio->delete();
-        return redirect()->route('espacios.index');
+        $contacto=Contacto::find($id);
+        $contacto->delete();
+        return back();
     }
 }

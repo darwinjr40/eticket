@@ -10,7 +10,7 @@ class Espacio extends Model
     protected $primaryKey = 'id';
     protected $table = 'espacios';
     protected $fillable = [
-        'id','numero','descripcion','capacidad'
+        'id','numero','descripcion','capacidad', 'id_sector'
     ];
     public $timestamps = false;
 }

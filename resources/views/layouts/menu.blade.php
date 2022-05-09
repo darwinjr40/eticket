@@ -17,7 +17,14 @@
     <a class="nav-link" href="/sectors">
         <i class=" fas fa-bars"></i><span>Sectores del Eventos</span>
     </a>
-    <a class="nav-link" href="/espacios">
-        <i class=" fas fa-bars"></i><span>Espacios de los Sectores</span>
+    <a class="nav-link" href="/contactos">
+        <i class=" fas fa-bars"></i><span>Contactos</span>
     </a>
+    <a class="nav-link" href="{{ route('imagens.index') }}">
+        <i class=" fas fa-bars"></i><span>Imagenes</span>
+    </a>
+    <a class="nav-link" href="{{ route('ubicacions.index') }}">
+        <i class=" fas fa-bars"></i><span>Ubicacion</span>
+    </a>
+
 </li>

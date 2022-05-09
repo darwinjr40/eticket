@@ -10,7 +10,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                             
+
                             @if ($errors->any())
                                 <div class="alert alert-dark alert-dismissible fade show" role="alert">
                                     <strong>¡Revise los campos!</strong>
@@ -27,7 +27,7 @@
                                 @method('PUT')
                                 @csrf
                                 <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-6">
+                                    <div class="col-xs-12 col-sm-12 col-md-9">
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-text">
@@ -58,7 +58,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>    
+                            </form>
 
                         </div>
                     </div>

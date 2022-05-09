@@ -21,7 +21,7 @@
                                         <th style="color: #fff">Capacidad</th>
                                         <th style="color: #fff">Referencia</th>
                                         <th style="color:#fff">Acciones</th>
-                                    </tr> 
+                                    </tr>
                                 </thead>
                                 <tbody >
                                     @foreach ($sectors as $sector)
@@ -32,7 +32,7 @@
                                             <td>{{$sector->referencia}}</td>
                                             <td>
                                                 @can('agregar-espacio')
-                                                    <a class="btn btn-warning" href="{{ route('espacios.index') }}"> Agregar Espacios</a>
+                                                    <a class="btn btn-warning" href="{{ route('espacios.index', $sector->id) }}"> Agregar Espacios</a>
                                                 @endcan
                                                 @can('editar-sector')
                                                     <a class="btn btn-info" href="{{ route('sectors.edit', $sector->id) }}">Editar</a>
@@ -46,7 +46,7 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                
+
                             </table>
                             {{$sectors->links()}}
                         </div>
