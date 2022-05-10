@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evento;
 use App\Models\categoriaEvento;
 use App\Models\Contacto;
+use App\Models\Ubicacion;
 use Illuminate\Http\Request;
 
 class EventoController extends Controller
@@ -52,7 +53,7 @@ class EventoController extends Controller
         $evento->id_contacto=$request->get('id_contacto');
         $evento->estado="preparacion";
         $evento->save();
-        return redirect()->route('eventos.index');
+        return back();
 
     }
 
@@ -76,9 +77,12 @@ class EventoController extends Controller
      */
     public function edit(Evento $evento)
     {
+        $ubicacions = $evento->ubicaciones;
+        $files = $evento->imagenes;
         $categorias=categoriaEvento::all();
         $contactos=Contacto::all();
-        return view('eventos.edit',compact('categorias','contactos','evento'));
+
+        return view('eventos.edit',compact('categorias','contactos','evento', 'ubicacions', 'files'));
     }
 
     /**
@@ -94,14 +98,14 @@ class EventoController extends Controller
             'titulo'=>'required',
             'descripcion'=>'required',
             ]);
-        
+
         $evento->titulo=$request->get('titulo');
         $evento->descripcion=$request->get('descripcion');
         $evento->id_categoria=$request->get('id_categoria');
         $evento->id_contacto=$request->get('id_contacto');
         $evento->estado=$request->get('estado');
         $evento->update();
-        return redirect()->route('eventos.index');
+        return back();
     }
 
     /**

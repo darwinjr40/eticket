@@ -33,7 +33,6 @@
                                                     {!! Form::open(['method'=>'DELETE','route'=>['eventos.destroy',$sec->id],'style'=>'display:inline']) !!}
                                                         {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
                                                     {!! Form::close() !!}
-                                                <a class="btn btn-success" href="{{route('eventos.show',$sec->id)}}" style="display: inline">Ubicaciones</a>
                                             </td>
                                         </tr>
                                     @endforeach

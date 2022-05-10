@@ -8,5 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Imagen extends Model
 {
     use HasFactory;
-    protected $fillable = ['path', 'pathPrivate'];
+    protected $fillable = ['path', 'pathPrivate', 'evento_id'];
+
+
+    public function evento(){
+        return $this->belongsTo(Evento::class);
+    }
 }

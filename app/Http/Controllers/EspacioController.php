@@ -14,9 +14,7 @@ class EspacioController extends Controller
      */
     public function index()
     {
-        $espacios['espacios'] = Espacio::join('sectors', 'sectors.id', '=', 'espacios.id_sector')
-        ->select('espacios.*','sectors.nombre')
-        ->get();
+        $espacios=Espacio::paginate(5);
         return view('espacios.index',compact('espacios'));
     }
 
@@ -38,13 +36,18 @@ class EspacioController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
+        $this->validate($request,[
             'numero'=>'required',
             'descripcion'=>'required',
             'capacidad'=>'required'
         ]);
-
-        Espacio::create($request->all());
+        $espacios=new Espacio();
+        $espacios->numero=$request->get('numero');
+        $espacios->descripcion=$request->get('descripcion');
+        $espacios->capacidad=$request->get('capacidad');
+        $espacios->id_sector=$request->get('id_sector');
+        $espacios->save();
+        return back();
         return redirect()->route('espacios.index');
     }
 

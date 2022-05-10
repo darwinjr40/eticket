@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Espacios del Sector {}</h3>
+            <h3 class="page__heading">Espacios del Sector</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -59,14 +59,28 @@
                                         <th style="color:#fff">Numero</th>
                                         <th style="color: #fff">Descripcion</th>
                                         <th style="color: #fff">Capacidad</th>
-                                        <th style="color: #fff">sector id</th>
                                         <th style="color:#fff">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody >
+                                    @foreach ($espacios as $espacio)
+                                        <tr>
+                                            <td>{{$espacio->id}}</td>
+                                            <td>{{$espacio->numero}}</td>
+                                            <td>{{$espacio->descripcion}}</td>
+                                            <td>{{$espacio->capacidad}}</td>
+                                            <td>
+                                                @can('borrar-espacio')
+                                                    {!! Form::open(['method'=>'DELETE','route'=>['espacios.destroy',$espacio->id],'style'=>'display:inline']) !!}
+                                                        {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
+                                                    {!! Form::close() !!}
+                                                @endcan
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
-
                             </table>
+                            {{$espacios->links()}}
                         </div>
                     </div>
                 </div>

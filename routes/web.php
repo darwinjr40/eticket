@@ -14,7 +14,7 @@ use App\Models\Contacto;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\UbicacionController;
 use Illuminate\Support\Facades\Auth;
-use Spatie\Permission\Contracts\Permission;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +43,8 @@ Route::group(['middelware'=>['auth']],function(){
     Route::resource('espacios',EspacioController::class);
     Route::resource('contactos',ContactoController::class);
     Route::resource('eventos',EventoController::class);
+    // Route::Post('eventos', [EventoController::class, 'storeEvento'])->name('eventos.storeEvento');
+
 });
 
 

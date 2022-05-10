@@ -17,12 +17,14 @@ class Evento extends Model
         return $this->belongsTo(Contacto::class, 'id_contacto');
     }
 
-    // public function imagenes(){
-    //     return $this->hasMany(Imagen::class, 'id');
-    // }
-    // public function ubicaciones(){
-    //     return $this->hasMany(Ubicacion::class, 'id');
-    // }
+    public function ubicaciones(){
+        return $this->hasMany(Ubicacion::class);
+    }
+
+    public function imagenes(){
+        return $this->hasMany(Imagen::class);
+    }
+
     
 
 }

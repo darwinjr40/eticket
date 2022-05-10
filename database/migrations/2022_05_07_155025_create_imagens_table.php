@@ -15,10 +15,10 @@ class CreateImagensTable extends Migration
     {
         Schema::create('imagens', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('id_evento')->nullable(); 
+            $table->unsignedBigInteger('evento_id')->nullable(); 
             $table->string('path')->nullable();
             $table->string('pathPrivate')->nullable();
-            // $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('evento_id')->references('id')->on('eventos')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
