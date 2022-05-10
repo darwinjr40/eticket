@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\UbicacionController;
-use App\Http\Controllers\Api\UbicacionControllerApi;
+use App\Http\Controllers\Api\UbicacionApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::apiResource('/ubicaciones', UbicacionControllerApi::class)->names('api.ubicaciones');
+Route::apiResource('ubicaciones', UbicacionApiController::class)->names('api.ubicaciones');

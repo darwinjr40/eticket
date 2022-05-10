@@ -7,9 +7,8 @@ use App\Http\Resources\UbicacionResource;
 use App\Models\Ubicacion;
 use Illuminate\Http\Request;
 
-class UbicacionControllerApi extends Controller
+class UbicacionApiController extends Controller
 {
-   
     public function index()
     {
         $ubicacion = Ubicacion::included()
