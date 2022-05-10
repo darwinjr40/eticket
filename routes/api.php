@@ -21,4 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::apiResource('ubicaciones', UbicacionControllerApi::class)->names('api.ubicaciones');
+Route::apiResource('/ubicaciones', UbicacionControllerApi::class)->names('api.ubicaciones');

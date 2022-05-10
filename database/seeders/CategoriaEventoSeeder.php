@@ -18,5 +18,10 @@ class CategoriaEventoSeeder extends Seeder
             'nombre' => 'Social' ,
             'descripcion' => 'para las confraternizaciones',            
         ]);
+
+        categoriaEvento::create([
+            'nombre' => 'Privado' ,
+            'descripcion' => 'reuniones importantes',            
+        ]);
     }
 }
