@@ -23,7 +23,7 @@ class ImagenController extends Controller
 
     public function store(Request $request)
     {
-        $evento_id = ($request->evento_id)? ($request->evento_id) : ('3');
+        $evento_id = ($request->evento_id)? ($request->evento_id) : ('1');
         $files = $request->file('files'); //retorna un vector con los datos de los archivos
         if ($request->hasFile('files')) {  //existe un archivo con nombre <files>
             foreach ($files as $file) {

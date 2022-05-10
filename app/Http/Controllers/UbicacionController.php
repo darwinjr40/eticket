@@ -5,68 +5,83 @@ namespace App\Http\Controllers;
 use App\Models\Evento;
 use App\Models\Ubicacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
-/**
- * Class UbicacionController
- * @package App\Http\Controllers
- */
 class UbicacionController extends Controller
 {
 
     public function index()
     {
-        $ubicacions = Ubicacion::paginate();
-        // return $ubicacions;
-        return view('ubicacion.index', compact('ubicacions'))
-            ->with('i');
-            // ->with('i', (request()->input('page', 1) - 1) * $ubicacions->perPage());
+        $coleccion = Http::get('http://193.123.108.26/api/ubicaciones');
+        $ubicacions = $coleccion["data"];
+        return view('ubicacion.index', compact('ubicacions'));
+        // $ubicacions = Ubicacion::paginate();
+        // return view('ubicacion.index', compact('ubicacions'));
+        // $coleccion = (array)json_decode($coleccion);
+        // return $ubicacion;
+        // $ubicacions = Ubicacion::hydrate($coleccion["data"]);
+        // $ubicacions = $ubicacions->flatten();
     }
     public function create()
     {
         $ubicacion = new Ubicacion();
-        // dd($ubicacion);
         return view('ubicacion.create', compact('ubicacion'));
     }
 
     public function store(Request $request)
     {
-        request()->validate(Ubicacion::$rules);
-        $ubicacion = Ubicacion::create($request->all());
+        // request()->validate(Ubicacion::$rules);
+        // $ubicacion = Ubicacion::create($request->all());
+        Http::withHeaders([
+            'Accept' => 'application/json',
+        ])->post('http://193.123.108.26/api/ubicaciones', $request->all());
         if ($request->evento_id) {
-            $evento = Evento::find($request->evento_id);
-            return redirect()->route('eventos.edit', $evento);
+            // $evento = Evento::find($request->evento_id);
+            // return redirect()->route('eventos.edit', $evento);
+            return back()->with('success', 'Ubicacion creada.');
         } else {
             return redirect()->route('ubicacions.index')
                 ->with('success', 'Ubicacion creada.');
         }
-        return back();
     }
 
     public function show($id)
     {
-        $ubicacion = Ubicacion::find($id);
+        // $ubicacion = Ubicacion::find($id);
+        $coleccion = Http::get('http://193.123.108.26/api/ubicaciones/'.$id);
+        $ubicacion = $coleccion["data"];
+        // return $ubicacion;
         return view('ubicacion.show', compact('ubicacion'));
     }
 
     public function edit($id)
     {
-        $ubicacion = Ubicacion::find($id);
+        // $ubicacion = Ubicacion::find($id);
+        $coleccion = Http::get('http://193.123.108.26/api/ubicaciones/'.$id);
+        $ubicacion = $coleccion["data"];
         return view('ubicacion.edit', compact('ubicacion'));
     }
 
-    public function update(Request $request, Ubicacion $ubicacion)
+    public function update(Request $request,  $id)
     {
-        request()->validate(Ubicacion::$rules);
-        $ubicacion->update($request->all());
-
-        return redirect()->route('ubicacions.index')
-            ->with('success', 'Ubicacion actualizada');
+        // return $request;
+        Http::withHeaders([
+            'Accept' => 'application/json',
+        ])->patch('http://193.123.108.26/api/ubicaciones/'.$id, $request->all());
+        // request()->validate(Ubicacion::$rules);
+        // $ubicacion->update($request->all());
+        if ($request->evento_id) {
+            return back()->with('success', 'Ubicacion actualizada.');
+        } else {
+            return redirect()->route('ubicacions.index')
+                ->with('success', 'Ubicacion actualizada.');
+        }
     }
 
     public function destroy($id)
     {
-        $ubicacion = Ubicacion::find($id)->delete();
-
+        // $ubicacion = Ubicacion::find($id)->delete();
+        $coleccion = Http::delete('http://193.123.108.26/api/ubicaciones/'.$id);
         return redirect()->route('ubicacions.index')
             ->with('success', 'Ubicacion eliminada');
     }

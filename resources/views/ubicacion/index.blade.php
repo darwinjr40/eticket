@@ -7,6 +7,13 @@
 @section('content')
     <div class="card">
         <div class="card-body">
+            
+            @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
+
             <div class="">
                 <span id="card_title">
                     <h3>Lista de Ubicaciones</h3>
@@ -20,14 +27,6 @@
             </div>
 
             <div class="row">
-
-
-                @if ($message = Session::get('success'))
-                    <div class="alert alert-success">
-                        <p>{{ $message }}</p>
-                    </div>
-                @endif
-
 
                 <div class="col-sm-12">
                     <table class="table table-striped" id="ubicaciones" border="3">
@@ -47,22 +46,22 @@
                         <tbody>
                             @foreach ($ubicacions as $ubicacion)
                                 <tr>
-                                    <td>{{ ++$i }}</td>
+                                    <td>{{ $ubicacion['id'] }}</td>
 
-                                    <td>{{ $ubicacion->nombre }}</td>
-                                    <td>{{ $ubicacion->direccion }}</td>
-                                    <td>{{ $ubicacion->telefono }}</td>
-                                    <td>{{ $ubicacion->capacidad }}</td>
+                                    <td>{{ $ubicacion['nombre'] }}</td>
+                                    <td>{{ $ubicacion['direccion'] }}</td>
+                                    <td>{{ $ubicacion['telefono'] }}</td>
+                                    <td>{{ $ubicacion['capacidad'] }}</td>
                                     {{-- <td>{{ $ubicacion->latitud }}</td>
                                 <td>{{ $ubicacion->longitud }}</td> --}}
 
                                     <td>
-                                        <form action="{{ route('ubicacions.destroy', $ubicacion->id) }}" method="POST">
+                                        <form action="{{ route('ubicacions.destroy', $ubicacion['id']) }}" method="POST">
                                             <a class="btn btn-sm btn-primary "
-                                                href="{{ route('ubicacions.show', $ubicacion->id) }}"><i
+                                                href="{{ route('ubicacions.show', $ubicacion['id']) }}"><i
                                                     class="fa fa-fw fa-eye"></i> </a>
                                             <a class="btn btn-sm btn-success"
-                                                href="{{ route('ubicacions.edit', $ubicacion->id) }}"><i
+                                                href="{{ route('ubicacions.edit', $ubicacion['id']) }}"><i
                                                     class="fa fa-fw fa-edit"></i> </a>
                                             @csrf
                                             @method('DELETE')

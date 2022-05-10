@@ -12,13 +12,14 @@ function initMap(latitud = -17.783290, longitud = -63.182073) {
 }
 
 function setMap(latitud = -17.783290, longitud = -63.182073) {
+
     var variable = typeof coordenada;
     coordenadas = (variable === 'undefined')? ({ lat: latitud, lng: longitud}) : (coordenada);
     generarMapa(coordenadas, 12, false);
 }
 //------------------------------------------------------------------------------
 function generarMapa(coordenadas, zoom, desplazar) {
-    var mapa = new google.maps.Map(mapDiv, {
+     var mapa = new google.maps.Map(mapDiv, {
         center: coordenadas,
         zoom: zoom,
     });

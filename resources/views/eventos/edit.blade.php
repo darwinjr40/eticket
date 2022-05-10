@@ -6,6 +6,11 @@
             <h3 class="page__heading">Crear Eventos</h3>
         </div>
         <div class="section-body">
+            @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
@@ -105,6 +110,7 @@
 
     <div class="card">
         <div class="card-body">
+            
             <!--Modal para agregar archivos -->
             <div class="jumbtron jumbotron-fluid">
                 <h3 style="text-align: center">Lista de Ubicaciones</h3>
@@ -194,14 +200,6 @@
             <!-- Fin Modal para agregar archivos -->
 
             <div class="row">
-
-                @if ($message = Session::get('success'))
-                    <div class="alert alert-success">
-                        <p>{{ $message }}</p>
-                    </div>
-                @endif
-
-
                 <div class="col-sm-12">
                     <table class="table table-striped" id="ubicaciones" border="3">
                         <thead class="thead">
