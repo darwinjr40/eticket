@@ -12,7 +12,7 @@ class UbicacionController extends Controller
 
     public function index()
     {
-        $coleccion = Http::get('http://192.168.1.2:8080/tiendatopicos/public/api/ubicaciones');
+        $coleccion = Http::get('http://193.123.108.26/api/ubicaciones');
         $ubicacions = $coleccion["data"];
         return view('ubicacion.index', compact('ubicacions'));
         // $ubicacions = Ubicacion::paginate();
@@ -34,7 +34,7 @@ class UbicacionController extends Controller
         // $ubicacion = Ubicacion::create($request->all());
         Http::withHeaders([
             'Accept' => 'application/json',
-        ])->post('http://192.168.1.2:8080/tiendatopicos/public/api/ubicaciones', $request->all());
+        ])->post('http://193.123.108.26/api/ubicaciones', $request->all());
         if ($request->evento_id) {
             // $evento = Evento::find($request->evento_id);
             // return redirect()->route('eventos.edit', $evento);
@@ -48,7 +48,7 @@ class UbicacionController extends Controller
     public function show($id)
     {
         // $ubicacion = Ubicacion::find($id);
-        $coleccion = Http::get('http://192.168.1.2:8080/tiendatopicos/public/api/ubicaciones/'.$id);
+        $coleccion = Http::get('http://193.123.108.26/api/ubicaciones/'.$id);
         $ubicacion = $coleccion["data"];
         // return $ubicacion;
         return view('ubicacion.show', compact('ubicacion'));
@@ -57,7 +57,7 @@ class UbicacionController extends Controller
     public function edit($id)
     {
         // $ubicacion = Ubicacion::find($id);
-        $coleccion = Http::get('http://192.168.1.2:8080/tiendatopicos/public/api/ubicaciones/'.$id);
+        $coleccion = Http::get('http://193.123.108.26/api/ubicaciones/'.$id);
         $ubicacion = $coleccion["data"];
         return view('ubicacion.edit', compact('ubicacion'));
     }
@@ -67,7 +67,7 @@ class UbicacionController extends Controller
         // return $request;
         Http::withHeaders([
             'Accept' => 'application/json',
-        ])->patch('http://192.168.1.2:8080/tiendatopicos/public/api/ubicaciones/'.$id, $request->all());
+        ])->patch('http://193.123.108.26/api/ubicaciones/'.$id, $request->all());
         // request()->validate(Ubicacion::$rules);
         // $ubicacion->update($request->all());
         if ($request->evento_id) {
@@ -81,7 +81,7 @@ class UbicacionController extends Controller
     public function destroy($id)
     {
         // $ubicacion = Ubicacion::find($id)->delete();
-        $coleccion = Http::delete('http://192.168.1.2:8080/tiendatopicos/public/api/ubicaciones/'.$id);
+        $coleccion = Http::delete('http://193.123.108.26/api/ubicaciones/'.$id);
         return redirect()->route('ubicacions.index')
             ->with('success', 'Ubicacion eliminada');
     }
