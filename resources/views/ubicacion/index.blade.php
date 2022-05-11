@@ -11,10 +11,10 @@
                 <span id="card_title">
                     <h3>Lista de Ubicaciones</h3>
                 </span>
-                <a href="{{ route('ubicacions.create') }}" class="btn btn-primary btn-sm" >
+                {{-- <a href="{{ route('ubicacions.create') }}" class="btn btn-primary btn-sm" >
                     <i class="fa fa-fw fa-plus"></i>
                     Ubicaciones
-                </a>
+                </a> --}}
                 <br>
                 <br>
             </div>

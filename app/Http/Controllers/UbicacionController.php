@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evento;
+use App\Models\Fecha;
+use Illuminate\Support\Facades\DB;
 use App\Models\Ubicacion;
 use Illuminate\Http\Request;
 
@@ -51,7 +53,9 @@ class UbicacionController extends Controller
     public function edit($id)
     {
         $ubicacion = Ubicacion::find($id);
-        return view('ubicacion.edit', compact('ubicacion'));
+        //$fechas=$ubicacion->fechas;
+        $fechas=DB::table('fechas')->where('id_ubicacion',$id)->get();
+        return view('ubicacion.edit', compact('ubicacion','fechas'));
     }
 
     public function update(Request $request, Ubicacion $ubicacion)

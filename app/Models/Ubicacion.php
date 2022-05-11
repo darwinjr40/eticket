@@ -38,5 +38,8 @@ class Ubicacion extends Model
 	public function evento(){
         return $this->belongsTo(Evento::class);
     }
+	public function fechas(){
+        return $this->hasMany(Fecha::class,'id');
+    }
 
 }

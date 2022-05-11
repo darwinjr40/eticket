@@ -26,6 +26,100 @@
         </div>
     </section>
 
+    <div class="card">
+        <div class="card-body">
+            <!--Modal para agregar archivos -->
+            <div class="jumbtron jumbotron-fluid">
+                <h3 style="text-align: center">Lista de Fechas</h3>
+                <div style="margin-bottom: 10px">
+                    <span class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalAgregarFecha">
+                        {{-- <span class="fas fa-plus-circle"></span> --}}
+                        <span class="fas fa-fw fa-plus"></span>
+                        Ubicaciones
+                    </span>
+                </div>
+
+
+                <div class="modal fade" id="modalAgregarFecha" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Crear Ubicacion</h5>
+                                {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>xd
+                                    </button> --}}
+                            </div>
+
+                            <div class="modal-body">
+
+                                <form id="frmArchivos" action="{{ route('fechas.store') }}"
+                                    enctype="multipart/form-data" method="post">
+                                    @csrf
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-calendar"> Fecha y Hora</i>
+                                            </span>
+                                            <input type="datetime-local" id="fechaHora" name="fechaHora" class="form-control""">
+                                        </div>
+                                    </div>
+
+                                    <input id="id_ubicacion" name="id_ubicacion" type="hidden" value="{{ $ubicacion->id }}">
+                                    {{-- Fin ocultos --}}
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
+                                        <button type="submit" class="btn btn-primary">guardar</button>
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped mt-2">
+                    <thead style="background-color: #6777eF">
+                        <tr>
+                            <th scope="col" style="color:#fff">ID</th>
+                            <th scope="col" style="color:#fff">DataTime</th>
+                            <th scope="col" style="color: #fff">Acciones</th>
+                        </tr>
+                        
+                    </thead>
+                    <tbody >
+                        
+                        @foreach ($fechas as $per)
+                            <tr>
+                                <td>{{$per->id}}</td>
+                                <td>{{$per->fechaHora}}</td>
+                                <td>
+                                    <a class="btn btn-info" href="{{ route('fechas.edit', $per->id) }}">Editar</a>
+                                    {!! Form::open(['method'=>'DELETE','route'=>['fechas.destroy',$per->id],'style'=>'display:inline']) !!}
+                                        {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
+                                    {!! Form::close() !!}
+                                </td>
+                            </tr>
+                            
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        
+    </div>
+
+
+
+                
+
+
+
+
     <script type="text/javascript">
         const coordenada = { lat: {{ $ubicacion->latitud }}, lng: {{ $ubicacion->longitud }} }; 
     </script>
@@ -33,3 +127,6 @@
     <script async src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script>
     {{-- <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvUexPfr0cJLlaF08zCb1X3aggukbaIAI&callback=initMap"></script> --}}
 @endsection
+
+
+
