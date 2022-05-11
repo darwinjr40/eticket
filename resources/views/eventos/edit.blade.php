@@ -226,14 +226,13 @@
                                     <td>{{ $ubicacion->capacidad }}</td>
                                     {{-- <td>{{ $ubicacion->latitud }}</td>
                                     <td>{{ $ubicacion->longitud }}</td> --}}
-
                                     <td>
                                         <form action="{{ route('ubicacions.destroy', $ubicacion->id) }}" method="POST">
                                             <a class="btn btn-sm btn-primary "
                                                 href="{{ route('ubicacions.show', $ubicacion->id) }}"><i
                                                     class="fa fa-fw fa-eye"></i> </a>
                                             <a class="btn btn-sm btn-success"
-                                                href="{{ route('ubicacions.edit', $ubicacion->id) }}"><i
+                                                href="{{ route('ubicacions.editEvento', $ubicacion->id, $evento->id ) }}"><i
                                                     class="fa fa-fw fa-edit"></i> </a>
                                             @csrf
                                             @method('DELETE')

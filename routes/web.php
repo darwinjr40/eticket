@@ -12,6 +12,7 @@ use App\Http\Controllers\SectorController;
 use App\Http\Controllers\EspacioController;
 use App\Models\Contacto;
 use App\Http\Controllers\ImagenController;
+use App\Http\Controllers\Ubicacion1Controller;
 use App\Http\Controllers\UbicacionController;
 use Illuminate\Support\Facades\Auth;
 
@@ -70,6 +71,7 @@ Route::group(['middelware'=>['auth']],function(){
 
 
 
-Route::resource('ubicacions', UbicacionController::class);
-Route::get('ubicacion', [UbicacionController::class, 'mapa'])->name('ubicacions.mapa');
+Route::resource('ubicacions', Ubicacion1Controller::class);
+Route::get('ubicacions/{id}/editEvento', [Ubicacion1Controller::class, 'editEvento'])->name('ubicacions.editEvento');
+// Route::get('ubicacion', [UbicacionController::class, 'mapa'])->name('ubicacions.mapa');
 Route::resource('imagens', ImagenController::class);
