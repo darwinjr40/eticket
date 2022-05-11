@@ -18,6 +18,11 @@ class SectorController extends Controller
         return view('sectors.index',compact('sectors'));
     }
 
+    public function indexUbicacion($id_ubicacion){
+        $sectors=Sector::paginate(10);
+        return view('sectors.indexUbicacion',compact('sectors', 'id_ubicacion'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -44,6 +49,22 @@ class SectorController extends Controller
 
         Sector::create($request->all());
         return redirect()->route('sectors.index');
+    }
+
+    public function storeUbicacionSector(Request $request, $id_ubicacion)
+    {
+        $this->validate($request,[
+            'nombre'=>'required',
+            'capacidad'=>'required',
+            'referencia'=>'required'
+        ]);
+        $espacios=new Sector();
+        $espacios->nombre = $request->nombre;
+        $espacios->capacidad = $request->capacidad;
+        $espacios->referencia = $request->referencia;
+        $espacios->id_ubicacion = $id_ubicacion;
+        $espacios->save();
+        return back();
     }
 
     /**

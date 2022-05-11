@@ -48,6 +48,9 @@ Route::group(['middelware'=>['auth']],function(){
     Route::get('espacios_sector/{id_sector}',[EspacioController::class,'indexSector'])->name('espacios.indexSector');
     Route::post('espacios_sector/{id_sector}',[EspacioController::class,'storeEspacioSector'])->name('espacios.storeEspacioSector');
     Route::resource('fechas',FechaController::class);
+    Route::get('sector_ubicacion/{id_sector}',[SectorController::class,'indexUbicacion'])->name('sectors.indexUbicacion');
+    Route::post('sector_ubicacion/{id_sector}',[SectorController::class,'storeUbicacionSector'])->name('sectors.storeUbicacionSector');
+
     // Route::Post('eventos', [EventoController::class, 'storeEvento'])->name('eventos.storeEvento');
 
 });

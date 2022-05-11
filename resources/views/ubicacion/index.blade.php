@@ -7,7 +7,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            
+
             @if ($message = Session::get('success'))
                     <div class="alert alert-success">
                         <p>{{ $message }}</p>
@@ -60,6 +60,9 @@
                                             <a class="btn btn-sm btn-primary "
                                                 href="{{ route('ubicacions.show', $ubicacion['id']) }}"><i
                                                     class="fa fa-fw fa-eye"></i> </a>
+                                            <a class="btn btn-sm btn-warning"
+                                                href="{{ route('sectors.indexUbicacion', $ubicacion['id']) }}"><i
+                                                    class="fa fa-object-group"></i> </a>
                                             <a class="btn btn-sm btn-success"
                                                 href="{{ route('ubicacions.edit', $ubicacion['id']) }}"><i
                                                     class="fa fa-fw fa-edit"></i> </a>

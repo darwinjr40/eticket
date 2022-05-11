@@ -15,7 +15,7 @@ class EspacioController extends Controller
      */
     public function index()
     {
-        $espacios=Espacio::paginate(10);
+        $espacios=Espacio::paginate(15);
         return view('espacios.index',compact('espacios'));
     }
 

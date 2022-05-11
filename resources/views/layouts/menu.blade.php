@@ -16,10 +16,10 @@
         <i class=" fas fa-bars"></i><span>Categoria Eventos</span>
     </a>
     <a class="nav-link" href="/sectors">
-        <i class=" fas fa-bars"></i><span>Sectores del Eventos</span>
+        <i class="fa fa-object-group"></i><span>Sectores del Eventos</span>
     </a>
     <a class="nav-link" href="/espacios">
-        <i class=" fas fa-bars"></i><span>Espacios de Sectores</span>
+        <i class="fa fa-puzzle-piece"></i><span>Espacios de Sectores</span>
     </a>
     <a class="nav-link" href="/contactos">
         <i class=" fas fa-bars"></i><span>Contactos</span>
