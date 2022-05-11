@@ -10,9 +10,6 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            @can('crear-sectors')
-                                <a class="btn btn-primary" href="{{ route('sectors.create') }}"> Crear Sector</a>
-                            @endcan
                             <table class="table table-striped mt-2" style="width: 100%">
                                 <thead style="background-color: #6777eF">
                                     <tr>
@@ -32,7 +29,7 @@
                                             <td>{{$sector->referencia}}</td>
                                             <td>
                                                 @can('agregar-espacio')
-                                                    <a class="btn btn-warning" href="{{ route('espacios.index', $sector->id) }}"> Agregar Espacios</a>
+                                                    <a class="btn btn-warning" href="{{ route('espacios.indexSector', $sector->id) }}"> Ver Espacios</a>
                                                 @endcan
                                                 @can('editar-sector')
                                                     <a class="btn btn-info" href="{{ route('sectors.edit', $sector->id) }}">Editar</a>

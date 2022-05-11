@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Espacio;
+use App\Models\Sector;
 use Illuminate\Http\Request;
 
 class EspacioController extends Controller
@@ -14,8 +15,13 @@ class EspacioController extends Controller
      */
     public function index()
     {
-        $espacios=Espacio::paginate(5);
+        $espacios=Espacio::paginate(15);
         return view('espacios.index',compact('espacios'));
+    }
+
+    public function indexSector($id_sector){
+        $espacios=Espacio::paginate(10);
+        return view('espacios.indexSector',compact('espacios', 'id_sector'));
     }
 
     /**
@@ -42,13 +48,28 @@ class EspacioController extends Controller
             'capacidad'=>'required'
         ]);
         $espacios=new Espacio();
-        $espacios->numero=$request->get('numero');
-        $espacios->descripcion=$request->get('descripcion');
-        $espacios->capacidad=$request->get('capacidad');
-        $espacios->id_sector=$request->get('id_sector');
+        $espacios->numero = $request->numero;
+        $espacios->descripcion = $request->descripcion;
+        $espacios->capacidad = $request->capacidad;
+        $espacios->id_sector = $request->id_sector;
+        $espacios->save();
+        return redirect()->route('espacios.indexSector');
+    }
+
+    public function storeEspacioSector(Request $request, $id_sector)
+    {
+        $this->validate($request,[
+            'numero'=>'required',
+            'descripcion'=>'required',
+            'capacidad'=>'required'
+        ]);
+        $espacios=new Espacio();
+        $espacios->numero = $request->numero;
+        $espacios->descripcion = $request->descripcion;
+        $espacios->capacidad = $request->capacidad;
+        $espacios->id_sector = $id_sector;
         $espacios->save();
         return back();
-        return redirect()->route('espacios.index');
     }
 
     /**
@@ -101,6 +122,6 @@ class EspacioController extends Controller
     public function destroy(Espacio $espacio)
     {
         $espacio->delete();
-        return redirect()->route('espacios.index');
+        return redirect()->route('espacios.indexSector');
     }
 }

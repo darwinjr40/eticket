@@ -10,9 +10,7 @@ class Sector extends Model
     protected $primaryKey = 'id';
     protected $table = 'sectors';
     protected $fillable = [
-        'id','nombre','capacidad','referencia'
+        'id','nombre','capacidad','referencia','id_ubicacion'
     ];
-    public function espacios(){
-        return $this->hasMany(Espacio::class, 'id');
-    }
+    public $timestamps = false;
 }
