@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evento;
+use App\Models\Fecha;
+use Illuminate\Support\Facades\DB;
 use App\Models\Ubicacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -56,10 +58,10 @@ class UbicacionController extends Controller
 
     public function edit($id)
     {
-        // $ubicacion = Ubicacion::find($id);
-        $coleccion = Http::get('http://193.123.108.26/api/ubicaciones/'.$id);
-        $ubicacion = $coleccion["data"];
-        return view('ubicacion.edit', compact('ubicacion'));
+        $ubicacion = Ubicacion::find($id);
+        //$fechas=$ubicacion->fechas;
+        $fechas=DB::table('fechas')->where('id_ubicacion',$id)->get();
+        return view('ubicacion.edit', compact('ubicacion','fechas'));
     }
 
     public function update(Request $request,  $id)

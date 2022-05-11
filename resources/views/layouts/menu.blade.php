@@ -6,12 +6,12 @@
     <a class="nav-link" href="{{route('usuarios.index')}}">
         <i class=" fas fa-users"></i><span>Usuarios</span>
     </a>
-    <a class="nav-link" href="{{route('roles.index')}}">
+    {{-- <a class="nav-link" href="{{route('roles.index')}}">
         <i class=" fas fa-user-lock"></i><span>Roles</span>
     </a>
     <a class="nav-link" href="{{route('permisos.index')}}">
         <i class=" fas fa-user-lock"></i><span>Permisos</span>
-    </a>
+    </a> --}}
     <a class="nav-link" href="{{route('categoriaEventos.index')}}">
         <i class=" fas fa-bars"></i><span>Categoria Eventos</span>
     </a>
