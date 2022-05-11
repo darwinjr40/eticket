@@ -15,6 +15,11 @@
     <a class="nav-link" href="{{route('categoriaEventos.index')}}">
         <i class=" fas fa-bars"></i><span>Categoria Eventos</span>
     </a>
+    <a class="nav-link" href="/sectors">
+        <i class=" fas fa-bars"></i><span>Sectores del Eventos</span>
+    </a>
+    <a class="nav-link" href="/contactos">
+        <i class=" fas fa-bars"></i><span>Contactos</span>
     <a class="nav-link" href="{{route('contactos.index')}}">
         <i class=" fas fa-address-book"></i><span>Contactos</span>
     </a>
@@ -28,5 +33,5 @@
      <a class="nav-link" href="{{ route('ubicacions.index') }}">
         <i class=" fas fa-map-marker"></i><span>Ubicacion</span>
     </a>
-    
+
 </li>

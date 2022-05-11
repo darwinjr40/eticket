@@ -4,25 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class Ubicacion
- *
- * @property $id
- * @property $nombre
- * @property $direccion
- * @property $telefono
- * @property $capacidad
- * @property $latitud
- * @property $longitud
- * @property $created_at
- * @property $updated_at
- *
- * @package App
- * @mixin \Illuminate\Database\Eloquent\Builder
- */
+use App\Traits\ApiTrait;
 class Ubicacion extends Model
 {
+    use ApiTrait;
     
+    //para la api, por el cual se va poder filtrar
+    protected $allowIncluded = ['evento'];
+    protected $allowFilter = ['id', 'nombre', 'direccion', 'telefono', 'capacidad', 'latitud', 'longitud'];
+    protected $allowSort = ['id', 'nombre', 'direccion', 'telefono', 'capacidad', 'latitud', 'longitud'];
+    //Fin para filtrar api
+
     static $rules = [
 		'nombre' => 'required',
 		'direccion' => 'required',
@@ -32,7 +24,6 @@ class Ubicacion extends Model
 		'longitud' => 'required',
     ];
     protected $perPage = 20;
-
     protected $fillable = ['nombre', 'evento_id','direccion','telefono','capacidad','latitud','longitud'];
 
 	public function evento(){

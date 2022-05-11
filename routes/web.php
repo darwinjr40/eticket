@@ -9,6 +9,9 @@ use App\Http\Controllers\FechaController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolController;
+use App\Http\Controllers\SectorController;
+use App\Http\Controllers\EspacioController;
+use App\Models\Contacto;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\UbicacionController;
 use Illuminate\Support\Facades\Auth;
@@ -37,11 +40,13 @@ Route::group(['middelware'=>['auth']],function(){
     Route::resource('usuarios',UsuarioController::class);
     Route::resource('categoriaEventos',CategoriaEventoController::class);
     Route::resource('permisos',PermissionController::class);
+    Route::resource('sectors',SectorController::class);
+    Route::resource('espacios',EspacioController::class);
     Route::resource('contactos',ContactoController::class);
     Route::resource('eventos',EventoController::class);
     Route::resource('fechas',FechaController::class);
     // Route::Post('eventos', [EventoController::class, 'storeEvento'])->name('eventos.storeEvento');
-    
+
 });
 
 

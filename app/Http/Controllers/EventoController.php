@@ -68,7 +68,7 @@ class EventoController extends Controller
         $evento->load('categoria_eventos','contactos');
         return view('eventos.show',compact('evento'));
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -98,7 +98,7 @@ class EventoController extends Controller
             'titulo'=>'required',
             'descripcion'=>'required',
             ]);
-        
+
         $evento->titulo=$request->get('titulo');
         $evento->descripcion=$request->get('descripcion');
         $evento->id_categoria=$request->get('id_categoria');

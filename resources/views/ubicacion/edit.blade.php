@@ -14,7 +14,7 @@
                 @includeif('partials.errors')
                 <div class="card card-default">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('ubicacions.update', $ubicacion->id) }}" role="form"
+                        <form method="POST" action="{{ route('ubicacions.update', $ubicacion['id']) }}" role="form"
                             enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
@@ -121,7 +121,7 @@
 
 
     <script type="text/javascript">
-        const coordenada = { lat: {{ $ubicacion->latitud }}, lng: {{ $ubicacion->longitud }} }; 
+        const coordenada = { lat: {{ $ubicacion['latitud'] }}, lng: {{ $ubicacion['longitud'] }} }; 
     </script>
     <script type="text/javascript" src="{{ asset('js/map/mapa2.js') }}"></script>
     <script async src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script>
