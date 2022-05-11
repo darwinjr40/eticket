@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Espacios del Sector</h3>
+            <h3 class="page__heading">Espacios del Sector {{$id_sector}}</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -22,7 +22,7 @@
                                 </div>
                             @endif
 
-                            <form action="{{ route('espacios.store') }}" method="POST">
+                            <form action="{{ route('espacios.storeEspacioSector', $id_sector)}}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -59,7 +59,7 @@
                                         <th style="color:#fff">Numero</th>
                                         <th style="color: #fff">Descripcion</th>
                                         <th style="color: #fff">Capacidad</th>
-                                        <th style="color:#fff">Acciones</th>
+                                        <th style="color:#fff">Accion</th>
                                     </tr>
                                 </thead>
                                 <tbody >

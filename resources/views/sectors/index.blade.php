@@ -32,7 +32,7 @@
                                             <td>{{$sector->referencia}}</td>
                                             <td>
                                                 @can('agregar-espacio')
-                                                    <a class="btn btn-warning" href="{{ route('espacios.index', $sector->id) }}"> Agregar Espacios</a>
+                                                    <a class="btn btn-warning" href="{{ route('espacios.indexSector', $sector->id) }}"> Agregar Espacios</a>
                                                 @endcan
                                                 @can('editar-sector')
                                                     <a class="btn btn-info" href="{{ route('sectors.edit', $sector->id) }}">Editar</a>

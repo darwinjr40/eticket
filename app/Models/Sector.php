@@ -12,7 +12,5 @@ class Sector extends Model
     protected $fillable = [
         'id','nombre','capacidad','referencia'
     ];
-    public function espacios(){
-        return $this->hasMany(Espacio::class, 'id');
-    }
+    public $timestamps = false;
 }
