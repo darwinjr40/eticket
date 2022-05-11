@@ -23,8 +23,11 @@ class Ubicacion1Controller extends Controller
 
     public function store(Request $request)
     {
-        request()->validate(Ubicacion::$rules);
-        Ubicacion::create($request->all());
+        // request()->validate(Ubicacion::$rules);
+        // Ubicacion::create($request->all());
+        $json = json_encode($request->all());
+        $json = json_decode($json);
+        return $json;
         if ($request->evento_id) {
             return back()->with('success', 'Ubicacion creada.');
         } else {

@@ -27,11 +27,12 @@ class EventoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(categoriaEvento $id)
+    public function create()
     {
         $categorias=categoriaEvento::all();
         $contactos=Contacto::all();
-        return view('eventos.create',compact('categorias','contactos'));
+        $ubicacions = Ubicacion::all();
+        return view('eventos.create',compact('categorias','contactos', 'ubicacions'));
     }
 
     /**
@@ -42,6 +43,8 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
+        // $json = json_encode($request->all());
+        // return $json;
         $this->validate($request,[
             'titulo'=>'required',
             'descripcion'=>'required',
