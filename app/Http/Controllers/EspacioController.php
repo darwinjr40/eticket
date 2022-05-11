@@ -21,7 +21,7 @@ class EspacioController extends Controller
 
     public function indexSector($id_sector){
         $espacios=Espacio::paginate(10);
-        return view('espacios.index',compact('espacios', 'id_sector'));
+        return view('espacios.indexSector',compact('espacios', 'id_sector'));
     }
 
     /**
@@ -53,7 +53,7 @@ class EspacioController extends Controller
         $espacios->capacidad = $request->capacidad;
         $espacios->id_sector = $request->id_sector;
         $espacios->save();
-        return redirect()->route('espacios.index');
+        return redirect()->route('espacios.indexSector');
     }
 
     public function storeEspacioSector(Request $request, $id_sector)

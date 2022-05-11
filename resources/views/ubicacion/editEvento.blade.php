@@ -19,6 +19,9 @@
                             {{ method_field('PATCH') }}
                             @csrf
                             @include('ubicacion.form')
+                            {{-- ocultos --}}
+                            <input id="" name="evento_id" type="hidden" value="{{ $ubicacion['evento_id'] }}">
+                            {{-- Fin ocultos --}}
                         </form>
                     </div>
                 </div>
@@ -109,14 +112,7 @@
             </div>
         </div>
     </div>
-
-
-
-                
-
-
-
-
+    
     <script type="text/javascript">
         const coordenada = { lat: {{ $ubicacion['latitud'] }}, lng: {{ $ubicacion['longitud'] }} }; 
     </script>
@@ -124,6 +120,3 @@
     <script async src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script>
     {{-- <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvUexPfr0cJLlaF08zCb1X3aggukbaIAI&callback=initMap"></script> --}}
 @endsection
-
-
-

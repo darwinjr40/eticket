@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaEventoController;
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers\FechaController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\SectorController;
 use App\Http\Controllers\EspacioController;
 use App\Models\Contacto;
 use App\Http\Controllers\ImagenController;
+use App\Http\Controllers\Ubicacion1Controller;
 use App\Http\Controllers\UbicacionController;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,6 +47,7 @@ Route::group(['middelware'=>['auth']],function(){
     Route::resource('eventos',EventoController::class);
     Route::get('espacios_sector/{id_sector}',[EspacioController::class,'indexSector'])->name('espacios.indexSector');
     Route::post('espacios_sector/{id_sector}',[EspacioController::class,'storeEspacioSector'])->name('espacios.storeEspacioSector');
+    Route::resource('fechas',FechaController::class);
     // Route::Post('eventos', [EventoController::class, 'storeEvento'])->name('eventos.storeEvento');
 
 });
@@ -72,6 +75,7 @@ Route::group(['middelware'=>['auth']],function(){
 
 
 
-Route::resource('ubicacions', UbicacionController::class);
-Route::get('ubicacion', [UbicacionController::class, 'mapa'])->name('ubicacions.mapa');
+Route::resource('ubicacions', Ubicacion1Controller::class);
+Route::get('ubicacions/{id}/editEvento', [Ubicacion1Controller::class, 'editEvento'])->name('ubicacions.editEvento');
+// Route::get('ubicacion', [UbicacionController::class, 'mapa'])->name('ubicacions.mapa');
 Route::resource('imagens', ImagenController::class);
