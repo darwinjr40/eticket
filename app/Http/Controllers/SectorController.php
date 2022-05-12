@@ -19,7 +19,10 @@ class SectorController extends Controller
     }
 
     public function indexUbicacion($id_ubicacion){
-        $sectors=Sector::paginate(10);
+
+        // $sectors=Sector::paginate(10);
+        $sectors=Sector::all()->where('id_ubicacion', $id_ubicacion);
+        // return $sectors;
         return view('sectors.indexUbicacion',compact('sectors', 'id_ubicacion'));
     }
 
@@ -46,7 +49,6 @@ class SectorController extends Controller
             'capacidad'=>'required',
             'referencia'=>'required'
         ]);
-
         Sector::create($request->all());
         return redirect()->route('sectors.index');
     }
@@ -58,6 +60,7 @@ class SectorController extends Controller
             'capacidad'=>'required',
             'referencia'=>'required'
         ]);
+        // return $id_ubicacion;
         $espacios=new Sector();
         $espacios->nombre = $request->nombre;
         $espacios->capacidad = $request->capacidad;
@@ -103,7 +106,6 @@ class SectorController extends Controller
             'capacidad'=>'required',
             'referencia'=>'required'
         ]);
-
         $sector->update($request->all());
         return redirect()->route('sectors.index');
     }
@@ -117,6 +119,7 @@ class SectorController extends Controller
     public function destroy(Sector $sector)
     {
         $sector->delete();
-        return redirect()->route('sectors.index');
+        return back();
+        // return redirect()->route('sectors.index');
     }
 }

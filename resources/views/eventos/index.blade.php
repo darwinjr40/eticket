@@ -10,9 +10,9 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            @can('crear-sector')
+                            {{-- @can('crear-sector') --}}
                                 <a class="btn btn-primary" href="{{ route('eventos.create') }}"> Crear Evento</a>
-                            @endcan
+                            {{-- @endcan --}}
                             <table id="tabla" class="table table-striped mt-2" style="width: 100%">
                                 <thead style="background-color: #6777eF">
                                     <tr>

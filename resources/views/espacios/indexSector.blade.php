@@ -70,10 +70,22 @@
                                             <td>{{$espacio->descripcion}}</td>
                                             <td>{{$espacio->capacidad}}</td>
                                             <td>
-                                                <a class="btn btn-info" href="{{ route('espacios.edit', $espacio->id) }}">Editar</a>
+
+                                                <form action="{{ route('espacios.destroy',$espacio->id) }}" method="POST">
+
+                                                    <a class="btn btn-sm btn-success"
+                                                        href="{{ route('espacios.edit', $espacio->id) }}" title="modificar">
+                                                        <i class="fa fa-fw fa-edit"></i>
+                                                    </a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm" title="eliminar">
+                                                        <i class="fa fa-fw fa-trash"></i> </button>
+                                                </form>
+                                                {{-- <a class="btn btn-info" href="{{ route('espacios.edit', $espacio->id) }}">Editar</a>
                                                 {!! Form::open(['method'=>'DELETE','route'=>['espacios.destroy',$espacio->id],'style'=>'display:inline']) !!}
                                                     {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
-                                                {!! Form::close() !!}
+                                                {!! Form::close() !!} --}}
                                                 {{-- @can('editar-espacio')
                                                 @endcan
                                                 @can('borrar-espacio')
@@ -83,7 +95,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{$espacios->links()}}
+                            {{-- {{$espacios->links()}} --}}
                         </div>
                     </div>
                 </div>

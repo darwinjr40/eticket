@@ -59,10 +59,10 @@
                                                     <select name="estado" id="estado" class="form-control">
                                                         <option value="{{ $evento->estado }}">
                                                             {{ old('estado', $evento->estado) }}</option>
-                                                        <option value="inicio">Inicio</option>
+                                                        <option value="desactivado">desactivado</option>
+                                                        {{-- <option value="inicio">Inicio</option>
                                                         <option value="proceso">Proceso</option>
-                                                        <option value="fin">Fin</option>
-
+                                                        <option value="fin">Fin</option> --}}
                                                     </select>
                                                 </div>
                                             </div>
@@ -225,17 +225,18 @@
                                     <td>
                                         <form action="{{ route('ubicacions.destroy', $ubicacion['id']) }}" method="POST">
                                             
-                                            <a class="btn btn-sm btn-primary "
+                                            <a class="btn btn-sm btn-primary"
+                                            href="{{ route('sectors.indexUbicacion', $ubicacion['id']) }}"><i
+                                                class="fas fa-fw fa-plus"
+                                                title="add Sectores"></i> 
+                                            </a>
+
+                                            <a class="btn btn-sm btn-dark "
                                                 href="{{ route('ubicacions.show', $ubicacion['id']) }}"
                                                 title="detalles">
                                                 <i class="fa fa-fw fa-eye"></i>
                                             </a>
 
-                                            <a class="btn btn-sm btn-warning"
-                                            href="{{ route('sectors.indexUbicacion', $ubicacion['id']) }}"><i
-                                                class="fa fa-object-group"
-                                                title="add Sectores"></i> 
-                                            </a>
 
                                             <a class="btn btn-sm btn-success"
                                                 href="{{ route('ubicacions.editEvento', $ubicacion['id'], $evento['id']) }}"
@@ -333,7 +334,7 @@
 
                                     <td>
                                         <form action="{{ route('imagens.destroy', $file) }}" method="POST">
-                                            <a class="btn btn-sm btn-primary"
+                                            <a class="btn btn-sm btn-dark"
                                                 href="{{ $file->path ? $file->path : '#' }}"><i
                                                     class="fa fa-fw fa-eye"></i></a>
                                             {{-- <a class="btn btn-sm btn-success" href="{{ route('imagens.edit', $file) }}"><i

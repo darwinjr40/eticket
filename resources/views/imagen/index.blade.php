@@ -75,7 +75,7 @@
 
                                     <td>
                                         <form action="{{ route('imagens.destroy', $file) }}" method="POST">
-                                            <a class="btn btn-sm btn-primary" href="{{ ($file->path) ? $file->path : '#' }}"><i class="fa fa-fw fa-eye"></i></a>  
+                                            <a class="btn btn-sm btn-dark" href="{{ ($file->path) ? $file->path : '#' }}"><i class="fa fa-fw fa-eye"></i></a>  
                                             {{-- <a class="btn btn-sm btn-success" href="{{ route('imagens.edit', $file) }}"><i
                                                     class="fa fa-fw fa-edit"></i> </a> --}}
                                             @csrf

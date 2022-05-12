@@ -57,13 +57,13 @@
 
                                     <td>
                                         <form action="{{ route('ubicacions.destroy', $ubicacion['id']) }}" method="POST">
-                                            <a class="btn btn-sm btn-primary "
+                                            <a class="btn btn-sm btn-dark "
                                                 href="{{ route('ubicacions.show', $ubicacion['id']) }}"><i
                                                     class="fa fa-fw fa-eye"></i> </a>
-                                            <a class="btn btn-sm btn-warning"
+                                            {{-- <a class="btn btn-sm btn-warning"
                                                 href="{{ route('sectors.indexUbicacion', $ubicacion['id']) }}"><i
                                                     class="fa fa-object-group" title="add Sectores"></i>
-                                            </a>
+                                            </a> --}}
                                             <a class="btn btn-sm btn-success"
                                                 href="{{ route('ubicacions.edit', $ubicacion['id']) }}"><i
                                                     class="fa fa-fw fa-edit"></i> </a>

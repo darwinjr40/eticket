@@ -1,5 +1,5 @@
 <li class="side-menus {{ Request::is('*') ? 'active' : '' }}">
-    <a class="nav-link" href="/home">
+    <a class="nav-link" href="{{route('home')}}">
         <i class=" fas fa-building"></i><span>Casita</span>
     </a>
 
@@ -12,20 +12,27 @@
     <a class="nav-link" href="{{route('permisos.index')}}">
         <i class=" fas fa-user-lock"></i><span>Permisos</span>
     </a> --}}
+
     <a class="nav-link" href="{{route('categoriaEventos.index')}}">
         <i class=" fas fa-bars"></i><span>Categoria Eventos</span>
     </a>
-    <a class="nav-link" href="/sectors">
+
+    <a class="nav-link" href="{{route('sectors.index')}}">
         <i class="fa fa-object-group"></i><span>Sectores del Eventos</span>
     </a>
-    <a class="nav-link" href="/espacios">
+
+    <a class="nav-link" href="{{route('espacios.index')}}">
         <i class="fa fa-puzzle-piece"></i><span>Espacios de Sectores</span>
     </a>
-    <a class="nav-link" href="/contactos">
+    
+    {{-- <a class="nav-link" href="/contactos">
         <i class=" fas fa-bars"></i><span>Contactos</span>
+    </a> --}}
+    
     <a class="nav-link" href="{{route('contactos.index')}}">
         <i class=" fas fa-address-book"></i><span>Contactos</span>
     </a>
+    
     <a class="nav-link" href="{{route('eventos.index')}}">
         <i class="fa fa-calendar"></i><span>Eventos</span>
     </a>
@@ -33,7 +40,8 @@
     <a class="nav-link" href="{{ route('imagens.index') }}">
         <i class="fa fa-clone"></i><span>Imagenes</span>
     </a>
-     <a class="nav-link" href="{{ route('ubicacions.index') }}">
+    
+    <a class="nav-link" href="{{ route('ubicacions.index') }}">
         <i class=" fas fa-map-marker"></i><span>Ubicacion</span>
     </a>
 

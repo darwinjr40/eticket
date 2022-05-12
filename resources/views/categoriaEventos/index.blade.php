@@ -27,14 +27,14 @@
                                             <td>{{$cat->nombre}}</td>
                                             <td style="text-overflow: ellipsis; overflow: hidden;">{{$cat->descripcion}}</td>
                                             <td>
-                                                @can('editar-categoriaEvento')
-                                                    <a class="btn btn-info" href="{{ route('categoriaEventos.edit', $cat->id) }}">Editar</a>
+                                                {{-- @can('editar-categoriaEvento')
                                                 @endcan
                                                 @can('borrar-categoriaEvento')
+                                                @endcan --}}
+                                                    <a class="btn btn-info" href="{{ route('categoriaEventos.edit', $cat->id) }}">Editar</a>
                                                     {!! Form::open(['method'=>'DELETE','route'=>['categoriaEventos.destroy',$cat->id],'style'=>'display:inline']) !!}
                                                         {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
                                                     {!! Form::close() !!}
-                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach

@@ -56,7 +56,7 @@ class EventoController extends Controller
         $evento->id_contacto=$request->get('id_contacto');
         $evento->estado="desactivado";
         $evento->save();
-        return back();
+        return redirect()->route('eventos.edit', $evento->id);
 
     }
 

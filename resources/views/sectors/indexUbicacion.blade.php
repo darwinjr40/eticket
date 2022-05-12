@@ -75,18 +75,39 @@
                                                 @endcan
                                                 @can('borrar-sector')
                                                 @endcan --}}
-                                                <a class="btn btn-warning" href="{{ route('espacios.indexSector', $sector->id) }}"> Agregar Espacios</a>
+                                                <form action="{{ route('sectors.destroy',$sector->id) }}" method="POST">
+                                            
+                                                    <a class="btn btn-sm btn-primary"
+                                                    href="{{ route('espacios.indexSector', $sector->id) }}"><i
+                                                        class="fas fa-fw fa-plus"
+                                                        title="add espacios"></i> 
+                                                    </a>
+        
+        
+                                                    <a class="btn btn-sm btn-success"
+                                                        href="{{ route('sectors.edit', $sector->id) }}"
+                                                        title="modificar">
+                                                        <i class="fa fa-fw fa-edit"></i> 
+                                                    </a>
+        
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm" title="eliminar">
+                                                        <i class="fa fa-fw fa-trash"></i> 
+                                                    </button>
+                                                </form>
+                                                {{-- <a class="btn btn-warning" href="{{ route('espacios.indexSector', $sector->id) }}"> Agregar Espacios</a>
                                                     <a class="btn btn-info" href="{{ route('sectors.edit', $sector->id) }}">Editar</a>
                                                     {!! Form::open(['method'=>'DELETE','route'=>['sectors.destroy',$sector->id],'style'=>'display:inline']) !!}
                                                         {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
-                                                    {!! Form::close() !!}
+                                                    {!! Form::close() !!} --}}
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
 
                             </table>
-                            {{$sectors->links()}}
+                            {{-- {{$sectors->links()}} --}}
                         </div>
                     </div>
                 </div>

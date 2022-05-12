@@ -20,15 +20,11 @@ class EspacioController extends Controller
     }
 
     public function indexSector($id_sector){
-        $espacios=Espacio::paginate(10);
+        // $espacios = Espacio::paginate(10);
+        $espacios = Espacio::all()->where('id_sector', $id_sector);
         return view('espacios.indexSector',compact('espacios', 'id_sector'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('espacios.create');
