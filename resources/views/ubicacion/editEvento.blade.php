@@ -14,6 +14,11 @@
                 @includeif('partials.errors')
                 <div class="card card-default">
                     <div class="card-body">
+                        @if ($message = Session::get('success'))
+                            <div class="alert alert-success">
+                                <p>{{ $message }}</p>
+                            </div>
+                        @endif
                         <form method="POST" action="{{ route('ubicacions.update', $ubicacion['id']) }}" role="form"
                             enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
@@ -57,19 +62,21 @@
 
                             <div class="modal-body">
 
-                                <form id="frmArchivos" action="{{ route('fechas.store') }}"
-                                    enctype="multipart/form-data" method="post">
+                                <form id="frmArchivos" action="{{ route('fechas.store') }}" enctype="multipart/form-data"
+                                    method="post">
                                     @csrf
                                     <div class="form-group">
                                         <div class="input-group">
                                             <span class="input-group-text">
                                                 <i class="fa fa-calendar"> Fecha y Hora</i>
                                             </span>
-                                            <input type="datetime-local" id="fechaHora" name="fechaHora" class="form-control""">
+                                            <input type="datetime-local" id="fechaHora" name="fechaHora"
+                                                class="form-control""">
                                         </div>
                                     </div>
 
-                                    <input id="id_ubicacion" name="id_ubicacion" type="hidden" value="{{ $ubicacion->id }}">
+                                    <input id="id_ubicacion" name="id_ubicacion" type="hidden"
+                                        value="{{ $ubicacion['id'] }}">
                                     {{-- Fin ocultos --}}
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
@@ -90,33 +97,36 @@
                             <th scope="col" style="color:#fff">DataTime</th>
                             <th scope="col" style="color: #fff">Acciones</th>
                         </tr>
-                        
+
                     </thead>
-                    <tbody >
-                        
+                    <tbody>
+
                         @foreach ($fechas as $per)
                             <tr>
-                                <td>{{$per->id}}</td>
-                                <td>{{$per->fechaHora}}</td>
+                                <td>{{ $per->id }}</td>
+                                <td>{{ $per->fechaHora }}</td>
                                 <td>
                                     <a class="btn btn-info" href="{{ route('fechas.edit', $per->id) }}">Editar</a>
-                                    {!! Form::open(['method'=>'DELETE','route'=>['fechas.destroy',$per->id],'style'=>'display:inline']) !!}
-                                        {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
+                                    {!! Form::open(['method' => 'DELETE', 'route' => ['fechas.destroy', $per->id], 'style' => 'display:inline']) !!}
+                                    {!! Form::submit('Borrar', ['Class' => 'btn btn-danger']) !!}
                                     {!! Form::close() !!}
                                 </td>
                             </tr>
-                            
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    
+
     <script type="text/javascript">
-        const coordenada = { lat: {{ $ubicacion['latitud'] }}, lng: {{ $ubicacion['longitud'] }} }; 
+        const coordenada = {
+            lat: {{ $ubicacion['latitud'] }},
+            lng: {{ $ubicacion['longitud'] }}
+        };
     </script>
     <script type="text/javascript" src="{{ asset('js/map/mapa2.js') }}"></script>
     {{-- <script async src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script> --}}
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvUexPfr0cJLlaF08zCb1X3aggukbaIAI&callback=initMap"></script>
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvUexPfr0cJLlaF08zCb1X3aggukbaIAI&callback=initMap"></script>
 @endsection

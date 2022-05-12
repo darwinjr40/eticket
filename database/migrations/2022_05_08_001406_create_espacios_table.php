@@ -19,7 +19,7 @@ class CreateEspaciosTable extends Migration
             $table->string('descripcion',255);
             $table->integer('capacidad');
             $table->integer('id_sector')->unsigned();
-            $table->foreign('id_sector')->references('id')->on('sectors');
+            $table->foreign('id_sector')->references('id')->on('sectors')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

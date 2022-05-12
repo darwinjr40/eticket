@@ -44,7 +44,7 @@ class UbicacionApiController extends Controller
     public function destroy($id)
     {
         $ubicacion = Ubicacion::findOrFail($id);
-        $ubicacion -> delete();
+        $ubicacion->delete();
         return UbicacionResource::make($ubicacion);
     }
 }

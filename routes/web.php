@@ -78,7 +78,7 @@ Route::group(['middelware'=>['auth']],function(){
 
 
 
-Route::resource('ubicacions', Ubicacion1Controller::class);
-Route::get('ubicacions/{id}/editEvento', [Ubicacion1Controller::class, 'editEvento'])->name('ubicacions.editEvento');
+Route::resource('ubicacions', UbicacionController::class);
+Route::get('ubicacions/{id}/editEvento', [UbicacionController::class, 'editEvento'])->name('ubicacions.editEvento');
 // Route::get('ubicacion', [UbicacionController::class, 'mapa'])->name('ubicacions.mapa');
 Route::resource('imagens', ImagenController::class);
