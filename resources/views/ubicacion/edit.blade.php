@@ -118,7 +118,7 @@
 
 
     <script type="text/javascript">
-        const coordenada = { lat: {{ $ubicacion['latitud'] }}, lng: {{ $ubicacion['longitud'] }} }; 
+        // const coordenada = { lat: {{ $ubicacion['latitud'] }}, lng: {{ $ubicacion['longitud'] }} }; 
     </script>
     <script type="text/javascript" src="{{ asset('js/map/mapa2.js') }}"></script>
     <script async src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script>

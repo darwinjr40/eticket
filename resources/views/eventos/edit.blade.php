@@ -371,8 +371,8 @@
 @section('scripts')
     {{-- maps --}}
     <script type="text/javascript" src="{{ asset('js/map/mapa2.js') }}"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script>
-    {{-- <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvUexPfr0cJLlaF08zCb1X3aggukbaIAI&callback=initMap"></script> --}}
+    {{-- <script async src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script> --}}
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvUexPfr0cJLlaF08zCb1X3aggukbaIAI&callback=initMap"></script>
     {{-- Fin maps --}}
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
