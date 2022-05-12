@@ -28,14 +28,14 @@
                                             <td>{{$espacio->descripcion}}</td>
                                             <td>{{$espacio->capacidad}}</td>
                                             <td>
-                                                @can('editar-espacio')
-                                                    <a class="btn btn-info" href="{{ route('espacios.edit', $espacio->id) }}">Editar</a>
+                                                <a class="btn btn-info" href="{{ route('espacios.edit', $espacio->id) }}">Editar</a>
+                                                {!! Form::open(['method'=>'DELETE','route'=>['espacios.destroy',$espacio->id],'style'=>'display:inline']) !!}
+                                                    {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
+                                                {!! Form::close() !!}
+                                                {{-- @can('editar-espacio')
                                                 @endcan
                                                 @can('borrar-espacio')
-                                                    {!! Form::open(['method'=>'DELETE','route'=>['espacios.destroy',$espacio->id],'style'=>'display:inline']) !!}
-                                                        {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
-                                                    {!! Form::close() !!}
-                                                @endcan
+                                                @endcan --}}
                                             </td>
                                         </tr>
                                     @endforeach

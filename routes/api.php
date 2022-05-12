@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\EventoApiController;
 use App\Http\Controllers\Api\UbicacionApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::apiResource('ubicaciones', UbicacionApiController::class)->names('api.ubicaciones');
+Route::apiResource('eventos-api', EventoApiController::class)->names('api.eventos');
+

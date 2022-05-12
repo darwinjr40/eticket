@@ -13,33 +13,51 @@
                             @can('crear-sector')
                                 <a class="btn btn-primary" href="{{ route('eventos.create') }}"> Crear Evento</a>
                             @endcan
-                            <table class="table table-striped mt-2" style="width: 100%">
+                            <table id="tabla" class="table table-striped mt-2" style="width: 100%">
                                 <thead style="background-color: #6777eF">
                                     <tr>
                                         <th style="color:#fff">titulo</th>
                                         <th style="color:#fff">Descripcion</th>
                                         <th style="color:#fff">Estado</th>
                                         <th style="color: #fff">Acciones</th>
-                                    </tr> 
+                                    </tr>
                                 </thead>
-                                <tbody >
+                                <tbody>
                                     @foreach ($evento as $sec)
                                         <tr>
-                                            <td>{{$sec->titulo}}</td>
-                                            <td>{{$sec->descripcion}}</td>
-                                            <td>{{$sec->estado}}</td>
+                                            <td>{{ $sec->titulo }}</td>
+                                            <td>{{ $sec->descripcion }}</td>
+                                            <td id="ISINcb" class="lblCell_R" align="center">
+                                                <select name="select-estado" id="select-estado" class="form-control">
+                                                    <option selected  value="{{$sec['id']}}">{{$sec->estado}}</option>
+                                                    <option value="">
+                                                        {{($sec->estado == 'activado') ? ('desctivado'): ('activado')}}
+                                                    </option>
+                                                </select>
+                                            </td>
                                             <td>
-                                                <a class="btn btn-info" href="{{ route('eventos.edit', $sec->id) }}">Editar</a>
-                                                    {!! Form::open(['method'=>'DELETE','route'=>['eventos.destroy',$sec->id],'style'=>'display:inline']) !!}
-                                                        {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
-                                                    {!! Form::close() !!}
+
+                                                <form action="{{ route('eventos.destroy', $sec->id) }}" method="POST">
+
+                                                    <a class="btn btn-sm btn-success"
+                                                        href="{{ route('eventos.edit', $sec->id) }}" title="modificar">
+                                                        <i class="fa fa-fw fa-edit"></i>
+                                                    </a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm" title="eliminar">
+                                                        <i class="fa fa-fw fa-trash"></i> </button>
+                                                </form>
+                                                {{-- {!! Form::open(['method'=>'DELETE','route'=>['eventos.destroy',$sec->id],'style'=>'display:inline']) !!}
+                                                        {!! Form::submit('Borrar',['Class'=>'btn btn-danger btn-sm']) !!}
+                                                    {!! Form::close() !!} --}}
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                
+
                             </table>
-                            {{$evento->links()}}
+                            {{ $evento->links() }}
                         </div>
                     </div>
                 </div>
@@ -47,3 +65,7 @@
         </div>
     </section>
 @endsection
+
+@section('scripts')
+    <script type="text/javascript" src="{{ asset('js/eventos/index.js') }}"></script>
+@stop

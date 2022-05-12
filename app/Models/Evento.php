@@ -8,12 +8,18 @@ use App\Traits\ApiTrait;
 class Evento extends Model
 {
     use HasFactory, ApiTrait;
+    static $rules = [
+		'titulo' => 'required',
+		'descripcion' => 'required'
+    ];
     //para la api, por el cual se va poder filtrar
     protected $allowIncluded = ['ubicaciones', 'imagenes'];
     protected $allowFilter = ['id', 'titulo', 'descripcion', 'estado', 'id_categoria', 'id_contacto'];
     protected $allowSort = ['id', 'titulo', 'descripcion', 'estado', 'id_categoria', 'id_contacto'];
     //Fin para filtrar api
     protected $fillable = ['titulo', 'descripcion', 'estado', 'id_categoria', 'id_contacto'];
+    
+    
     public function categoria_eventos()
     {
         return $this->belongsTo(categoriaEvento::class, 'id_categoria');

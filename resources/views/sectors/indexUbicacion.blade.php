@@ -69,17 +69,17 @@
                                             <td>{{$sector->capacidad}}</td>
                                             <td>{{$sector->referencia}}</td>
                                             <td>
-                                                @can('agregar-espacio')
-                                                    <a class="btn btn-warning" href="{{ route('espacios.indexSector', $sector->id) }}"> Agregar Espacios</a>
+                                                {{-- @can('agregar-espacio')
                                                 @endcan
                                                 @can('editar-sector')
-                                                    <a class="btn btn-info" href="{{ route('sectors.edit', $sector->id) }}">Editar</a>
                                                 @endcan
                                                 @can('borrar-sector')
+                                                @endcan --}}
+                                                <a class="btn btn-warning" href="{{ route('espacios.indexSector', $sector->id) }}"> Agregar Espacios</a>
+                                                    <a class="btn btn-info" href="{{ route('sectors.edit', $sector->id) }}">Editar</a>
                                                     {!! Form::open(['method'=>'DELETE','route'=>['sectors.destroy',$sector->id],'style'=>'display:inline']) !!}
                                                         {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
                                                     {!! Form::close() !!}
-                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach

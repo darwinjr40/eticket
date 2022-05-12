@@ -54,7 +54,7 @@ class EventoController extends Controller
         $evento->descripcion=$request->get('descripcion');
         $evento->id_categoria=$request->get('id_categoria');
         $evento->id_contacto=$request->get('id_contacto');
-        $evento->estado="preparacion";
+        $evento->estado="desactivado";
         $evento->save();
         return back();
 
