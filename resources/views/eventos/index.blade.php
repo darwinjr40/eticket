@@ -27,14 +27,7 @@
                                         <tr>
                                             <td>{{ $sec->titulo }}</td>
                                             <td>{{ $sec->descripcion }}</td>
-                                            <td id="ISINcb" class="lblCell_R" align="center">
-                                                <select name="select-estado" id="select-estado" class="form-control">
-                                                    <option selected  value="{{$sec['id']}}">{{$sec->estado}}</option>
-                                                    <option value="">
-                                                        {{($sec->estado == 'activado') ? ('desctivado'): ('activado')}}
-                                                    </option>
-                                                </select>
-                                            </td>
+                                            <td >{{$sec->estado}}</td>
                                             <td>
 
                                                 <form action="{{ route('eventos.destroy', $sec->id) }}" method="POST">
@@ -66,6 +59,4 @@
     </section>
 @endsection
 
-@section('scripts')
-    <script type="text/javascript" src="{{ asset('js/eventos/index.js') }}"></script>
-@stop
+
