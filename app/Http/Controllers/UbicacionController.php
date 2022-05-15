@@ -9,6 +9,8 @@ use App\Models\Ubicacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
+use function PHPUnit\Framework\isNull;
+
 class UbicacionController extends Controller
 {
 
@@ -22,24 +24,29 @@ class UbicacionController extends Controller
 
     public function create()
     {
-        $ubicacion = new Ubicacion();
+        $ubicacion = array( 
+          "id" => "",
+          "nombre" => "",
+          "direccion" => "",
+          "telefono" => "",
+          "capacidad" => "",
+          "latitud" => "",
+          "longitud" => ""
+        );
         return view('ubicacion.create', compact('ubicacion'));
     }
 
     public function store(Request $request)
     {
-        request()->validate(Ubicacion::$rules);
         $data = Http::withHeaders([
             'Accept' => 'application/json',
         ])->post('http://localhost:8080/tiendatopicos/public/api/ubicaciones', $request->all());
         // ])->post('http://193.123.108.26/api/ubicaciones', $request->all());
-        // $mensaje = ($data['errors'])? 'error rellenar Ubicacion.' : 'Ubicacion creada.';
-        if ($request->evento_id) {
-            return back()->with('success', 'Ubicacion creada.');
-        } else {
-            return redirect()->route('ubicacions.index')
-                ->with('success', 'Ubicacion creada.');
-        }
+        // $v = json_decode($data, true);
+        $data = $data->json();      
+        $mensaje = (isset($data['errors']))? 'ERROR rellenar Ubicacion.' : 'EXITO Ubicacion creada.';
+        return back()->with('success', $mensaje);
+        // return redirect()->route('ubicacions.index')->with('success', $mensaje);
     }
 
     public function show($id)

@@ -17,7 +17,6 @@ class FechaController extends Controller
     {
         $fechas=Fecha::paginate(10);
         return view('fechas.index',compact('fechas'));
-
     }
 
     /**
@@ -43,13 +42,11 @@ class FechaController extends Controller
             ]);
         $fecha = Fecha::create($request->all());
         if ($request->id_ubicacion) {
-            $ubicacion = Ubicacion::find($request->id_ubicacion);
-            return redirect()->route('ubicacions.edit', $ubicacion);
+            return back()->with('success', 'Fecha creada');
         } else {
             return redirect()->route('fechas.index')
                 ->with('success', 'Fecha creada.');
         }
-        return back();
     }
 
     /**

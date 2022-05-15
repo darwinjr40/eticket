@@ -20,7 +20,7 @@ class UbicacionApiController extends Controller
 
     public function store(Request $request)
     {
-        request()->validate(Ubicacion::$rules);
+        $date = request()->validate(Ubicacion::$rules);
         $ubicacion = Ubicacion::create($request->all());
         return UbicacionResource::make($ubicacion);
     }

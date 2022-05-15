@@ -279,7 +279,8 @@
                                     <td>{{ $ubicacion->longitud }}</td> --}}
                                     <td>
                                         <form action="{{ route('ubicacions.destroy', $ubicacion['id']) }}" method="POST">
-
+                                            @csrf
+                                            @method('DELETE')
                                             <a class="btn btn-sm btn-primary"
                                                 href="{{ route('sectors.indexUbicacion', $ubicacion['id']) }}"><i
                                                     class="fas fa-fw fa-plus" title="add Sectores"></i>
@@ -297,8 +298,7 @@
                                                 <i class="fa fa-fw fa-edit"></i>
                                             </a>
 
-                                            @csrf
-                                            @method('DELETE')
+                                            
                                             <button type="submit" class="btn btn-danger btn-sm" title="eliminar">
                                                 <i class="fa fa-fw fa-trash"></i>
                                             </button>

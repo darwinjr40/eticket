@@ -15,6 +15,7 @@ class Ubicacion extends Model
     protected $allowSort = ['id', 'nombre', 'direccion', 'telefono', 'capacidad', 'latitud', 'longitud'];
     //Fin para filtrar api
 
+
     static $rules = [
 		'nombre' => 'required',
 		'direccion' => 'required',
@@ -23,6 +24,7 @@ class Ubicacion extends Model
 		'latitud' => 'required',
 		'longitud' => 'required',
     ];
+    
     protected $perPage = 20;
     protected $fillable = ['nombre', 'evento_id','direccion','telefono','capacidad','latitud','longitud'];
 
