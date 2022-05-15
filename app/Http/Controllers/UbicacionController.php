@@ -75,7 +75,7 @@ class UbicacionController extends Controller
         // ])->patch('http://193.123.108.26/api/ubicaciones/'.$id, $request->all());
         // $mensaje = ($data['errors'])? 'error rellenar Ubicacion.' : 'Ubicacion actualizada.';
         if ($request->evento_id) {
-            return back()->with('success', 'ubicacion actualizada');
+            return back()->with('success', 'ubicacion actualizada');//misma pagina update
         } else {
             return redirect()->route('ubicacions.index')
                 ->with('success', 'ubicacion actualizada');
@@ -91,6 +91,6 @@ class UbicacionController extends Controller
 
     public function mapa()
     {
-        return view('ubicacion.mapa21');
+        return view('ubicacion.mapa.mapa21');
     }
 }
