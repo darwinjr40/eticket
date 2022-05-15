@@ -17,7 +17,8 @@
 
     
     {{-- picker --}}
-    <link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css"/ >
+    {{-- comentado by darwin
+    <link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css"/ > --}}
 
 
 @yield('page_css')
