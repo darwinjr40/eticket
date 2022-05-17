@@ -17,7 +17,7 @@ class UbicacionController extends Controller
     public function index()
     {
         // $coleccion = Http::get('http://193.123.108.26/api/ubicaciones');
-        $coleccion = Http::get('http://tiendatopicos.test/api/ubicaciones');        
+        $coleccion = Http::get('http://127.0.0.1:8000/api/ubicaciones');        
         $ubicacions = $coleccion["data"];
         return view('ubicacion.index', compact('ubicacions'));
     }
@@ -59,10 +59,10 @@ class UbicacionController extends Controller
 
     public function edit($id)
     {
-        $ubicacion = Ubicacion::find($id);
-        //$fechas=$ubicacion->fechas;
-        $fechas=DB::table('fechas')->where('id_ubicacion',$id)->get();
-        return view('ubicacion.edit', compact('ubicacion','fechas'));
+        // $ubicacion = Ubicacion::find($id);
+        // //$fechas=$ubicacion->fechas;
+        // $fechas=DB::table('fechas')->where('id_ubicacion',$id)->get();
+        // return view('ubicacion.edit', compact('ubicacion','fechas'));
     }
 
     public function editEvento($id)
