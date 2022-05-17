@@ -47,7 +47,7 @@ class ImagenApiController extends Controller
         request()->validate(Imagen::$rules);
         try {
             if ($request->hasFile('files')) {  //existe un archivo con nombre <files>
-                $files = $request->file('files'); //retorna un vector con los datos de los archivos
+                $files = $request->file('files'); //retorna un object con los datos de los archivos
                 $data = array("evento_id" => $request['evento_id']);
                 foreach ($files as $file) {
                     $data['pathPrivate'] = Storage::disk('s3')->put($data['evento_id'], $file, 'public');
@@ -61,7 +61,6 @@ class ImagenApiController extends Controller
         } catch (Exception  $e) {
             return response()->json(['message' => 'Error al subir el archivo'], 406);
         }
-
     }
 
 
@@ -89,10 +88,10 @@ class ImagenApiController extends Controller
                 $imagen->delete();
                 return ImagenResource::make($imagen);
             } else {
-                return response()->json(['message' => 'Error al subir el archivo'], 403);
+                return response()->json(['message' => 'Error al encontrar el archivo'], 403);
             }
         } catch (Exception  $e) {
-            return response()->json(['message' => 'Error al subir el archivo'], 406);
+            return response()->json(['message' => 'Error al eliminar el archivo'], 406);
         }
     }
 }

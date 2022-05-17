@@ -350,7 +350,9 @@
                                         <input type="file" name="files[]" id="archivos" multiple required>
                                         <br>
                                         <br>
-                                        <input name="evento_id" type="hidden" value="{{ $evento->id }}">
+                                        {{-- oculto --}}
+                                        {{-- <input name="evento_id" type="hidden" value="{{ $evento->id }}"> --}}
+
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">cerrar</button>

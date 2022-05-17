@@ -67,7 +67,13 @@ class UbicacionController extends Controller
 
     public function editEvento($id)
     {
-        $coleccion = Http::get('http://127.0.0.1:8000/api/ubicaciones/'.$id);        
+        $coleccion = Http::get('http://127.0.0.1:8000/api/ubicaciones/'.$id);   
+        if ($coleccion->assertSuccessful()) {
+            return"exito";
+        } else {
+            return 'error';
+        }
+             
         $ubicacion = $coleccion["data"];
         $fechas=DB::table('fechas')->where('id_ubicacion',$id)->get();
         return view('ubicacion.editEvento', compact('ubicacion','fechas'));

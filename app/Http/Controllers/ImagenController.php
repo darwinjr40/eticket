@@ -26,47 +26,13 @@ class ImagenController extends Controller
 
     public function store(Request $request)
     {
-        // $evento_id = ($request->evento_id)? ($request->evento_id) : ('1');
-        // if ($request->hasFile('files')) {  //existe un archivo con nombre <files>
-        //     $files = $request->file('files'); //retorna un vector con los datos de los archivos
-        //     dd($files);
-        //     $data = array("evento_id" => $request['evento_id']);
-        //     foreach ($files as $file) {                
-        //         $data['pathPrivate'] = Storage::disk('s3')->put($evento_id, $file, 'public');
-        //         $data['path'] = Storage::disk('s3')->url($data['pathPrivate']);
-        //         Imagen::create($data);
-        //     } 
-        //     //Alert::success('Success Title', 'Success Message');
-        // } else {
-        //     //Alert::error('Success Title', 'Success Message');
-        // }          
-
-        // $request = $request->all();
-        // if ($request['files']) {  //existe un archivo con nombre <files>
-        //     $files = $request['files']; //$request->file('files'); //retorna un vector con los datos de los archivos
-        //     $data = array("evento_id" => $request['evento_id']);
-        //     foreach ($files as $file) {   
-        //         $data['pathPrivate'] = Storage::disk('s3')->put($data['evento_id'], $file, 'public');
-        //         $data['path'] = Storage::disk('s3')->url($data['pathPrivate']);                
-        //         $imagen = Imagen::create($data);
-        //     } 
-        //     return response()->json(['message' => 'archivo subido con exito'], 406); 
-        // } else {
-        //     return response()->json(['message' => 'Faltan archivos'], 406);  
-        // }
-
-        // dd($request);
-        // dd(array($request));
-        // $a = array($request)[0];
-        // dd($a);
-        // dd( $request->all()['files']);
-        // return $request->all();
-        // $data = Http::asForm()->post('http://127.0.0.1:8000/api/subirFile', $request->all());
-        $data = Http::withHeaders([
+        $response = Http::withHeaders([
             'Content-Type' => 'multipart/form-data',
         ])->post('http://127.0.0.1:8000/api/imagenes-api', $request->all());
-        // $data = Http::post('http://127.0.0.1:8000/api/subirFile', $request->all());
-        return $data;
+        $s = $response->status();
+        if (($s >=400) && ($s <= 599)) {
+            return back()->withErrors($response->json()['errors']);            
+        } 
         return back()->with('success', 'Archivo Guardado.');
     }
 
