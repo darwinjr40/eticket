@@ -78,7 +78,7 @@
                                                 <select name="estado" id="estado" class="form-control">
                                                     <option value="{{ $evento->estado }}">
                                                         {{ old('estado', $evento->estado) }}</option>
-                                                    <option value="desactivado">desactivado</option>
+                                                    <option value="{{($evento->estado == 'desactivado')? 'activado': 'desactivado'}}">{{ ($evento->estado == 'desactivado')? 'activado': 'desactivado'  }}</option>
                                                     {{-- <option value="inicio">Inicio</option>
                                                         <option value="proceso">Proceso</option>
                                                         <option value="fin">Fin</option> --}}

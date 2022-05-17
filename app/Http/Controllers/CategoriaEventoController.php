@@ -51,7 +51,8 @@ class CategoriaEventoController extends Controller
         ]);
 
         categoriaEvento::create($request->all());
-        return redirect()->route('categoriaEventos.index');
+        // return redirect()->route('categoriaEventos.index');
+        return back();
 
     }
 
