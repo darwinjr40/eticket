@@ -43,7 +43,7 @@ class UbicacionController extends Controller
         ])->post('http://127.0.0.1:8000/api/ubicaciones', $request->all());
         // ])->post('http://193.123.108.26/api/ubicaciones', $request->all());
         // $v = json_decode($data, true);
-        $data = $data->json();      
+        $data = $data->json();
         $mensaje = (isset($data['errors']))? 'ERROR rellenar Ubicacion.' : 'EXITO Ubicacion creada.';
         return back()->with('success', $mensaje);
         // return redirect()->route('ubicacions.index')->with('success', $mensaje);
@@ -68,12 +68,6 @@ class UbicacionController extends Controller
     public function editEvento($id)
     {
         $coleccion = Http::get('http://127.0.0.1:8000/api/ubicaciones/'.$id);   
-        if ($coleccion->assertSuccessful()) {
-            return"exito";
-        } else {
-            return 'error';
-        }
-             
         $ubicacion = $coleccion["data"];
         $fechas=DB::table('fechas')->where('id_ubicacion',$id)->get();
         return view('ubicacion.editEvento', compact('ubicacion','fechas'));

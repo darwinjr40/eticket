@@ -20,39 +20,15 @@ class ImagenApiController extends Controller
         return ImagenResource::collection($imagen);
     }
 
-    
-    public function subirFile(Request $request)
-    {
-        try {
-            if ($request->hasFile('files')) {  //existe un archivo con nombre <files>
-                $files = $request->file('files'); //retorna un vector con los datos de los archivos
-                $data = array("evento_id" => $request['evento_id']);
-                foreach ($files as $file) {
-                    $data['pathPrivate'] = Storage::disk('s3')->put($data['evento_id'], $file, 'public');
-                    $data['path'] = Storage::disk('s3')->url($data['pathPrivate']);
-                    Imagen::create($data);
-                }
-                return response()->json(['message' => 'archivo subido con exito1'], 200);
-            } else {
-                // return response()->json(['message' => $request], 406);
-                return response()->json(['message' => 'Faltan archivos1'], 406);
-            }
-        } catch (Exception  $e) {
-            return response()->json(['message' => 'Error al subir el archivo'], 406);
-        }
-    }
+
+
     public function store(Request $request)
     {
-
         request()->validate(Imagen::$rules);
         try {
-            if ($request->hasFile('files')) {  //existe un archivo con nombre <files>
-                $files = $request->file('files'); //retorna un object con los datos de los archivos
-                $data = array("evento_id" => $request['evento_id']);
-                foreach ($files as $file) {
-                    $data['pathPrivate'] = Storage::disk('s3')->put($data['evento_id'], $file, 'public');
-                    $data['path'] = Storage::disk('s3')->url($data['pathPrivate']);
-                    Imagen::create($data);
+            if (isset($request['datos'])) {  //existe un archivo con nombre <files>
+                foreach ($request['datos'] as $v) {
+                    Imagen::create($v);
                 }
                 return response()->json(['message' => 'archivo subido con exito'], 200);
             } else {
@@ -86,12 +62,13 @@ class ImagenApiController extends Controller
             if ($imagen->pathPrivate) {
                 Storage::disk('s3')->delete($imagen->pathPrivate);
                 $imagen->delete();
-                return ImagenResource::make($imagen);
+                // return ImagenResource::make($imagen);
+                return response()->json(['message' => 'EXITO Archivo Eliminado' ], 200);
             } else {
-                return response()->json(['message' => 'Error al encontrar el archivo'], 403);
+                return response()->json(['errors' => 'Error al encontrar el archivo'], 403);
             }
         } catch (Exception  $e) {
-            return response()->json(['message' => 'Error al eliminar el archivo'], 406);
+            return response()->json(['errors' => 'Error al eliminar el archivo'], 403);
         }
     }
 }

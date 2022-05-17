@@ -21,19 +21,29 @@ class ImagenController extends Controller
 
     public function create()
     {
-        return view('imagen.create');
     }
 
     public function store(Request $request)
     {
-        $response = Http::withHeaders([
-            'Content-Type' => 'multipart/form-data',
-        ])->post('http://127.0.0.1:8000/api/imagenes-api', $request->all());
-        $s = $response->status();
-        if (($s >=400) && ($s <= 599)) {
-            return back()->withErrors($response->json()['errors']);            
-        } 
-        return back()->with('success', 'Archivo Guardado.');
+        if ($request->hasFile('files')) {  //existe un archivo con nombre <files>
+            $imagen= [];
+            $data = array("evento_id" => $request['evento_id']);
+            $files = $request->file('files'); //retorna un object con los datos de los archivos
+            foreach ($files as $file) {
+                $data['pathPrivate'] = Storage::disk('s3')->put($data['evento_id'], $file, 'public');
+                $data['path'] = Storage::disk('s3')->url($data['pathPrivate']);
+                // $data['pathPrivate'] = '';
+                // $data['path'] = '';
+                $imagen[] = $data;
+            }
+            $request['datos'] = $imagen;
+        }
+        $response = Http::post('http://127.0.0.1:8000/api/imagenes-api', $request->all());
+        if (isset($response['errors'])) {
+            return back()->withErrors($response->json()['errors']);  
+        } else {
+            return back()->with('success', $response->json()['message']);
+        }        
     }
 
 
@@ -61,7 +71,11 @@ class ImagenController extends Controller
 
     public function destroy( $id)
     {
-        $data = Http::delete('http://127.0.0.1:8000/api/imagenes-api/'.$id);
-        return back()->with('success', 'Archivo eliminado.');
+        $response = Http::delete('http://127.0.0.1:8000/api/imagenes-api/'.$id);
+        if (isset($response['errors'])) {
+            return back()->withErrors($response->json()['errors']);  
+        } else {
+            return back()->with('success', $response->json()['message']);
+        }       
     }
 }

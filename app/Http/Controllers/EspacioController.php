@@ -118,6 +118,7 @@ class EspacioController extends Controller
     public function destroy(Espacio $espacio)
     {
         $espacio->delete();
-        return redirect()->route('espacios.indexSector');
+        return back();
+        // return redirect()->route('espacios.indexSector');
     }
 }

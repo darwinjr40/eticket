@@ -27,7 +27,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('eventos-api', EventoApiController::class)->names('api.eventos');
 Route::apiResource('imagenes-api', ImagenApiController::class)->names('api.imagenes');
-Route::post('subirFile', [ImagenApiController::class, 'subirFile'])->name('api.imagenes.subirFile');
 Route::apiResource('ubicaciones', UbicacionApiController::class)->names('api.ubicaciones');
 
 

@@ -344,15 +344,13 @@
 
                                 <div class="modal-body">
 
-                                    <form id="frmImagenes" action="{{ route('api.imagenes.store') }}"
+                                    <form id="frmImagenes" action="{{ route('imagens.store') }}"
                                         enctype="multipart/form-data" method="post">
                                         @csrf
                                         <input type="file" name="files[]" id="archivos" multiple required>
                                         <br>
                                         <br>
-                                        {{-- oculto --}}
-                                        {{-- <input name="evento_id" type="hidden" value="{{ $evento->id }}"> --}}
-
+                                        <input name="evento_id" type="hidden" value="{{ $evento->id }}">
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">cerrar</button>
