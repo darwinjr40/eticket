@@ -143,6 +143,6 @@
         };
     </script>
     <script type="text/javascript" src="{{ asset('js/map/mapa2.js') }}"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script>
-    {{-- <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvUexPfr0cJLlaF08zCb1X3aggukbaIAI&callback=initMap"></script> --}}
+    {{-- <script async src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script> --}}
+    <script async  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvUexPfr0cJLlaF08zCb1X3aggukbaIAI&callback=initMap"></script>
 @endsection
