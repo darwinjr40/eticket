@@ -10,7 +10,7 @@
 
 <div class="card">
     <div class="card-body">
-        <img src="{{asset($imagen->path)}}" alt="">
+        <img src="{{asset($imagen['path'])}}" alt="">
         </div>
     </div>
 @endsection

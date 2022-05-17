@@ -56,6 +56,7 @@
                     </div>
                 </div>
            <!-- Fin Modal para agregar archivos -->
+
             <div class="row">
                 <div class="col-sm-12">
 
@@ -70,12 +71,12 @@
                         <tbody>
                             @foreach ($files as $file)
                                 <tr>
-                                    <td>{{ $file->id }}</td>
-                                    <td>{{ $file->path }}</td>
+                                    <td>{{ $file['id'] }}</td>
+                                    <td>{{ $file['path'] }}</td>
 
                                     <td>
-                                        <form action="{{ route('imagens.destroy', $file) }}" method="POST">
-                                            <a class="btn btn-sm btn-dark" href="{{ ($file->path) ? $file->path : '#' }}"><i class="fa fa-fw fa-eye"></i></a>  
+                                        <form action="{{ route('imagens.destroy', $file['id']) }}" method="POST">
+                                            <a class="btn btn-sm btn-dark" href="{{ ($file['path']) ? $file['path'] : '#' }}"><i class="fa fa-fw fa-eye"></i></a>  
                                             {{-- <a class="btn btn-sm btn-success" href="{{ route('imagens.edit', $file) }}"><i
                                                     class="fa fa-fw fa-edit"></i> </a> --}}
                                             @csrf

@@ -40,7 +40,7 @@ class UbicacionController extends Controller
     {
         $data = Http::withHeaders([
             'Accept' => 'application/json',
-        ])->post('http://tiendatopicos.test/api/ubicaciones', $request->all());
+        ])->post('http://127.0.0.1:8000/api/ubicaciones', $request->all());
         // ])->post('http://193.123.108.26/api/ubicaciones', $request->all());
         // $v = json_decode($data, true);
         $data = $data->json();      
@@ -52,7 +52,7 @@ class UbicacionController extends Controller
     public function show($id)
     {
         // $coleccion = Http::get('http://193.123.108.26/api/ubicaciones/'.$id);
-        $coleccion = Http::get('http://tiendatopicos.test/api/ubicaciones/'.$id);        
+        $coleccion = Http::get('http://127.0.0.1:8000/api/ubicaciones/'.$id);        
         $ubicacion = $coleccion["data"];
         return view('ubicacion.show', compact('ubicacion'));
     }
@@ -67,7 +67,7 @@ class UbicacionController extends Controller
 
     public function editEvento($id)
     {
-        $coleccion = Http::get('http://tiendatopicos.test/api/ubicaciones/'.$id);        
+        $coleccion = Http::get('http://127.0.0.1:8000/api/ubicaciones/'.$id);        
         $ubicacion = $coleccion["data"];
         $fechas=DB::table('fechas')->where('id_ubicacion',$id)->get();
         return view('ubicacion.editEvento', compact('ubicacion','fechas'));
@@ -78,7 +78,7 @@ class UbicacionController extends Controller
         request()->validate(Ubicacion::$rules);
         $data = Http::withHeaders([
             'Accept' => 'application/json',
-        ])->patch('http://tiendatopicos.test/api/ubicaciones/'.$id, $request->all());
+        ])->patch('http://127.0.0.1:8000/api/ubicaciones/'.$id, $request->all());
         // ])->patch('http://193.123.108.26/api/ubicaciones/'.$id, $request->all());
         // $mensaje = ($data['errors'])? 'error rellenar Ubicacion.' : 'Ubicacion actualizada.';
         if ($request->evento_id) {
@@ -92,7 +92,7 @@ class UbicacionController extends Controller
     public function destroy($id)
     {
         // $coleccion = Http::delete('http://193.123.108.26/api/ubicaciones/'.$id);
-        Http::delete('http://tiendatopicos.test/api/ubicaciones/'.$id);
+        Http::delete('http://127.0.0.1:8000/api/ubicaciones/'.$id);
         return back()->with('success', 'Ubicacion eliminada.');
     }
 

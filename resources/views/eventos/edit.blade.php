@@ -344,7 +344,7 @@
 
                                 <div class="modal-body">
 
-                                    <form id="frmImagenes" action="{{ route('imagens.store') }}"
+                                    <form id="frmImagenes" action="{{ route('api.imagenes.store') }}"
                                         enctype="multipart/form-data" method="post">
                                         @csrf
                                         <input type="file" name="files[]" id="archivos" multiple required>
