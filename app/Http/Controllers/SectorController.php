@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sector;
+use App\Models\Ubicacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SectorController extends Controller
 {
@@ -60,13 +62,25 @@ class SectorController extends Controller
             'capacidad'=>'required',
             'referencia'=>'required'
         ]);
-        // return $id_ubicacion;
-        $espacios=new Sector();
-        $espacios->nombre = $request->nombre;
-        $espacios->capacidad = $request->capacidad;
-        $espacios->referencia = $request->referencia;
-        $espacios->id_ubicacion = $id_ubicacion;
-        $espacios->save();
+        $sectores=DB::table('sectors')->where('id_ubicacion',$id_ubicacion)->get();
+        $ubicacion=Ubicacion::find($id_ubicacion);
+        $suma=0;
+        foreach($sectores as $sector){
+            $suma=$suma+$sector->capacidad;
+        }
+        $suma=$suma+$request->get('capacidad');
+        if ($ubicacion->capacidad>=$suma) {
+            Sector::create($request->all());
+        }else{
+            return back()->with('danger','Capacidad exedidad...');
+        }
+        
+        // $espacios=new Sector();
+        // $espacios->nombre = $request->nombre;
+        // $espacios->capacidad = $request->capacidad;
+        // $espacios->referencia = $request->referencia;
+        // $espacios->id_ubicacion = $id_ubicacion;
+        // $espacios->save();
         return back();
     }
 
@@ -116,9 +130,9 @@ class SectorController extends Controller
      * @param  \App\Models\Sector  $sector
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sector $sector)
+    public function destroy($id)
     {
-        $sector->delete();
+        $sector=Sector::find($id)->delete();
         return back();
         // return redirect()->route('sectors.index');
     }

@@ -36,11 +36,12 @@
                                                         <span class="input-group-text">
                                                             <i class="fa fa-envelope"> Capacidad</i>
                                                         </span>
-                                                        <input type="number" id="capacidad" name="capacidad" class="form-control">
+                                                        <input type="number" id="capacidad" name="capacidad" class="form-control" min=1>
                                                         <span class="input-group-text">
                                                             <i class="fa fa-lock"> Referencia</i>
                                                         </span>
                                                         <input type="text" id="referencia" name="referencia" class="form-control">
+                                                            <input type="hidden" id="id_ubicacion" name="id_ubicacion" value="{{$id_ubicacion}}">
                                                     </div>
                                                 </div>
                                             </div>

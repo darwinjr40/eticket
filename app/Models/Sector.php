@@ -12,5 +12,6 @@ class Sector extends Model
     protected $fillable = [
         'id','nombre','capacidad','referencia','id_ubicacion'
     ];
+
     public $timestamps = false;
 }

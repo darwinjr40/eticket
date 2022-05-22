@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Espacio;
 use App\Models\Sector;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EspacioController extends Controller
 {
@@ -59,12 +60,24 @@ class EspacioController extends Controller
             'descripcion'=>'required',
             'capacidad'=>'required'
         ]);
-        $espacios=new Espacio();
-        $espacios->numero = $request->numero;
-        $espacios->descripcion = $request->descripcion;
-        $espacios->capacidad = $request->capacidad;
-        $espacios->id_sector = $id_sector;
-        $espacios->save();
+        $espacios=DB::table('espacios')->where('id_sector',$id_sector)->get();
+        $sector=Sector::find($id_sector);
+        $suma=0;
+        foreach($espacios as $espacio){
+            $suma=$suma+$espacio->capacidad;
+        }
+        $suma=$suma+$request->get('capacidad');
+        if ($sector->capacidad>=$suma) {
+            $espa=new Espacio();
+            $espa->numero = $request->numero;
+            $espa->descripcion = $request->descripcion;
+            $espa->capacidad = $request->capacidad;
+            $espa->id_sector = $id_sector;
+            $espa->save();
+        }else{
+            return back()->with('danger','Capacidad exedidad...');
+        }
+ 
         return back();
     }
 
@@ -118,6 +131,6 @@ class EspacioController extends Controller
     public function destroy(Espacio $espacio)
     {
         $espacio->delete();
-        return redirect()->route('espacios.indexSector');
+        return back();
     }
 }

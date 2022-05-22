@@ -34,8 +34,8 @@
                 <div style="margin-bottom: 10px">
                     <span class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalAgregarFecha">
                         {{-- <span class="fas fa-plus-circle"></span> --}}
-                        <span class="fas fa-fw fa-plus"></span>
-                        Ubicaciones
+                        <span class="fas fa-calendar"></span>
+                        Crear Fechas
                     </span>
                 </div>
 
@@ -46,7 +46,7 @@
                         <div class="modal-content">
 
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Crear Ubicacion</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Crear Fecha</h5>
                                 {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>xd
                                     </button> --}}

@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 
 class CategoriaEventoController extends Controller
 {
-    function __construct()
-    {
-        $this->middleware('permission:ver-categoriaEvento | crear-categoriaEvento | editar-categoriaEvento | borrar-categoriaEvento',['only'=>['index']]);
-        $this->middleware('permission:crear-categoriaEvento',['only'=>['create','store']]);
-        $this->middleware('permission:editar-categoriaEvento',['only'=>['edit','update']]);
-        $this->middleware('permission:borrar-categoriaEvento',['only'=>['destroy']]);
+    // function __construct()
+    // {
+    //     $this->middleware('permission:ver-categoriaEvento | crear-categoriaEvento | editar-categoriaEvento | borrar-categoriaEvento',['only'=>['index']]);
+    //     $this->middleware('permission:crear-categoriaEvento',['only'=>['create','store']]);
+    //     $this->middleware('permission:editar-categoriaEvento',['only'=>['edit','update']]);
+    //     $this->middleware('permission:borrar-categoriaEvento',['only'=>['destroy']]);
         
-    }
+    // }
 
     /**
      * Display a listing of the resource.

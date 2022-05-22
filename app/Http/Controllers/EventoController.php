@@ -49,11 +49,8 @@ class EventoController extends Controller
             'titulo'=>'required',
             'descripcion'=>'required',
             ]);
-        $evento=new Evento();
-        $evento->titulo=$request->get('titulo');
-        $evento->descripcion=$request->get('descripcion');
-        $evento->id_categoria=$request->get('id_categoria');
-        $evento->id_contacto=$request->get('id_contacto');
+
+        $evento=new Evento($request->all());
         $evento->estado="desactivado";
         $evento->save();
         return redirect()->route('eventos.edit', $evento->id);

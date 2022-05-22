@@ -60,9 +60,9 @@
                                                         <option value="{{ $evento->estado }}">
                                                             {{ old('estado', $evento->estado) }}</option>
                                                         <option value="desactivado">desactivado</option>
-                                                        {{-- <option value="inicio">Inicio</option>
+                                                        <option value="inicio">Inicio</option>
                                                         <option value="proceso">Proceso</option>
-                                                        <option value="fin">Fin</option> --}}
+                                                        <option value="fin">Fin</option>
                                                     </select>
                                                 </div>
                                             </div>
