@@ -14,6 +14,11 @@
                 @includeif('partials.errors')
                 <div class="card card-default">
                     <div class="card-body">
+                        @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                        @endif
                         <form method="POST" action="{{ route('ubicacions.update', $ubicacion['id']) }}" role="form"
                             enctype="multipart/form-data">
                             {{ method_field('PATCH') }}

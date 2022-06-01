@@ -132,5 +132,6 @@ class EspacioController extends Controller
     {
         $espacio->delete();
         return back();
+        // return redirect()->route('espacios.indexSector');
     }
 }

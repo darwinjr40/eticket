@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('template_title')
+{{-- @section('template_title')
     Create Ubicacion
-@endsection
+@endsection --}}
 
 @section('content')
     <section class="section">

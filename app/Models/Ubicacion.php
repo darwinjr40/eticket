@@ -10,10 +10,11 @@ class Ubicacion extends Model
     use ApiTrait;
     
     //para la api, por el cual se va poder filtrar
-    protected $allowIncluded = ['evento'];
+    protected $allowIncluded = ['evento', 'fechas', 'sectores'];
     protected $allowFilter = ['id', 'nombre', 'direccion', 'telefono', 'capacidad', 'latitud', 'longitud'];
     protected $allowSort = ['id', 'nombre', 'direccion', 'telefono', 'capacidad', 'latitud', 'longitud'];
     //Fin para filtrar api
+
 
     static $rules = [
 		'nombre' => 'required',
@@ -23,6 +24,7 @@ class Ubicacion extends Model
 		'latitud' => 'required',
 		'longitud' => 'required',
     ];
+    
     protected $perPage = 20;
     protected $fillable = ['nombre', 'evento_id','direccion','telefono','capacidad','latitud','longitud'];
 
@@ -30,7 +32,10 @@ class Ubicacion extends Model
         return $this->belongsTo(Evento::class);
     }
 	public function fechas(){
-        return $this->hasMany(Fecha::class,'id');
+        return $this->hasMany(Fecha::class,'id_ubicacion');
+    }
+    public function sectores(){
+        return $this->hasMany(Sector::class,'id_ubicacion');
     }
 
 }

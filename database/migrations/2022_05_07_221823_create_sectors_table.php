@@ -19,7 +19,7 @@ class CreateSectorsTable extends Migration
             $table->integer('capacidad');
             $table->string('referencia', 255);
             $table->integer('id_ubicacion')->unsigned();
-            $table->foreign('id_ubicacion')->references('id')->on('ubicacions');
+            $table->foreign('id_ubicacion')->references('id')->on('ubicacions')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

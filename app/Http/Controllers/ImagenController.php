@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Imagen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
 class ImagenController extends Controller
@@ -12,46 +13,48 @@ class ImagenController extends Controller
     
     public function index()
     {
-        $files = Imagen::all();//File::whereUserId(Auth::id()) -> latest()->get();
+        // $files = Imagen::all();//File::whereUserId(Auth::id()) -> latest()->get();
+        $coleccion = Http::get('http://127.0.0.1:8000/api/imagenes-api');        
+        $files = $coleccion["data"];
         return view('imagen.index', compact('files')); 
     }
 
     public function create()
     {
-        return view('imagen.create');
     }
 
     public function store(Request $request)
     {
-        $evento_id = ($request->evento_id)? ($request->evento_id) : ('1');
-        $files = $request->file('files'); //retorna un vector con los datos de los archivos
         if ($request->hasFile('files')) {  //existe un archivo con nombre <files>
+            $imagen= [];
+            $data = array("evento_id" => $request['evento_id']);
+            $files = $request->file('files'); //retorna un object con los datos de los archivos
             foreach ($files as $file) {
-                
-                
-                $pathPrivate = Storage::disk('s3')->put($evento_id, $file, 'public');
-                $path= Storage::disk('s3')->url($pathPrivate);
-                Imagen::create([
-                    'path' => $path,
-                    'pathPrivate' => $pathPrivate,
-                    'evento_id' => $evento_id
-                ]);
-            } 
-            //Alert::success('Success Title', 'Success Message');
+                $data['pathPrivate'] = Storage::disk('s3')->put($data['evento_id'], $file, 'public');
+                $data['path'] = Storage::disk('s3')->url($data['pathPrivate']);
+                // $data['pathPrivate'] = '';
+                // $data['path'] = '';
+                $imagen[] = $data;
+            }
+            $request['datos'] = $imagen;
+        }
+        $response = Http::post('http://127.0.0.1:8000/api/imagenes-api', $request->all());
+        if (isset($response['errors'])) {
+            return back()->withErrors($response->json()['errors']);  
         } else {
-            //Alert::error('Success Title', 'Success Message');
-        }          
-        return back();
+            return back()->with('success', $response->json()['message']);
+        }        
     }
 
 
-    public function show(Imagen $imagen)
+    public function show($id)
     {
-        
-        if ($imagen->path) {
-            return view('imagen.show', compact('imagen'));
-        } else {
+        $data = Http::get('http://127.0.0.1:8000/api/imagenes-api/'.$id); 
+        $imagen = $data->json();
+        if (isset($imagen['errors'])) {
             abort(403);
+        } else {
+            return view('imagen.show', compact('imagen'));
         }
     }
 
@@ -66,15 +69,13 @@ class ImagenController extends Controller
         //
     }
 
-    public function destroy(Imagen $imagen)
+    public function destroy( $id)
     {
-
-        if ($imagen->pathPrivate) {
-            Storage::disk('s3')->delete($imagen->pathPrivate);
-            $imagen->delete();
+        $response = Http::delete('http://127.0.0.1:8000/api/imagenes-api/'.$id);
+        if (isset($response['errors'])) {
+            return back()->withErrors($response->json()['errors']);  
         } else {
-            abort(403);
-        }
-        return back();
+            return back()->with('success', $response->json()['message']);
+        }       
     }
 }

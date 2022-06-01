@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Sector;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UbicacionResource extends JsonResource
@@ -20,7 +21,8 @@ class UbicacionResource extends JsonResource
             'longitud' => $this->longitud,
             //es para que nos retorne las relaciones.
             'evento' => EventoResource::make($this->whenLoaded('evento')),
-            //  'procesosA' => ProcesoResource::collection($this->whenLoaded('procesosA')),            
+            'sectores' => SectorResource::collection($this->whenLoaded('sectores')),
+            'fechas' => FechaResource::collection($this->whenLoaded('fechas')),
         ];
     }
 }
