@@ -72,15 +72,8 @@ class SectorController extends Controller
         if ($ubicacion->capacidad>=$suma) {
             Sector::create($request->all());
         }else{
-            return back()->with('danger','Capacidad exedidad...');
+            return back()->with('danger','Capacidad excedidad...');
         }
-        
-        // $espacios=new Sector();
-        // $espacios->nombre = $request->nombre;
-        // $espacios->capacidad = $request->capacidad;
-        // $espacios->referencia = $request->referencia;
-        // $espacios->id_ubicacion = $id_ubicacion;
-        // $espacios->save();
         return back();
     }
 

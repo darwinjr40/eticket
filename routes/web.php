@@ -1,6 +1,5 @@
 <?php
 
-use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaEventoController;
 use App\Http\Controllers\ContactoController;
@@ -11,10 +10,10 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\SectorController;
 use App\Http\Controllers\EspacioController;
-use App\Models\Contacto;
+
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\Ubicacion1Controller;
-use App\Http\Controllers\UbicacionController;
+
 use Illuminate\Support\Facades\Auth;
 
 

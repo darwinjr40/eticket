@@ -75,7 +75,7 @@ class EspacioController extends Controller
             $espa->id_sector = $id_sector;
             $espa->save();
         }else{
-            return back()->with('danger','Capacidad exedidad...');
+            return back()->with('danger','Capacidad Excedidad...');
         }
  
         return back();
