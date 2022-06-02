@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Contacto;
+use App\Models\Fecha;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
@@ -22,5 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoriaEventoSeeder::class);
         $this->call(EventoSeeder::class);
         $this->call(UbicacionSeeder::class);
+        //crea 10 registros de fechas
+        Fecha::factory(10)->create();
     }
 }

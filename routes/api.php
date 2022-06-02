@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\EventoApiController;
 use App\Http\Controllers\Api\FechaApiController;
 use App\Http\Controllers\Api\ImagenApiController;
 use App\Http\Controllers\Api\SectorApiController;
+use App\Http\Controllers\Api\TicketApiController;
 use App\Http\Controllers\Api\UbicacionApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,6 @@ Route::apiResource('ubicaciones', UbicacionApiController::class)->names('api.ubi
 Route::apiResource('fechas-api', FechaApiController::class)->names('api.fechas');
 Route::apiResource('sectores-api', SectorApiController::class)->names('api.sectores');
 Route::apiResource('espacios-api', EspacioApiController::class)->names('api.espacios');
-
+Route::apiResource('tickets-api', TicketApiController::class)->names('api.tickets');
 
 

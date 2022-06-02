@@ -11,8 +11,8 @@ class Ubicacion extends Model
     
     //para la api, por el cual se va poder filtrar
     protected $allowIncluded = ['evento', 'fechas', 'sectores'];
-    protected $allowFilter = ['id', 'nombre', 'direccion', 'telefono', 'capacidad', 'latitud', 'longitud'];
-    protected $allowSort = ['id', 'nombre', 'direccion', 'telefono', 'capacidad', 'latitud', 'longitud'];
+    protected $allowFilter = ['id', 'nombre', 'direccion', 'telefono', 'capacidad', 'latitud', 'longitud', 'evento_id'];
+    protected $allowSort = ['id', 'nombre', 'direccion', 'telefono', 'capacidad', 'latitud', 'longitud', 'evento_id'];
     //Fin para filtrar api
 
 

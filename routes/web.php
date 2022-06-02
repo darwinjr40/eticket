@@ -12,6 +12,7 @@ use App\Http\Controllers\SectorController;
 use App\Http\Controllers\EspacioController;
 
 use App\Http\Controllers\ImagenController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\Ubicacion1Controller;
 
 use Illuminate\Support\Facades\Auth;
@@ -81,3 +82,7 @@ Route::resource('ubicacions', Ubicacion1Controller::class);
 Route::get('ubicacions/{id}/editEvento', [Ubicacion1Controller::class, 'editEvento'])->name('ubicacions.editEvento');
 // Route::get('ubicacion', [UbicacionController::class, 'mapa'])->name('ubicacions.mapa');
 Route::resource('imagens', ImagenController::class);
+Route::resource('tickets', TicketController::class);
+Route::post('tickets-addEvento', [TicketController::class, 'crearEvento'])->name('tickets.addEvento');
+Route::get('tickets-addEvento1', [TicketController::class, 'crearEvento1'])->name('tickets.addEvento1');
+
