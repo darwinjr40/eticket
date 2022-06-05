@@ -39,7 +39,7 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-text">
-                                                    <i class="fa fa-envelope"> Descripcion</i>
+                                                    <i class="fa fa-blog"> Descripcion</i>
                                                 </span>
                                                 <input type="text" id="descripcion" name="descripcion" class="form-control" value="{{ old('descripcion',$espacio->descripcion)}}">
                                             </div>
@@ -47,9 +47,17 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-text">
-                                                    <i class="fa fa-envelope"> Capacidad</i>
+                                                    <i class="fa fa-bars"> Capacidad</i>
                                                 </span>
                                                 <input type="number" id="capacidad" name="capacidad" class="form-control" value="{{ old('capacidad',$espacio->capacidad)}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-credit-card"> Precio</i>
+                                                </span>
+                                                <input type="number" id="precio" name="precio" class="form-control" value="{{ old('capacidad',$espacio->precio)}}">
                                             </div>
                                         </div>
                                         <div class="form-group">

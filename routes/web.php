@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('eventosS');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -43,7 +43,11 @@ Route::group(['middelware'=>['auth']],function(){
     Route::resource('sectors',SectorController::class);
     Route::resource('espacios',EspacioController::class);
     Route::resource('contactos',ContactoController::class);
+
+    //Eventos
     Route::resource('eventos',EventoController::class);
+    Route::get('home/Eventos',[EventoController::class,'showcliente'])->name('eventosS');
+
     Route::get('espacios_sector/{id_sector}',[EspacioController::class,'indexSector'])->name('espacios.indexSector');
     Route::post('espacios_sector/{id_sector}',[EspacioController::class,'storeEspacioSector'])->name('espacios.storeEspacioSector');
     Route::resource('fechas',FechaController::class);

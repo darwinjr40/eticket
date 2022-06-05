@@ -17,6 +17,8 @@ class CreateSectorsTable extends Migration
             $table->increments('id');
             $table->string('nombre',255);
             $table->integer('capacidad');
+            $table->integer('capacidad_disponible');
+            $table->integer('precio');
             $table->string('referencia', 255);
             $table->integer('id_ubicacion')->unsigned();
             $table->foreign('id_ubicacion')->references('id')->on('ubicacions');

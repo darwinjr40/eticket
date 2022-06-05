@@ -10,9 +10,9 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            @can('crear-rol')
+                            {{-- @can('crear-rol') --}}
                                 <a class="btn btn-primary" href="{{ route('roles.create') }}"> Crear Rol</a>
-                            @endcan
+                            {{-- @endcan --}}
                             <table class="table table-striped mt-2">
                                 <thead style="background-color: #6777eF">
                                     <tr>

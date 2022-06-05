@@ -70,7 +70,10 @@ class SectorController extends Controller
         }
         $suma=$suma+$request->get('capacidad');
         if ($ubicacion->capacidad>=$suma) {
-            Sector::create($request->all());
+            $sector=new Sector($request->all());
+            $sector->capacidad_disponible=$request->capacidad;
+            $sector->precio=0;
+            $sector->save();
         }else{
             return back()->with('danger','Capacidad excedidad...');
         }

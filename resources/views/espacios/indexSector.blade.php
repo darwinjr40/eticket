@@ -34,13 +34,17 @@
                                                 </span>
                                                 <input type="text" id="numero" name="numero" class="form-control">
                                                 <span class="input-group-text">
-                                                    <i class="fa fa-envelope"> Descripcion</i>
+                                                    <i class="fa fa-bars"> Descripcion</i>
                                                 </span>
                                                 <input type="text" id="descripcion" name="descripcion" class="form-control">
                                                 <span class="input-group-text">
-                                                    <i class="fa fa-envelope"> Capacidad</i>
+                                                    <i class="fa fa-bars"> Capacidad</i>
                                                 </span>
                                                 <input type="number" id="capacidad" name="capacidad" class="form-control">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-credit-card" aria-hidden="true"> Precio</i>
+                                                </span>
+                                                <input type="number" id="precio" name="precio" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -59,6 +63,8 @@
                                         <th style="color:#fff">Numero</th>
                                         <th style="color: #fff">Descripcion</th>
                                         <th style="color: #fff">Capacidad</th>
+                                        <th style="color: #fff">Precio</th>
+                                        
                                         <th style="color:#fff">Accion</th>
                                     </tr>
                                 </thead>
@@ -69,6 +75,8 @@
                                             <td>{{$espacio->numero}}</td>
                                             <td>{{$espacio->descripcion}}</td>
                                             <td>{{$espacio->capacidad}}</td>
+                                            <td>{{$espacio->precio}}</td>
+                                            
                                             <td>
 
                                                 <form action="{{ route('espacios.destroy',$espacio->id) }}" method="POST">

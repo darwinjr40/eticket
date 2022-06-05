@@ -24,7 +24,11 @@ class Ubicacion1Controller extends Controller
     public function store(Request $request)
     {
         request()->validate(Ubicacion::$rules);
-        Ubicacion::create($request->all());
+        $ubicacion=new Ubicacion($request->all());
+        $ubicacion->capacidad_disponible=$request->capacidad;
+        $ubicacion->precio=0;
+        $ubicacion->save();
+
         if ($request->evento_id) {
             return back()->with('success', 'Ubicacion creada.');
         } else {
@@ -42,7 +46,6 @@ class Ubicacion1Controller extends Controller
     public function edit($id)
     {
         $ubicacion = Ubicacion::find($id);
-        //$fechas=$ubicacion->fechas;
         $fechas=DB::table('fechas')->where('id_ubicacion',$id)->get();
         return view('ubicacion.edit', compact('ubicacion','fechas'));
     }
