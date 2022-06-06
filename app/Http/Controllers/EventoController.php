@@ -7,6 +7,8 @@ use App\Models\categoriaEvento;
 use App\Models\Contacto;
 use App\Models\Ubicacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class EventoController extends Controller
 {
@@ -52,6 +54,7 @@ class EventoController extends Controller
 
         $evento=new Evento($request->all());
         $evento->estado="desactivado";
+        
         $evento->save();
         return redirect()->route('eventos.edit', $evento->id);
 
@@ -79,6 +82,7 @@ class EventoController extends Controller
     {
         $ubicacions = $evento->ubicaciones;
         $files = $evento->imagenes;
+        //dd($files);
         $categorias=categoriaEvento::all();
         $contactos=Contacto::all();
 
@@ -118,5 +122,14 @@ class EventoController extends Controller
     {
         $evento->delete();
         return back();
+    }
+
+    public function showcliente(){
+        $eventos=Evento::where('estado','inicio')->get();
+        $eventos->load('imagenes');
+
+        // $buscador=Evento::where('estado','inicio')->pluck('id','titulo');
+        // Session::put('eventos', json_encode($buscador));
+        return view("eventos.showcliente",compact('eventos'));
     }
 }

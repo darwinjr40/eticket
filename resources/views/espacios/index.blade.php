@@ -17,6 +17,8 @@
                                         <th style="color:#fff">Numero</th>
                                         <th style="color: #fff">Descripcion</th>
                                         <th style="color: #fff">Capacidad</th>
+                                        <th style="color: #fff">Estado</th>
+                                        <th style="color: #fff">Precio</th>
                                         <th style="color:#fff">Accion</th>
                                     </tr>
                                 </thead>
@@ -27,6 +29,9 @@
                                             <td>{{$espacio->numero}}</td>
                                             <td>{{$espacio->descripcion}}</td>
                                             <td>{{$espacio->capacidad}}</td>
+                                            <td>{{$espacio->estado}}</td>
+                                            <td>{{$espacio->precio}} Bs</td>
+                                            
                                             <td>
                                                 <a class="btn btn-info" href="{{ route('espacios.edit', $espacio->id) }}">Editar</a>
                                                 {!! Form::open(['method'=>'DELETE','route'=>['espacios.destroy',$espacio->id],'style'=>'display:inline']) !!}

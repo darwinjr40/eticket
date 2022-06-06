@@ -19,8 +19,8 @@
             <br> <br>
             <form method="POST" action="{{ route('tickets.addEvento') }}" role="form" enctype="multipart/form-data">
                 @csrf
-                {{-- SELECT UBICACION --}}
                 <div class="row row justify-content-center">
+                {{-- SELECT UBICACION --}}
                     <div class="col-3">
                         <select name="ubicacion_id" id="select-ubicaciones" class="form-control" autofocus required>
                             <option value="">Seleccionar Ubicacion</option>
@@ -50,14 +50,29 @@
                     {{-- BUTTON AÑADIR --}}
                     <div class="col-3 align-items-center" style="">
                         {{-- <button  class="btn btn-primary type="submit">Comprar Ticket</button> --}}
-                        <button class="btn btn-primary type=" submit">Añadir</button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Añadir</button>
+                        
                     </div>
                     {{-- oculto --}}
                     <input type="hidden" name="tickets"  value="{{json_encode($tickets)}}">
                 </div>
-            </form>
+                </form>
 
+            <div class="row">
+                <div class="col-sm-9" style="">
+                    
+                </div>
 
+                <div class="col-sm-2" style="">
+                    <form method="POST" action="{{ route('nota-ventas.crear') }}" role="form" enctype="multipart/form-data">
+                        @csrf
+                        <button class="btn  btn-dark " type="submit"><i class="fa fa-credit-card" aria-hidden="true"></i> Pagar ahora</button>
+                        {{-- oculto --}}
+                        <input type="hidden" name="tickets"  value="{{json_encode($tickets)}}">
+                        <input type="hidden" name="ubicacion_id"  value="">
+                    </form>
+                </div>
+            </div>
             {{-- tabla --}}
             <div class="row row justify-content-center m-2">
                 <h2 class="font-weight-bold">Detalles de la compra</h2>
@@ -83,19 +98,17 @@
                                 <td>{{ $ticket['ubicacion'] }}</td>
                                 <td>{{ $ticket['fecha'] }}</td>
                                 <td>{{ $ticket['cantidad'] }}</td>
-                                <td>{{ 'dasd' }}</td>
-                                <td>{{ 'dasd' }}</td>
+                                <td>{{ $ticket['precio'] }}</td>
+                                <td>{{ $ticket['precio'] * $ticket['cantidad'] }}</td>
                                 <td>
-                                    <form action="{{ route('tickets.destroy', 1) }}" method="post">
+                                    <form method="POST" action="{{ route('tickets.destroyEvento', $ticket['id']) }}" role="form" enctype="multipart/form-data">
                                         @csrf
-                                        @method('delete')
-                                        {{-- <a class="btn btn-primary btn-sm" href="{{route('detalleVentas.show', $detalleVenta)}}">Ver</a> --}}
-                                        {{-- <a class="btn btn-primary btn-sm" href="{{route('detalleVentas.show',auth()->detalleVenta()->detalleVenta)}}">Ver</a> --}}
-                                        {{-- <a href="{{route('detalleVentas.edit', $detalleVenta)}}"class="btn btn-info btn-sm">Editar</a> --}}
+                                        {{-- oculto --}}
+                                        <input type="hidden" name="tickets"  value="{{json_encode($tickets)}}">
+                                        {{-- button --}}
                                         <button class="btn btn-danger btn-sm"
                                             onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" value="Borrar">
-                                            {{-- <i class="fas fa-times"></i> --}}
-                                            <i class="fas fa-trash"></i>
+                                            <i class="fas fa-times"></i>
 
                                         </button>
                                     </form>
@@ -127,5 +140,4 @@
 @section('scripts')
     <script type="text/javascript" src="{{ asset('js/path.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/ticket/combo.js') }}"></script>
-
 @stop

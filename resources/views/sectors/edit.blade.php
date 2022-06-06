@@ -47,6 +47,14 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-text">
+                                                    <i class="fa fa-envelope"> Precio</i>
+                                                </span>
+                                                <input type="text" id="precio" name="precio" class="form-control" value="{{ old('precio',$sector->precio)}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-text">
                                                     <i class="fa fa-users"> Referencia</i>
                                                 </span>
                                                 <input type="text" id="referencia" name="referencia" class="form-control" value="{{ old('referencia',$sector->referencia)}}">

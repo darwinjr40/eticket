@@ -22,6 +22,16 @@
             {!! $errors->first('capacidad', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
+            {{ Form::label('capacidad Disponible') }}
+            {{ Form::text('capacidad_disponible', $ubicacion['capacidad_disponible'], ['class' => 'form-control' . ($errors->has('capacidad_disponible') ? ' is-invalid' : ''), 'placeholder' => 'Capacidad Disponible']) }}
+            {!! $errors->first('capacidad', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
+            {{ Form::label('Precio') }}
+            {{ Form::text('precio', $ubicacion['precio'], ['class' => 'form-control' . ($errors->has('precio') ? ' is-invalid' : ''), 'placeholder' => 'Precio']) }}
+            {!! $errors->first('precio', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
             {{ Form::label('ubicacion') }}
             <div id="map" style="width: 100%; height: 500px;"></div>
         </div>

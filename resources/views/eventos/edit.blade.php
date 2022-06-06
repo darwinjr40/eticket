@@ -263,6 +263,9 @@
                                 <th style="color:#fff">Direccion</th>
                                 <th style="color:#fff">Telefono</th>
                                 <th style="color:#fff">Capacidad</th>
+                                <th style="color:#fff">Capacidad Disponible</th>
+                                <th style="color:#fff">Precio</th>
+                                
                                 <th style="color:#fff">acciones</th>
                             </tr>
                         </thead>
@@ -275,6 +278,9 @@
                                     <td>{{ $ubicacion->direccion }}</td>
                                     <td>{{ $ubicacion->telefono }}</td>
                                     <td>{{ $ubicacion->capacidad }}</td>
+                                    <td>{{ $ubicacion->capacidad_disponible }}</td>
+                                    <td>{{ $ubicacion->precio }}</td>
+                                    
                                     {{-- <td>{{ $ubicacion->latitud }}</td>
                                     <td>{{ $ubicacion->longitud }}</td> --}}
                                     <td>

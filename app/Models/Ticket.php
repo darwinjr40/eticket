@@ -23,4 +23,6 @@ class Ticket extends Model
         'espacio' => 'required',
         'tipo' => 'required',
     ];
+
+    protected $fillable = ['fecha', 'precio','clave','cliente','evento','ubicacion','espacio','tipo'];
 }

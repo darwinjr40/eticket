@@ -12,6 +12,7 @@ use App\Http\Controllers\SectorController;
 use App\Http\Controllers\EspacioController;
 
 use App\Http\Controllers\ImagenController;
+use App\Http\Controllers\NotaVentaController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\Ubicacion1Controller;
 
@@ -30,7 +31,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('eventosS');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -44,7 +45,11 @@ Route::group(['middelware'=>['auth']],function(){
     Route::resource('sectors',SectorController::class);
     Route::resource('espacios',EspacioController::class);
     Route::resource('contactos',ContactoController::class);
+
+    //Eventos
     Route::resource('eventos',EventoController::class);
+    Route::get('home/Eventos',[EventoController::class,'showcliente'])->name('eventosS');
+
     Route::get('espacios_sector/{id_sector}',[EspacioController::class,'indexSector'])->name('espacios.indexSector');
     Route::post('espacios_sector/{id_sector}',[EspacioController::class,'storeEspacioSector'])->name('espacios.storeEspacioSector');
     Route::resource('fechas',FechaController::class);
@@ -85,4 +90,11 @@ Route::resource('imagens', ImagenController::class);
 Route::resource('tickets', TicketController::class);
 Route::post('tickets-addEvento', [TicketController::class, 'crearEvento'])->name('tickets.addEvento');
 Route::get('tickets-addEvento1', [TicketController::class, 'crearEvento1'])->name('tickets.addEvento1');
+Route::post('tickets-del/{id}', [TicketController::class, 'destroyEvento'])->name('tickets.destroyEvento');
+
+Route::resource('nota-ventas', NotaVentaController::class);
+Route::post('nota-ventas-crear', [NotaVentaController::class, 'crear'])->name('nota-ventas.crear');
+
+
+
 
