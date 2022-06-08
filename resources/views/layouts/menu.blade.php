@@ -24,15 +24,15 @@
     <a class="nav-link" href="{{route('espacios.index')}}">
         <i class="fa fa-puzzle-piece"></i><span>Espacios de Sectores</span>
     </a>
-    
+
     {{-- <a class="nav-link" href="/contactos">
         <i class=" fas fa-bars"></i><span>Contactos</span>
     </a> --}}
-    
+
     <a class="nav-link" href="{{route('contactos.index')}}">
         <i class=" fas fa-address-book"></i><span>Contactos</span>
     </a>
-    
+
     <a class="nav-link" href="{{route('eventos.index')}}">
         <i class="fa fa-calendar"></i><span>Eventos</span>
     </a>
@@ -40,9 +40,13 @@
     <a class="nav-link" href="{{ route('imagens.index') }}">
         <i class="fa fa-clone"></i><span>Imagenes</span>
     </a>
-    
+
     <a class="nav-link" href="{{ route('ubicacions.index') }}">
         <i class=" fas fa-map-marker"></i><span>Ubicacion</span>
+    </a>
+
+    <a class="nav-link" href="{{ route('clientes.index') }}">
+        <i class="fa fa-users"></i><span>Clientes</span>
     </a>
 
 </li>
