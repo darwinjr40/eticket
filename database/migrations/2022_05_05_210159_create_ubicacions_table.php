@@ -20,6 +20,8 @@ class CreateUbicacionsTable extends Migration
             $table->string('direccion');
             $table->string('telefono');
             $table->integer('capacidad');
+            $table->integer('capacidad_disponible');
+            $table->integer('precio');
             $table->string('latitud');
             $table->string('longitud');
             $table->foreign('evento_id')->references('id')->on('eventos')->onDelete('cascade')->onUpdate('cascade');

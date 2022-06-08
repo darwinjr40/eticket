@@ -1,5 +1,5 @@
 // alert(pathLocal);
-
+console.log(tickets);
 $(function () {
     $('#select-ubicaciones').on('change', onSelectProjectChange);
 });

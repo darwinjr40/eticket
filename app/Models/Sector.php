@@ -22,7 +22,7 @@ class Sector extends Model
         'id_ubicacion' => 'required'
     ];
     protected $fillable = [
-        'id','nombre','capacidad','referencia','id_ubicacion'
+        'id','nombre','capacidad','capacidad_disponible','precio','referencia','id_ubicacion'
     ];
 
     public $timestamps = false;

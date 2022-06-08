@@ -12,34 +12,31 @@ class TicketController extends Controller
  
     public function crearEvento(Request $request)
     {
-        // return $a;
         $ubicacion = Ubicacion::find($request['ubicacion_id']);
         $fecha = Fecha::find($request['fecha_id']);
         $request['fecha_id'] = $fecha['id'];
         $request['fecha'] = $fecha['fechaHora'];
         $request['ubicacion_id'] = $ubicacion['id'];
-        $request['ubicacion'] = $ubicacion['nombre'];
-        $t = [
-            "id" => 1,
-            "fecha" => $request['fecha'],
-            "precio" => "",
-            "clave" => "",
-            "cliente" => "",
-            "evento" => "",
-            "ubicacion" => $request['ubicacion'],
-            "tipo" => "",
-            "espacio" => "",
-            "cantidad" => $request['cantidad'],
-        ];
-        if (!$request['tickets']) { //crear
-            $tickets = [ $t];
-            //   return $tickets;
+        $request['ubicacion'] = $ubicacion['nombre'];        
+        if (isset($request['tickets'])) {             
+            $tickets = json_decode($request['tickets'], true);  
+            $t = [
+                "id" => count($tickets),
+                "fecha" => $request['fecha'],
+                "precio" => '10',
+                "clave" => "",
+                "cliente" => "",
+                "evento" => "",
+                "ubicacion" => $request['ubicacion'],
+                "tipo" => "",
+                "espacio" => "",
+                "cantidad" => $request['cantidad'],
+            ];
+            array_push($tickets, $t);        
         } else {
-            $tickets = json_decode($request['tickets'], true);            
-            array_push($tickets, $t);
-        }
+            $tickets = array();
+        }    
         // return $tickets;
-
         $evento_id = 1;
         $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
         return view('compras.tickets.createLista', compact('ubicaciones', 'tickets'));
@@ -49,8 +46,17 @@ class TicketController extends Controller
     {
         $evento_id = 1;
         $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();        
-        $tickets = [];
+        $tickets = array();
         return view('compras.tickets.createLista', compact('ubicaciones',  'tickets'));
+    }
+
+    public function destroyEvento(Request $request, $id)
+    {
+        $tickets = json_decode($request['tickets'], true);  
+        unset($tickets[$id]);
+        $evento_id = 1;
+        $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
+        return view('compras.tickets.createLista', compact('ubicaciones', 'tickets'));
     }
 
     public function index()
@@ -65,8 +71,17 @@ class TicketController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
-        return redirect()->route('tickets.addEvento');
+        // dd($request);
+        if (isset($request['tickets'])) {             
+            $tickets = json_decode($request['tickets'], true);      
+            $n = count($tickets);
+            // Ticket::create($tickets[0]);
+
+            for($i=0; $i < $n ; $i++) { 
+                Ticket::create($tickets[$i]);
+            }
+        }
+        return "exito";
     }
 
     public function show(Ticket $ticket)
@@ -88,6 +103,10 @@ class TicketController extends Controller
     {
         return "eliminar xd-".$id;
     }
+
+
+
+    
 
 
 }

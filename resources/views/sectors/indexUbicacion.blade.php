@@ -58,6 +58,9 @@
                                         <th style="color:#fff">Id</th>
                                         <th style="color:#fff">Nombre</th>
                                         <th style="color: #fff">Capacidad</th>
+                                        <th style="color: #fff">Capacidad Disponible</th>
+                                        <th style="color: #fff">Precio</th>
+                                        
                                         <th style="color: #fff">Referencia</th>
                                         <th style="color:#fff">Acciones</th>
                                     </tr>
@@ -68,6 +71,9 @@
                                             <td>{{$sector->id}}</td>
                                             <td>{{$sector->nombre}}</td>
                                             <td>{{$sector->capacidad}}</td>
+                                            <td>{{$sector->capacidad_disponible}}</td>
+                                            <td>{{$sector->precio}}</td>
+                                            
                                             <td>{{$sector->referencia}}</td>
                                             <td>
                                                 {{-- @can('agregar-espacio')
