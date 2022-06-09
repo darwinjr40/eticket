@@ -127,6 +127,7 @@ class EventoController extends Controller
     public function showcliente(){
         $eventos=Evento::where('estado','inicio')->get();
         $eventos->load('imagenes');
+        // return $eventos;
         // return $eventos;//[0]['imagenes'][0];
         // $buscador=Evento::where('estado','inicio')->pluck('id','titulo');
         // Session::put('eventos', json_encode($buscador));

@@ -71,7 +71,7 @@ class UbicacionSeeder extends Seeder
             'precio' => '0',
             'latitud' => '-17.813935958226825',
             'longitud' => '-63.18258798413087',
-            'evento_id' => '2',
+            'evento_id' => '1',
         ]);
     }
 }
