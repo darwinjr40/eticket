@@ -6,7 +6,8 @@
         @foreach ($eventos as $evento)
         <div class="col-4" style="font-size: 14px;">
             <a href=""><img src="{{$evento->imagenes[0]->path}}" alt="" style="width: 80%;"></a>
-            
+            {{-- <a href=""><img src="{{$evento['imagenes'][0]->path}}" alt="" style="width: 80%;"></a> --}}
+            {{-- <h1>$evento</h1> --}}
             <h4 style="color: #555; font-weight: normal">{{$evento->titulo}}</h4>
             <div style="color: #ff523b">
                 <i class="fa fa-star"></i>

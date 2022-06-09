@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\NotaVenta;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class NotaVentaController extends Controller
@@ -10,7 +11,11 @@ class NotaVentaController extends Controller
     
     public function crear(Request $request)
     {
-        return $request;        
+        // return $request;
+        $tickets = json_decode($request['tickets'], true);    
+        if (isset($request['ubicacion_id']) && $request['ubicacion_id']) {
+        }
+        return view('compras.notaVentas.create', compact('tickets'));        
     }
 
     public function index()
@@ -35,7 +40,17 @@ class NotaVentaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nota = NotaVenta::create($request->all());
+        if (isset($request['tickets'])) {             
+            $tickets = json_decode($request['tickets'], true);    
+            $n = count($tickets);
+            for($i=0; $i < $n ; $i++) { 
+                $t = Ticket::create($tickets[$i]);
+                $t->nota_venta_id = $nota['id'];
+                $t->save();
+            }
+        } 
+        return redirect()->route('eventosS');
     }
 
     /**

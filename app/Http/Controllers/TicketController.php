@@ -19,7 +19,7 @@ class TicketController extends Controller
         $request['ubicacion_id'] = $ubicacion['id'];
         $request['ubicacion'] = $ubicacion['nombre'];        
         if (isset($request['tickets'])) {             
-            $tickets = json_decode($request['tickets'], true);  
+            $tickets = json_decode($request['tickets'], true);              
             $t = [
                 "id" => count($tickets),
                 "fecha" => $request['fecha'],
@@ -31,6 +31,9 @@ class TicketController extends Controller
                 "tipo" => "",
                 "espacio" => "",
                 "cantidad" => $request['cantidad'],
+                "ubicacion_id" => $request['ubicacion_id'],
+                "sector_id" => $request['sector_id'],
+                "espacio_id" => $request['espacio_id'],
             ];
             array_push($tickets, $t);        
         } else {
