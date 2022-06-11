@@ -16,8 +16,9 @@ class ClienteController extends Controller
      */
     public function index()
     {
+        $user= User::paginate(10);
         $clientes= Cliente::paginate(10);
-        return view('clientes.index', compact('clientes'));
+        return view('clientes.index', compact('user','clientes'));
     }
 
     /**
@@ -40,15 +41,17 @@ class ClienteController extends Controller
     {
         $this->validate($request,[
             'name'=>'required',
-            'email'=>'required|email|unique:users,email',
-            'password'=>'required|same:confirm-password'
+            'email'=>'required|email|unique:users,email'
         ]);
         $input=$request->all();
         $input['password']=Hash::make($input['password']);
-        $user=User::create($request->all());
-        Cliente::create(['id'=> $user->id]);
-
-        return redirect()->route('clientes.index');
+        $user=User::create($input);
+        //$user=User::create($request->all());
+        $cliente= new Cliente ();
+        $cliente ->id= $user->id;
+        $cliente -> telefono = $request->get('telefono');
+        $cliente -> save();
+        return redirect()->route('eventosS');
     }
 
     /**
@@ -68,9 +71,11 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cliente $cliente)
+    public function edit(int $id)
     {
-        //
+        $cliente = Cliente::findOrFail($id);
+        $user = User::findOrFail($id);
+        return view('clientes.edit',compact('cliente','user'));
     }
 
     /**
@@ -82,7 +87,13 @@ class ClienteController extends Controller
      */
     public function update(Request $request, Cliente $cliente)
     {
-        //
+        request()->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'telefono'=>'required'
+        ]);
+        $cliente->update($request->all());
+        return redirect()->route('clientes.index');
     }
 
     /**
@@ -93,7 +104,8 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
+        Cliente::find($id)->delete();
         User::find($id)->delete();
-        return redirect()->route('cliente.index');
+        return redirect()->route('clientes.index');
     }
 }

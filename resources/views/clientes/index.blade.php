@@ -10,7 +10,6 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <a class="btn btn-primary" href="{{ route('clientes.create') }}"> Crear Cliente</a>
                             <table class="table table-striped mt-2" style="width: 100%">
                                 <thead style="background-color: #6777eF">
                                     <tr>
@@ -25,11 +24,11 @@
                                     @foreach ($clientes as $cliente)
                                         <tr>
                                             <td>{{$cliente->id}}</td>
-                                            <td>{{$cliente->nombre}}</td>
-                                            <td>{{$cliente->email}}</td>
+                                            <td>{{$cliente->user->name}}</td>
+                                            <td>{{$cliente->user->email}}</td>
                                             <td>{{$cliente->telefono}}</td>
                                             <td>
-                                                <a class="btn btn-info" href="">Editar</a>
+                                                <a class="btn btn-info" href="{{ route('clientes.edit', $cliente->id) }}">Editar</a>
                                                 {!! Form::open(['method'=>'DELETE','route'=>['clientes.destroy',$cliente->id],'style'=>'display:inline']) !!}
                                                     {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
                                                 {!! Form::close() !!}

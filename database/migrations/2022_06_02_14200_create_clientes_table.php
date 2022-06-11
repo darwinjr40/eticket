@@ -16,11 +16,9 @@ class CreateClientesTable extends Migration
         Schema::create('clientes', function (Blueprint $table) {
             $table->integer('id')->unsigned();
             $table->string('telefono',8);
-            $table->foreign('id')->references('id')->on('users');
+            $table->foreign('id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->primary(['id']);
             $table->timestamps();
-            //$table->integer('id_rol')->unsigned();
-           // $table->foreign('id_rol')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

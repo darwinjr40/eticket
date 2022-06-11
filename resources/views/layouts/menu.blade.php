@@ -48,5 +48,8 @@
     <a class="nav-link" href="{{ route('clientes.index') }}">
         <i class="fa fa-users"></i><span>Clientes</span>
     </a>
+    <a class="nav-link" href=" ">
+        <i class="fa fa-cash"></i><span>Tipo de Pago</span>
+    </a>
 
 </li>

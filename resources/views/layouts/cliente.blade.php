@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://use.fontawesome.com/c53c06c750.js"></script>
     @yield('css')
-    
+
     <title>Laravel</title>
 </head>
 <body>
@@ -25,12 +25,20 @@
               <a class="nav-link active" aria-current="page" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
             </div>
           </div>
-          
+
           <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Buscar Evento" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Buscar</button>
           </form>
         </div>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" aria-current="page" href="{{ route('login') }}">Iniciar Sesión</a>
+            </div>
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="{{ route('clientes.create') }}">Registrarse</a>
+              </div>
+          </div>
     </nav>
     <div class="main-content">
         {{-- <p>{{session('eventos')}}</p> --}}

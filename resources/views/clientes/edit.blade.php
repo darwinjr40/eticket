@@ -1,10 +1,11 @@
 @extends('layouts.logo_app')
 @section('content')
     <div class="card card-primary">
-        <div class="card-header"><h4>Registro a la Pagina web E-Ticket</h4></div>
+        <div class="card-header"><h4>Actualizar Informacion</h4></div>
 
         <div class="card-body pt-1">
-            <form method="POST" action="{{ route('clientes.store') }}"  >
+            <form action="{{ route('clientes.update',$cliente->id)}}" method="POST">
+                @method('PUT')
                 @csrf
                 <div class="row">
                     <div class="col-md-8">
@@ -14,7 +15,7 @@
                             <input id="firstName" type="text"
                                    class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
                                    name="name"
-                                   tabindex="1" placeholder="Enter Full Name" value="{{ old('name') }}"
+                                   tabindex="1" value="{{old('name',$user->name)}}"
                                    autofocus required>
                             <div class="invalid-feedback">
                                 {{ $errors->first('name') }}
@@ -27,8 +28,8 @@
                                     class="text-danger">*</span>
                             <input id="email" type="email"
                                    class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                   placeholder="Enter Email address" name="email" tabindex="1"
-                                   value="{{ old('email') }}"
+                                   name="email" tabindex="1"
+                                   value="{{old('email',$user->email)}}"
                                    required autofocus>
                             <div class="invalid-feedback">
                                 {{ $errors->first('email') }}
@@ -42,52 +43,21 @@
                             <input id="telefono" type="text"
                                    class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}"
                                    name="telefono"
-                                   tabindex="1" placeholder="74125897" value="{{ old('telefono') }}"
+                                   tabindex="1"  value="{{old('telefono',$cliente->telefono)}}"
                                    autofocus required>
                             <div class="invalid-feedback">
                                 {{ $errors->first('telefono') }}
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="password" class="control-label">Password
-                                :</label><span
-                                    class="text-danger">*</span>
-                            <input id="password" type="password"
-                                   class="form-control{{ $errors->has('password') ? ' is-invalid': '' }}"
-                                   placeholder="Set account password" name="password" tabindex="2" required>
-                            <div class="invalid-feedback">
-                                {{ $errors->first('password') }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="password_confirmation"
-                                   class="control-label">Confirm Password:</label><span
-                                    class="text-danger">*</span>
-                            <input id="password_confirmation" type="password" placeholder="Confirm account password"
-                                   class="form-control{{ $errors->has('password_confirmation') ? ' is-invalid': '' }}"
-                                   name="password_confirmation" tabindex="2">
-                            <div class="invalid-feedback">
-                                {{ $errors->first('password_confirmation') }}
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-md-12 mt-4">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                Registrarse
-                            </button>
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                            <a href="{{route('clientes.index')}}" class="btn btn-danger">Cancelar</a>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-    </div>
-    <div class="mt-5 text-muted text-center">
-        Ya tienes una cuenta? <a
-                href="{{ route('login') }}">Iniciar Sesión</a>
     </div>
 @endsection
