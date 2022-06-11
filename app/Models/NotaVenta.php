@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class NotaVenta extends Model
 {
     use HasFactory;
+    protected $fillable = ['nombre','nit','correo','total'];
 }

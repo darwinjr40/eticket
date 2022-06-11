@@ -1,11 +1,12 @@
 // alert(pathLocal);
-console.log(tickets);
+// console.log(tickets);
 $(function () {
     $('#select-ubicaciones').on('change', onSelectProjectChange);
 });
 
 function onSelectProjectChange() {
     var ubicacion_id = $(this).val();
+    document.getElementById("ubicacion").value = ubicacion_id;
     var xd = '<option value="">Seleccionar Fecha</option>';
     //    alert(ubicacion_id);     
     if (!ubicacion_id) { //tiene un valor

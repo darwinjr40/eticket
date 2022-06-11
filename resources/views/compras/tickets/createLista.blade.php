@@ -20,7 +20,7 @@
             <form method="POST" action="{{ route('tickets.addEvento') }}" role="form" enctype="multipart/form-data">
                 @csrf
                 <div class="row row justify-content-center">
-                {{-- SELECT UBICACION --}}
+                    {{-- SELECT UBICACION --}}
                     <div class="col-3">
                         <select name="ubicacion_id" id="select-ubicaciones" class="form-control" autofocus required>
                             <option value="">Seleccionar Ubicacion</option>
@@ -38,46 +38,48 @@
                     {{-- INPUT CANTIDAD --}}
                     <div class="col-3 ">
                         <div class="form-group input-group">
-                                <span class="input-group-text">
-                                    <i class="fa fa-arrow-up"> cantidad</i>
-                                </span>
-                                <input type="number" value="1" name="cantidad" class="  form-control" min="1" max="50">
+                            <span class="input-group-text">
+                                <i class="fa fa-arrow-up"> cantidad</i>
+                            </span>
+                            <input type="number" value="1" name="cantidad" class="  form-control" min="1" max="50">
                         </div>
-                        {{-- @error('cantidad')
-                        <p>DEBE INGRESAR LA CANTIDAD</p>
-                        @enderror --}}
+                        {{-- @error('cantidad')<p>DEBE INGRESAR LA CANTIDAD</p>@enderror --}}
                     </div>
                     {{-- BUTTON AÑADIR --}}
                     <div class="col-3 align-items-center" style="">
-                        {{-- <button  class="btn btn-primary type="submit">Comprar Ticket</button> --}}
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Añadir</button>
-                        
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-shopping-cart"
+                                aria-hidden="true"></i>Añadir</button>
                     </div>
                     {{-- oculto --}}
-                    <input type="hidden" name="tickets"  value="{{json_encode($tickets)}}">
+                    <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
+                    <input id="ubicacion" type="hidden" name="ubicacion_id" value="">
                 </div>
-                </form>
+            </form>
 
+            {{-- <div class="row justify-content-center m-2"> --}}
             <div class="row">
-                <div class="col-sm-9" style="">
-                    
+                <div class="col-9">
+                    <h2 class="font-weight-bold" style="margin-left: 35%">Detalles de la compra</h2>
                 </div>
+                {{-- Button Pagar ahora --}}
+                <div class="col-3">
+                    @if (isset($tickets) && count($tickets) > 0)
+                        <form method="POST" action="{{ route('nota-ventas.crear') }}" role="form"
+                            enctype="multipart/form-data" style="">
+                            @csrf
+                            <button class="btn  btn-dark " type="submit" ><i class="fa fa-credit-card" aria-hidden="true"></i>
+                                Pagar ahora</button>
+                            {{-- oculto --}}
+                            <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
+                            <input type="hidden" name="ubicacion_id" value="1">
+                        </form>
+                    @endif
+                </div>
+            </div>
 
-                <div class="col-sm-2" style="">
-                    <form method="POST" action="{{ route('nota-ventas.crear') }}" role="form" enctype="multipart/form-data">
-                        @csrf
-                        <button class="btn  btn-dark " type="submit"><i class="fa fa-credit-card" aria-hidden="true"></i> Pagar ahora</button>
-                        {{-- oculto --}}
-                        <input type="hidden" name="tickets"  value="{{json_encode($tickets)}}">
-                        <input type="hidden" name="ubicacion_id"  value="">
-                    </form>
-                </div>
-            </div>
+
             {{-- tabla --}}
-            <div class="row row justify-content-center m-2">
-                <h2 class="font-weight-bold">Detalles de la compra</h2>
-            </div>
-            <div>
+            <div style="margin-top: 2%">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -101,23 +103,19 @@
                                 <td>{{ $ticket['precio'] }}</td>
                                 <td>{{ $ticket['precio'] * $ticket['cantidad'] }}</td>
                                 <td>
-                                    <form method="POST" action="{{ route('tickets.destroyEvento', $ticket['id']) }}" role="form" enctype="multipart/form-data">
+                                    <form method="POST" action="{{ route('tickets.destroyEvento', $ticket['id']) }}"
+                                        role="form" enctype="multipart/form-data">
                                         @csrf
                                         {{-- oculto --}}
-                                        <input type="hidden" name="tickets"  value="{{json_encode($tickets)}}">
+                                        <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
                                         {{-- button --}}
                                         <button class="btn btn-danger btn-sm"
-                                            onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" value="Borrar">
-                                            <i class="fas fa-times"></i>
-
+                                            onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" value="Borrar"
+                                            title="Borrar">
+                                            {{-- <i class="fas fa-times"></i> --}}
+                                            <i class="far fa-trash-alt"></i>
                                         </button>
                                     </form>
-                                    {{-- <form action="{{ route('salidas.destroyDetalle', $salida, $detalle->id) }}" method="post"> --}}
-                                    {{-- <form  action="{{ route('salidas.update', $salida) }}" method="POST"> --}}
-                                    {{-- {!! Form::model("EliminarDetalle", ['route' => ['salidas.update', $salida], 'method' => 'put']) !!}
-                                    @csrf
-                                    <button name="productoId" value={{$detalle->id}} class="btn btn-danger btn-sm"  > <i class="fas fa-times"></i>  </button>
-                                {!! Form::close() !!} --}}
                                 </td>
                             </tr>
                         @endforeach
