@@ -14,6 +14,8 @@ class TipoPagoController extends Controller
      */
     public function index()
     {
+        $tipoPagos= TipoPago::paginate(10);
+        return view('tipoPagos.index', compact('tipoPagos'));
     }
 
     /**
