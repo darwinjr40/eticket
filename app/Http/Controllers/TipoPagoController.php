@@ -17,7 +17,6 @@ class TipoPagoController extends Controller
         $tipoPagos= TipoPago::paginate(10);
         return view('tipoPagos.index', compact('tipoPagos'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -25,7 +24,7 @@ class TipoPagoController extends Controller
      */
     public function create()
     {
-        //
+        return view('tipoPagos.create');
     }
 
     /**
@@ -36,7 +35,11 @@ class TipoPagoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'forma'=>'required'
+        ]);
+        TipoPago::create($request->all());
+        return redirect()->route('tipoPagos.index');
     }
 
     /**
@@ -58,7 +61,7 @@ class TipoPagoController extends Controller
      */
     public function edit(TipoPago $tipoPago)
     {
-        //
+        return view('tipoPagos.edit',compact('tipoPago'));
     }
 
     /**
@@ -70,7 +73,11 @@ class TipoPagoController extends Controller
      */
     public function update(Request $request, TipoPago $tipoPago)
     {
-        //
+        request()->validate([
+            'forma'=>'required'
+        ]);
+        $tipoPago->update($request->all());
+        return redirect()->route('tipoPagos.index');
     }
 
     /**
@@ -79,8 +86,9 @@ class TipoPagoController extends Controller
      * @param  \App\Models\TipoPago  $tipoPago
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TipoPago $tipoPago)
+    public function destroy($id)
     {
-        //
+        $tipoPago=TipoPago::find($id)->delete();
+        return back();
     }
 }

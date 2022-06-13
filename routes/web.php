@@ -17,6 +17,7 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\Ubicacion1Controller;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\TipoPagoController;
+use App\Http\Controllers\DatosPagoController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -59,6 +60,9 @@ Route::group(['middelware'=>['auth']],function(){
 
     Route::resource('clientes',ClienteController::class);
     Route::resource('tipoPagos',TipoPagoController::class);
+    Route::resource('datosPagos',DatosPagoController::class);
+    Route::get('datos_pagos/{id_tipoPago}',[DatosPagoController::class,'indexPago'])->name('datosPagos.indexPago');
+    Route::post('datos_pagos/{id_tipoPago}',[DatosPagoController::class,'storeDatoPago'])->name('datosPagos.storeDatoPago');
     // Route::Post('eventos', [EventoController::class, 'storeEvento'])->name('eventos.storeEvento');
 
 });

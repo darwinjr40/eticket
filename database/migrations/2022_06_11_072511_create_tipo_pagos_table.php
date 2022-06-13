@@ -16,9 +16,6 @@ class CreateTipoPagosTable extends Migration
         Schema::create('tipo_pagos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('forma',255);
-            $table->integer('monto')->unsigned();
-            $table->dateTime('fecha')->default(Date('Y-m-d\TH:i',time()));
-            $table->foreign('monto')->references('importe')->on('nota_ventas')->onDelete('cascade')->onUpdate('cascade');
 
             $table->timestamps();
         });
