@@ -92,6 +92,7 @@ Route::post('tickets-addEvento', [TicketController::class, 'crearEvento'])->name
 Route::get('tickets-addEvento1', [TicketController::class, 'crearEvento1'])->name('tickets.addEvento1');
 Route::post('tickets-del/{id}', [TicketController::class, 'destroyEvento'])->name('tickets.destroyEvento');
 
+
 Route::resource('nota-ventas', NotaVentaController::class);
 Route::post('nota-ventas-crear', [NotaVentaController::class, 'crear'])->name('nota-ventas.crear');
 

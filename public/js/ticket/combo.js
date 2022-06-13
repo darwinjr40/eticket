@@ -1,5 +1,7 @@
 // alert(pathLocal);
 // console.log(tickets);
+
+
 $(function () {
     $('#select-ubicaciones').on('change', onSelectProjectChange);
 });
@@ -12,7 +14,16 @@ function onSelectProjectChange() {
     if (!ubicacion_id) { //tiene un valor
         $('#select-fechas').html(xd);        
     } else {
-        $.get(pathLocal + 'fechas-api?filter[id_ubicacion]=' + ubicacion_id, function (data) {
+        // cargar ubicaciones
+        let path_ubicaciones = pathLocal + 'ubicaciones?filter[id]=' + ubicacion_id;
+        $.get(path_ubicaciones, function (data) {
+            data = data['data'];
+            // console.log(data[0]['latitud']);
+            setMap(Number(data[0]['latitud']), Number(data[0]['longitud']));
+        });
+        // cargar fechas
+        let path_fechas = pathLocal + 'fechas-api?filter[id_ubicacion]=' + ubicacion_id;
+        $.get(path_fechas, function (data) {
             data = data['data'];
             //  console.log(data);
             for (var i = 0; i < data.length; i++) {

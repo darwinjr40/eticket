@@ -10,7 +10,17 @@
     <script src="https://use.fontawesome.com/c53c06c750.js"></script>
     @yield('css')
     
-    <title>Laravel</title>
+        <!-- Bootstrap 4.1.1 -->
+        <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <!-- Ionicons -->
+        <link href="{{ asset('assets/css/@fortawesome/fontawesome-free/css/all.css') }}" rel="stylesheet" type="text/css">
+        {{-- <link href="//fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
+        <link href="{{ asset('assets/css/sweetalert.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
+        
+    <title>Eticket</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -25,16 +35,15 @@
               <a class="nav-link active" aria-current="page" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
             </div>
           </div>
-          
           <form class="d-flex">
             <input class="form-control me-2" type="search" placeholder="Buscar Evento" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Buscar</button>
-          </form>
+          </form>          
         </div>
     </nav>
     <div class="main-content">
         {{-- <p>{{session('eventos')}}</p> --}}
-        @yield('content')
+        <br> @yield('content') <br>
     </div>
     <!---Footer-->
     <div class="footer">
@@ -73,12 +82,28 @@
     </div>
 
     <!----js par toggle menu------->
-    <script>
+    {{-- <script>
 
 
         var buscador=JSON.encode({{Session('eventos')}})
         console.log(buscador);
-    </script>
+    </script> --}}
 
 </body>
+
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/js/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/js/sweetalert.min.js') }}"></script>
+<script src="{{ asset('assets/js/iziToast.min.js') }}"></script>
+<script src="{{ asset('assets/js/select2.min.js') }}"></script>
+<script src="{{ asset('assets/js/jquery.nicescroll.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- Template JS File -->
+{{-- <script src="{{ asset('web/js/stisla.js') }}"></script>
+<script src="{{ asset('web/js/scripts.js') }}"></script>
+<script src="{{ mix('assets/js/profile.js') }}"></script>
+<script src="{{ mix('assets/js/custom/custom.js') }}"></script> --}}
+@yield('scripts')
+
 </html>
