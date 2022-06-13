@@ -12,6 +12,7 @@ class TicketController extends Controller
  
     public function crearEvento(Request $request)
     {
+        return $request;
         $ubicacion = Ubicacion::find($request['ubicacion_id']);
         $fecha = Fecha::find($request['fecha_id']);
         $request['fecha_id'] = $fecha['id'];
@@ -45,12 +46,22 @@ class TicketController extends Controller
         return view('compras.tickets.createLista', compact('ubicaciones', 'tickets'));
     }
 
-    public function crearEvento1(Request $request)
+    public function crearEvento2(Request $request)
     {
         $evento_id = 1;
-        $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();        
+        $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();         
         $tickets = array();
         return view('compras.tickets.createLista', compact('ubicaciones',  'tickets'));
+
+    }
+
+    public function crearEvento1(Request $request)
+    {
+        $evento_id = 3;
+        $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();         
+        $tickets = array();
+        return view('compras.tickets.createLista1', compact('ubicaciones',  'tickets'));
+
     }
 
     public function destroyEvento(Request $request, $id)

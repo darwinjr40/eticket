@@ -24,7 +24,7 @@
                         <div id="map" class="izquierdaClass"></div>
                     </section>
 
-
+                    {{-- derecha --}}
                     <aside id="derecha" class="caja">
                         <div id="derecha1" class="derechaClass">
                             {{-- <h1>hola</h1> --}}
@@ -53,29 +53,43 @@
                                         <option value="">Seleccionar Fecha</option>
                                     </select>
                                 </div>
+
+                                {{-- SELECT Sector --}}
+                                <div id="id-sectores" class="derechaCompra" hidden>
+                                    <select name="sector_id" id="select-sectores" class="form-control" required>
+                                        <option value="">Seleccionar Sector</option>
+                                    </select>
+                                </div>
+
+                                {{-- SELECT Espacio --}}
+                                <div id="id-espacios" class="derechaCompra" hidden>
+                                    <select name="espacio_id[]" id="select-espacios" class="form-control"  multiple required >
+                                        <option value="">Seleccionar Espacio</option>                                        
+                                    </select>
+                                </div>
                                 {{-- INPUT CANTIDAD --}}
-                                @if (isset($ubicaciones) && $ubicaciones[0]['precio'] > 0)
-                                    <div class="derechaCompra">
+                                {{-- @if (isset($ubicaciones) && $ubicaciones[0]['precio'] > 0) --}}
+                                    <div id="id-cantidad" class="derechaCompra"  hidden>
                                         <div class="form-group input-group">
                                             <span class="input-group-text">
                                                 <i class="fa fa-arrow-up"> cantidad</i>
                                             </span>
-                                            <input type="number" value="1" name="cantidad" class="  form-control" min="1"
+                                            <input id="select-cantidad" type="number" value="1" name="cantidad" class="  form-control" min="1"
                                                 max="50">
                                         </div>
                                     </div>
                                     {{-- @error('cantidad')<p>DEBE INGRESAR LA CANTIDAD</p>@enderror --}}
                                     {{-- BUTTON AÑADIR --}}
-                                    <div class="derechaCompra">
-                                        <button class="btn btn-primary" type="submit"><i class="fa fa-shopping-cart"
+                                    <div class="derechaCompra" >
+                                        <button class="btn btn-primary" type="submit" onclick="agregar()"><i class="fa fa-shopping-cart"
                                                 aria-hidden="true"></i>Añadir</button>
                                     </div>
-                                @else
+                                {{-- @else
                                     <div class="derechaCompra">
                                         <a href="#" class="btn btn-dark" type="submit">
                                             <i class="fa fa-hand-o-right" aria-hidden="true"></i>Comprar Ticket</a>
                                     </div>
-                                @endif
+                                @endif --}}
                                 {{-- oculto --}}
                                 <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
                                 <input id="ubicacion" type="hidden" name="ubicacion_id" value="">
@@ -84,11 +98,15 @@
                     </aside>
                     <div class="clearfix"></div>
                 </div>
-                {{-- <div class="row justify-content-center m-2"> --}}
+
+
+
+
+
+
                 <br>
                 <br>
 
-                @if (isset($ubicaciones) && $ubicaciones[0]['precio'] > 0)
 
                     <div class="row">
                         <div class="col-9">
@@ -96,7 +114,6 @@
                         </div>
                         {{-- Button Pagar ahora --}}
                         <div class="col-3">
-                            @if (isset($tickets) && count($tickets) > 0)
                                 <form method="POST" action="{{ route('nota-ventas.crear') }}" role="form"
                                     enctype="multipart/form-data" style="">
                                     @csrf
@@ -107,7 +124,6 @@
                                     <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
                                     <input type="hidden" name="ubicacion_id" value="1">
                                 </form>
-                            @endif
                         </div>
                     </div>
 
@@ -158,7 +174,6 @@
                             </tbody>
                         </table>
                     </div>
-                @endif
 
             </div>
         </div>
@@ -168,12 +183,15 @@
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/ticket/ubicacion/createLista.css') }}">
+
 @stop
 
 @section('scripts')
+
     <script type="text/javascript" src="{{ asset('js/map/mapa2.js') }}"></script>
     <script async src="https://maps.googleapis.com/maps/api/js?key=&callback=setMap"></script>
     <script type="text/javascript" src="{{ asset('js/path.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/ticket/combo.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/ticket/combo1.js') }}"></script>
+
 
 @endsection

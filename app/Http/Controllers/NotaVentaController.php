@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\NotaVenta;
 use App\Models\Ticket;
+use App\Models\Ubicacion;
 use Illuminate\Http\Request;
 
 class NotaVentaController extends Controller
@@ -41,13 +42,20 @@ class NotaVentaController extends Controller
     public function store(Request $request)
     {
         $nota = NotaVenta::create($request->all());
-        if (isset($request['tickets'])) {             
+        if (isset($request['tickets'])) {   //es solo ubicacion           
             $tickets = json_decode($request['tickets'], true);    
-            $n = count($tickets);
+            // return $request;
+            $n = count($tickets);            
             for($i=0; $i < $n ; $i++) { 
                 $t = Ticket::create($tickets[$i]);
                 $t->nota_venta_id = $nota['id'];
                 $t->save();
+                $ubicacion = Ubicacion::where('id', $tickets[$i]['ubicacion_id'])->first();
+                if ($ubicacion) {
+                    $c = $ubicacion['capacidad_disponible'];
+                    $ubicacion['capacidad_disponible'] = $c - $tickets[$i]['cantidad'];
+                    $ubicacion->save()  ;
+                }
             }
         } 
         return redirect()->route('eventosS');

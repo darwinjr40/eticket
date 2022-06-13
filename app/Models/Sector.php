@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Traits\ApiTrait;
 class Sector extends Model
 {
+    use ApiTrait;
     protected $primaryKey = 'id';
     protected $table = 'sectors';
     //para la api, por el cual se va poder filtrar

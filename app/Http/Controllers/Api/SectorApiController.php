@@ -16,6 +16,7 @@ class SectorApiController extends Controller
                     ->sort()
                     ->getOrPaginate();
         return SectorResource::collection($sector);
+        // return "nise";
     }
 
     public function store(Request $request)

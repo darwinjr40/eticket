@@ -1,5 +1,8 @@
 @extends('layouts.cliente')
 @section('content')
+
+
+
 <div class="container" style="font-weight: bold;">
     <h2 style="text-align: center;margin: 0 auto 80px; position: relative; line-height: 60px;color: #555;">Eventos Disponibles</h2>
     <div class="row" style="display: flex;align-items: center;flex-wrap: wrap;justify-content: space-around;">
