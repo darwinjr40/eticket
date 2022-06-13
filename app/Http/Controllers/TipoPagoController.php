@@ -17,6 +17,12 @@ class TipoPagoController extends Controller
         $tipoPagos= TipoPago::paginate(10);
         return view('tipoPagos.index', compact('tipoPagos'));
     }
+
+    public function indexTipoPago()
+    {
+        $tipoPagos= TipoPago::paginate(10);
+        return view('tipoPagos.indexTipoPago', compact('tipoPagos'));
+    }
     /**
      * Show the form for creating a new resource.
      *

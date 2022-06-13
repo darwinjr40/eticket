@@ -64,7 +64,7 @@
                                 {{-- SELECT Espacio --}}
                                 <div id="id-espacios" class="derechaCompra" hidden>
                                     <select name="espacio_id[]" id="select-espacios" class="form-control"  multiple required >
-                                        <option value="">Seleccionar Espacio</option>                                        
+                                        <option value="">Seleccionar Espacio</option>
                                     </select>
                                 </div>
                                 {{-- INPUT CANTIDAD --}}
@@ -114,7 +114,7 @@
                         </div>
                         {{-- Button Pagar ahora --}}
                         <div class="col-3">
-                                <form method="POST" action="{{ route('nota-ventas.crear') }}" role="form"
+                                <form action="{{ route('tipoPagos.indexTipoPago') }}" role="form"
                                     enctype="multipart/form-data" style="">
                                     @csrf
                                     <button class="btn  btn-dark " type="submit"><i class="fa fa-credit-card"

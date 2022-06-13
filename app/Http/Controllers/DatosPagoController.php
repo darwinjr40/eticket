@@ -32,7 +32,7 @@ class DatosPagoController extends Controller
      */
     public function create()
     {
-        //
+        return view('datosPagos.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class DatosPagoController extends Controller
     {
         //
     }
-    public function storeDatoPago(Request $request, $id_tipoPago)
+    public function storeDatoPago(Request $request)
     {
         $this->validate($request,[
             'ci'=>'required',
@@ -53,13 +53,13 @@ class DatosPagoController extends Controller
             'nro'=>'required'
         ]);
         $datoPago=new DatosPago();
-        $datoPago->id_tipoPago = $id_tipoPago;
+        $datoPago->id_tipoPago = 1;
         $datoPago->ci = $request->ci;
         $datoPago->nombre = $request->nombre;
         $datoPago->nro = $request->nro;
         $datoPago->estado="Cobrado";
         $datoPago->save();
-        return back();
+        return redirect()->route('tipoPagos.indexTipoPago');
     }
 
 

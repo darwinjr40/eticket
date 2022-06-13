@@ -62,8 +62,9 @@ Route::group(['middelware'=>['auth']],function(){
     Route::resource('tipoPagos',TipoPagoController::class);
     Route::resource('datosPagos',DatosPagoController::class);
     Route::get('datos_pagos/{id_tipoPago}',[DatosPagoController::class,'indexPago'])->name('datosPagos.indexPago');
-    Route::post('datos_pagos/{id_tipoPago}',[DatosPagoController::class,'storeDatoPago'])->name('datosPagos.storeDatoPago');
-    // Route::Post('eventos', [EventoController::class, 'storeEvento'])->name('eventos.storeEvento');
+    Route::post('datos_pagos',[DatosPagoController::class,'storeDatoPago'])->name('datosPagos.storeDatoPago');
+    Route::get('tipo_pago', [TipoPagoController::class, 'indexTipoPago'])->name('tipoPagos.indexTipoPago');
+ // Route::Post('eventos', [EventoController::class, 'storeEvento'])->name('eventos.storeEvento');
 
 });
 

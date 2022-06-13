@@ -27,9 +27,9 @@
                                 <thead style="background-color: #6777eF">
                                     <tr>
                                         <th style="color:#fff">Id</th>
-                                        <th style="color:#fff">CI</th>
+                                        <th style="color:#fff">CI/NIT</th>
                                         <th style="color: #fff">Nombre</th>
-                                        <th style="color: #fff">Celular-Tarjeta</th>
+                                        <th style="color: #fff">Celular/Tarjeta</th>
                                         <th style="color: #fff">Estado</th>
                                     </tr>
                                 </thead>
