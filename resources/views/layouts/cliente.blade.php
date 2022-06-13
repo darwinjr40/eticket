@@ -40,6 +40,14 @@
             <button class="btn btn-outline-success" type="submit">Buscar</button>
           </form>          
         </div>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link active" aria-current="page" href="{{ route('login') }}">Iniciar Sesión</a>
+            </div>
+            <div class="navbar-nav">
+                <a class="nav-link active" aria-current="page" href="{{ route('clientes.create') }}">Registrarse</a>
+              </div>
+          </div>
     </nav>
     <div class="main-content">
         {{-- <p>{{session('eventos')}}</p> --}}
@@ -90,6 +98,7 @@
     </script> --}}
 
 </body>
+<<<<<<< HEAD
 
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/popper.min.js') }}"></script>
@@ -107,3 +116,6 @@
 @yield('scripts')
 
 </html>
+=======
+</html>
+>>>>>>> 22f0f31c4ecc38fef7b52332e7516aec4135e5c8

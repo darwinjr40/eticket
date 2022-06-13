@@ -15,7 +15,8 @@ use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\NotaVentaController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\Ubicacion1Controller;
-
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\TipoPagoController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -56,6 +57,8 @@ Route::group(['middelware'=>['auth']],function(){
     Route::get('sector_ubicacion/{id_sector}',[SectorController::class,'indexUbicacion'])->name('sectors.indexUbicacion');
     Route::post('sector_ubicacion/{id_sector}',[SectorController::class,'storeUbicacionSector'])->name('sectors.storeUbicacionSector');
 
+    Route::resource('clientes',ClienteController::class);
+    Route::resource('tipoPagos',TipoPagoController::class);
     // Route::Post('eventos', [EventoController::class, 'storeEvento'])->name('eventos.storeEvento');
 
 });
