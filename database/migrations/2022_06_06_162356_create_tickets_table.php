@@ -25,6 +25,7 @@ class CreateTicketsTable extends Migration
             $table->string('cliente')->default('');
             $table->string('evento')->default('');
             $table->string('ubicacion')->default('');
+            $table->string('sector')->default('');
             $table->string('espacio')->default('');
             $table->string('tipo')->default('');
 

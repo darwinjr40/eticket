@@ -18,7 +18,7 @@ class CreateNotaVentasTable extends Migration
             $table->string('nombre')->default('');
             $table->string('nit')->default('');
             $table->string('correo')->default('');
-            $table->decimal('total', 2)->default(0);
+            $table->decimal('total')->default(0);
             $table->timestamps();
         });
     }

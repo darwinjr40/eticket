@@ -81,7 +81,7 @@
                                     {{-- @error('cantidad')<p>DEBE INGRESAR LA CANTIDAD</p>@enderror --}}
                                     {{-- BUTTON AÑADIR --}}
                                     <div class="derechaCompra" >
-                                        <button class="btn btn-primary" type="submit" onclick="agregar()"><i class="fa fa-shopping-cart"
+                                        <button class="btn btn-primary" type="submit" ><i class="fa fa-shopping-cart"
                                                 aria-hidden="true"></i>Añadir</button>
                                     </div>
                                 {{-- @else
