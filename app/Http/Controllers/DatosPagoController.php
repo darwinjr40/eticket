@@ -47,17 +47,42 @@ class DatosPagoController extends Controller
     }
     public function storeDatoPago(Request $request)
     {
+        $tipoPago=TipoPago::where('forma','Tigo Money');
         $this->validate($request,[
             'ci'=>'required',
             'nombre'=>'required',
             'nro'=>'required'
         ]);
         $datoPago=new DatosPago();
-        $datoPago->id_tipoPago = 1;
+        $datoPago->id_tipoPago = $tipoPago->id;
+        $datoPago->id_notaVenta = 1;
         $datoPago->ci = $request->ci;
         $datoPago->nombre = $request->nombre;
         $datoPago->nro = $request->nro;
-        $datoPago->estado="Cobrado";
+        $datoPago->expiracion="--";
+        $datoPago->cvc="--";
+        $datoPago->estado="Procesado";
+        $datoPago->save();
+        return redirect()->route('tipoPagos.indexTipoPago');
+    }
+    public function storeDatoPago2(Request $request)
+    {
+        $tipoPago=TipoPago::where('forma','Tarjeta Debito o Credito');
+        $this->validate($request,[
+            'ci'=>'required',
+            'nombre'=>'required',
+            'nro'=>'required',
+            'expiracion'=> 'required',
+            'cvc'=> 'required',
+        ]);
+        $datoPago=new DatosPago();
+        $datoPago->id_tipoPago = $tipoPago;
+        $datoPago->ci = $request->ci;
+        $datoPago->nombre = $request->nombre;
+        $datoPago->nro = $request->nro;
+        $datoPago->expiracion = $request->expiracion;
+        $datoPago->cvc = $request->cvc;
+        $datoPago->estado="Procesado";
         $datoPago->save();
         return redirect()->route('tipoPagos.indexTipoPago');
     }

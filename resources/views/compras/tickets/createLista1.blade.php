@@ -117,9 +117,17 @@
                                 <form action="{{ route('tipoPagos.indexTipoPago') }}" role="form"
                                     enctype="multipart/form-data" style="">
                                     @csrf
-                                    <button class="btn  btn-dark " type="submit"><i class="fa fa-credit-card"
-                                            aria-hidden="true"></i>
-                                        Pagar ahora</button>
+                                    <div style="margin-block: 10px">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#modalTigoMoney">
+                                            <i class="fa fa-bars"></i><span> Tigo Money</span>
+                                        </button>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#modalTarjeta">
+                                            <i class="fa fa-users"></i><span> Tarjeta</span>
+                                        </button>
+
+                                    </div>
                                     {{-- oculto --}}
                                     <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
                                     <input type="hidden" name="ubicacion_id" value="1">
@@ -175,6 +183,119 @@
                         </table>
                     </div>
 
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalTigoMoney" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tigo Money</h5>
+                </div>
+                <div class="modal-body">
+
+                    <form action="{{ route('datosPagos.storeDatoPago') }}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-8">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-users"> CI/NIT</i>
+                                        </span>
+                                        <input type="text" id="ci" name="ci" class="form-control">
+                                    </div>
+                                </div><div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-users"> Nombre</i>
+                                        </span>
+                                        <input type="text" id="nombre" name="nombre" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-users"> Celular</i>
+                                        </span>
+                                        <input type="text" id="nro" name="nro" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
+                                    <button type="submit" class="btn btn-primary">Pagar Ahora</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modalTarjeta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tarjeta</h5>
+                </div>
+                <div class="modal-body">
+
+                    <form action="{{ route('datosPagos.storeDatoPago2') }}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-8">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-users"> CI/NIT</i>
+                                        </span>
+                                        <input type="text" id="ci" name="ci" class="form-control">
+                                    </div>
+                                </div><div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-users"> Nombre</i>
+                                        </span>
+                                        <input type="text" id="nombre" name="nombre" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-users"> Nro Tarjeta</i>
+                                        </span>
+                                        <input type="text" id="nro" name="nro" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-users"> Fecha de Expiracion</i>
+                                        </span>
+                                        <input type="text" id="expiracion" name="expiracion" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-users"> CVC</i>
+                                        </span>
+                                        <input type="number" id="cvc" name="cvc" class="form-control" max="999" min="100">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
