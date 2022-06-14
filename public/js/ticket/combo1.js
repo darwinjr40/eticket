@@ -80,6 +80,7 @@ function SelectSector() {
             if (data.length == 0) { //no existe espacios
                 document.getElementById('id-cantidad').removeAttribute("hidden");
                 document.getElementById('id-espacios').setAttribute("hidden", "");
+                document.getElementById('id-espacios').removeAttribute("required");
             } else {
                 document.getElementById('id-espacios').removeAttribute("hidden");  
                 document.getElementById('id-cantidad').setAttribute("hidden", "");
@@ -94,18 +95,18 @@ function SelectSector() {
     }
 }
 
-function agregar() {
-    let ubicaciones =  document.getElementById('select-ubicaciones');
-    let fechas =  document.getElementById('select-fechas');
-    let sectores =  document.getElementById('select-sectores');
-    let espacios =  document.getElementById('select-espacios');
-    let cantidad =  document.getElementById('select-cantidad');
+// function agregar() {
+//     let ubicaciones =  document.getElementById('select-ubicaciones');
+//     let fechas =  document.getElementById('select-fechas');
+//     let sectores =  document.getElementById('select-sectores');
+//     let espacios =  document.getElementById('select-espacios');
+//     let cantidad =  document.getElementById('select-cantidad');
     
-    obj.ubicaciones = ubicaciones.options[ubicaciones.selectedIndex].text;
-    obj.fechas = fechas.options[fechas.selectedIndex].text;
-    obj.sectores = sectores.options[sectores.selectedIndex].text;
-    // obj.espacios = espacios.options[espacios.selectedIndex].text;
-    obj.cantidad = cantidad.value;
-    console.log(espacios.selectedOptions[0].text);
-}
+//     obj.ubicaciones = ubicaciones.options[ubicaciones.selectedIndex].text;
+//     obj.fechas = fechas.options[fechas.selectedIndex].text;
+//     obj.sectores = sectores.options[sectores.selectedIndex].text;
+//     // obj.espacios = espacios.options[espacios.selectedIndex].text;
+//     obj.cantidad = cantidad.value;
+//     console.log(espacios.selectedOptions[0].text);
+// }
 
