@@ -15,7 +15,7 @@ class NotaVentaSeeder extends Seeder
             'nombre' => 'Darwin Mamani Paco',
             'nit' => '12345678',
             'correo' => 'darwin@gmail.com',
-            'total' => '',
+            'total' => 500,
         ]);
 
 
@@ -23,7 +23,7 @@ class NotaVentaSeeder extends Seeder
             'nombre' => 'Erick Vidal',
             'nit' => '7418563',
             'correo' => 'erick@gmail.com',
-            'total' => '',
+            'total' => '500',
         ]);
 
         Ticket::create([
@@ -96,7 +96,7 @@ class NotaVentaSeeder extends Seeder
             'sector_id' => '8',
             'espacio_id' => '25',
             'nota_venta_id' => '1',
-            'fecha' => '',
+            // 'fecha' => '',
             'precio' => '100',
             'clave' => 'asdfgarfas12fdsaf',
             'cliente' => 'darwin mamani',
