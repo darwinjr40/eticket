@@ -6,6 +6,7 @@
         <div class="card-body pt-1">
             <form method="POST" action="{{ route('clientes.store') }}"  >
                 @csrf
+                <input name="rol_id" hidden value= "2">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">

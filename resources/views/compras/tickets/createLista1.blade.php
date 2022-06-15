@@ -118,15 +118,14 @@
                                     enctype="multipart/form-data" style="">
                                     @csrf
                                     <div style="margin-block: 10px">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        <button type="button" class="btn btn-default" data-toggle="modal"
                                             data-target="#modalTigoMoney">
-                                            <i class="fa fa-bars"></i><span> Tigo Money</span>
+                                            <img src="{{ asset('img/tigo-money.png') }}" height ="30" width="75" />
                                         </button>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        <button type="button" class="btn btn-default" data-toggle="modal"
                                             data-target="#modalTarjeta">
-                                            <i class="fa fa-users"></i><span> Tarjeta</span>
+                                            <img src="{{ asset('img/tarjeta.png') }}" height ="30" width="75" />
                                         </button>
-
                                     </div>
                                     {{-- oculto --}}
                                     <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
@@ -203,14 +202,14 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-text">
-                                            <i class="fa fa-users"> CI/NIT</i>
+                                            <i class="fa fa-address-card"> CI/NIT</i>
                                         </span>
-                                        <input type="text" id="ci" name="ci" class="form-control">
+                                        <input type="number" id="ci" name="ci" class="form-control">
                                     </div>
                                 </div><div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-text">
-                                            <i class="fa fa-users"> Nombre</i>
+                                            <i class="fa fa-user-circle"> Nombre</i>
                                         </span>
                                         <input type="text" id="nombre" name="nombre" class="form-control">
                                     </div>
@@ -218,14 +217,15 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-text">
-                                            <i class="fa fa-users"> Celular</i>
+                                            <i class="fa fa-mobile"> Celular</i>
                                         </span>
                                         <input type="text" id="nro" name="nro" class="form-control">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
-                                    <button type="submit" class="btn btn-primary">Pagar Ahora</button>
+                                    <button class="btn btn-info" type="submit"><i class="fa fa-credit-card"
+                                        aria-hidden="true"></i> Pagar ahora</button>
                                 </div>
                             </div>
                         </div>
@@ -252,14 +252,14 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-text">
-                                            <i class="fa fa-users"> CI/NIT</i>
+                                            <i class="fa fa-address-card"> CI/NIT</i>
                                         </span>
-                                        <input type="text" id="ci" name="ci" class="form-control">
+                                        <input type="number" id="ci" name="ci" class="form-control">
                                     </div>
                                 </div><div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-text">
-                                            <i class="fa fa-users"> Nombre</i>
+                                            <i class="fa fa-user-circle"> Nombre</i>
                                         </span>
                                         <input type="text" id="nombre" name="nombre" class="form-control">
                                     </div>
@@ -267,30 +267,33 @@
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-text">
-                                            <i class="fa fa-users"> Nro Tarjeta</i>
+                                            <i class="fa fa-credit-card"> Nro Tarjeta</i>
                                         </span>
                                         <input type="text" id="nro" name="nro" class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group">
+
                                     <div class="input-group">
                                         <span class="input-group-text">
-                                            <i class="fa fa-users"> Fecha de Expiracion</i>
+                                            <i class="fa fa-calendar"> Fecha de Expiracion</i>
                                         </span>
-                                        <input type="text" id="expiracion" name="expiracion" class="form-control">
+                                        <input type="datetime-local" id="expiracion" name="expiracion"
+                                            class="form-control" value="{{Date('Y-m-d\TH:i',time())}}">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-text">
-                                            <i class="fa fa-users"> CVC</i>
+                                            <i class="fa fa-credit-card"> CVC</i>
                                         </span>
                                         <input type="number" id="cvc" name="cvc" class="form-control" max="999" min="100">
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                    <button class="btn btn-info" type="submit"><i class="fa fa-credit-card"
+                                        aria-hidden="true"></i> Pagar ahora</button>
                                 </div>
                             </div>
                         </div>

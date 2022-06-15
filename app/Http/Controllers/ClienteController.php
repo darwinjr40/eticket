@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\Response;
 
 class ClienteController extends Controller
 {
@@ -16,6 +18,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('borrar-categoriaEvento'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $user= User::paginate(10);
         $clientes= Cliente::paginate(10);
         return view('clientes.index', compact('user','clientes'));
@@ -44,6 +47,7 @@ class ClienteController extends Controller
             'email'=>'required|email|unique:users,email'
         ]);
         $input=$request->all();
+        //dd($input);
         $input['password']=Hash::make($input['password']);
         $user=User::create($input);
         //$user=User::create($request->all());

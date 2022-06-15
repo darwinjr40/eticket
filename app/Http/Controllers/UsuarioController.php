@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\rol;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +21,8 @@ class UsuarioController extends Controller
     public function index()
     {
         $usuarios= User::paginate(5);
-        return view('usuarios.index',compact('usuarios'));
+        $roles = rol::paginate(5);
+        return view('usuarios.index',compact('usuarios','roles'));
     }
 
     /**
@@ -31,7 +32,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        $roles=Role::pluck('name','name')->all();
+        $roles=rol::pluck('name','name')->all();
         return view('usuarios.create',compact('roles'));
 
     }
@@ -80,10 +81,9 @@ class UsuarioController extends Controller
     public function edit($id)
     {
         $user=User::find($id);
-        $roles=Role::pluck('name','name')->all();
-        $userRole=$user->roles->pluck('name','name')->all();
+        $roles=rol::pluck('name','name')->all();
 
-        return view('usuarios.edit',compact('user','roles','userRole'));
+        return view('usuarios.edit',compact('user','roles'));
 
     }
 
@@ -110,12 +110,12 @@ class UsuarioController extends Controller
         }else{
             $input=Arr::except($input,array('password'));
         }
-        
-        
+
+
         $user->update($input);
         DB::table('model_has_roles')->where('model_id',$id)->delete();
         $user->assignRole($request->input('roles'));
-        
+
         return redirect()->route('usuarios.index');
 
     }

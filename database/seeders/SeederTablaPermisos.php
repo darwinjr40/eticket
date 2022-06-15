@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\rol;
+use App\Models\rolPermiso;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
+use App\Models\permiso;
 
 class SeederTablaPermisos extends Seeder
 {
@@ -25,10 +27,46 @@ class SeederTablaPermisos extends Seeder
             'ver-categoriaEvento',
             'crear-categoriaEvento',
             'editar-categoriaEvento',
-            'borrar-categoriaEvento'
+            'borrar-categoriaEvento',
+
+
+            'ver-cliente'
         ];
         foreach($permisos as $permiso){
-            Permission::create(['name'=>$permiso]);
+            permiso::create(['name'=>$permiso]);
         }
+        $roles = [
+            //Administrador
+            'Administrador',
+            //Cliente
+            'Cliente'
+        ];
+        foreach($roles as $rol){
+            rol::create(['name'=>$rol]);
+        }
+        $rolPer = [
+            [
+                'rol_id' => 1,
+                'permission_id' => 1
+            ],
+            [
+                'rol_id' => 1,
+                'permission_id' => 2
+            ],
+            [
+                'rol_id' => 1,
+                'permission_id' => 3
+            ],
+            [
+                'rol_id' => 1,
+                'permission_id' => 4
+            ],
+            [
+                'rol_id' => 2,
+                'permission_id' => 5
+            ],
+        ];
+
+        rolPermiso::insert($rolPer);
     }
 }

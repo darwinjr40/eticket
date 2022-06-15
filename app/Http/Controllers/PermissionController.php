@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use Spatie\Permission\Models\Permission;
+//use Spatie\Permission\Models\Permission;
+
+use App\Models\permiso;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
@@ -13,7 +15,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permission=Permission::paginate(5);
+        $permission=permiso::paginate(5);
         return view('permisos.index', compact('permission'));
     }
 
@@ -39,9 +41,9 @@ class PermissionController extends Controller
             'name'=>'required'
         ]);
 
-        Permission::create($request->all());
+        permiso::create($request->all());
         return redirect()->route('permisos.index');
-    
+
     }
 
     /**
@@ -63,7 +65,7 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        $permission=Permission::find($id);
+        $permission=permiso::find($id);
         return view('permisos.edit', compact('permission'));
     }
 
@@ -74,7 +76,7 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Permission $permission)
+    public function update(Request $request, permiso $permission)
     {
         request()->validate([
             'name'=>'required'
@@ -89,7 +91,7 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Permission $permission)
+    public function destroy(permiso $permission)
     {
         $permission->delete();
         return redirect()->route('permisos.index');

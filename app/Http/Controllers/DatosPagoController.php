@@ -77,6 +77,7 @@ class DatosPagoController extends Controller
         ]);
         $datoPago=new DatosPago();
         $datoPago->id_tipoPago = $tipoPago;
+        $datoPago->id_notaVenta = 1;
         $datoPago->ci = $request->ci;
         $datoPago->nombre = $request->nombre;
         $datoPago->nro = $request->nro;

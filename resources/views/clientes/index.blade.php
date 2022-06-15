@@ -28,7 +28,9 @@
                                             <td>{{$cliente->user->email}}</td>
                                             <td>{{$cliente->telefono}}</td>
                                             <td>
+                                                @can('ver-categoriaEvento')
                                                 <a class="btn btn-info" href="{{ route('clientes.edit', $cliente->id) }}">Editar</a>
+                                                @endcan
                                                 {!! Form::open(['method'=>'DELETE','route'=>['clientes.destroy',$cliente->id],'style'=>'display:inline']) !!}
                                                     {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
                                                 {!! Form::close() !!}

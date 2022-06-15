@@ -20,8 +20,8 @@ class CreateDatosPagosTable extends Migration
             $table->string('ci',15);
             $table->string('nombre',255);
             $table->string('nro',20);
-            $table->string('expiracion')->nullable();
-            $table->string('cvc',4)->nullable();
+            $table->dateTime('expiracion')->nullable();
+            $table->integer('cvc')->nullable();
             $table->string('estado');
             $table->foreign('id_tipoPago')->references('id')->on('tipo_pagos')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreign('id_notaVenta')->references('id')->on('nota_ventas')->cascadeOnUpdate()->cascadeOnDelete();

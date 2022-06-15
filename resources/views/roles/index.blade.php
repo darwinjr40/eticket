@@ -20,16 +20,16 @@
                                         <th style="color:#fff">Acciones</th>
                                     </tr>
 
-                                    
+
                                 </thead>
                                 <tbody >
                                     @foreach ($roles as $rol)
                                         <tr>
                                             <td>{{$rol->name}}</td>
                                             <td>
-                                                @can('editar-rol')
+                                                {{-- @can('editar-rol') --}}
                                                     <a class="btn btn-info" href="{{ route('roles.edit', $rol->id) }}">Editar</a>
-                                                @endcan
+                                                {{-- @endcan --}}
                                                 @can('borrar-rol')
                                                     {!! Form::open(['method'=>'DELETE','route'=>['roles.destroy',$rol->id],'style'=>'display:inline']) !!}
                                                         {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}
