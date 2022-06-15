@@ -78,4 +78,7 @@ class ImagenController extends Controller
             return back()->with('success', $response->json()['message']);
         }       
     }
+
+
+    
 }

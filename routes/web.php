@@ -18,6 +18,8 @@ use App\Http\Controllers\Ubicacion1Controller;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\TipoPagoController;
 use App\Http\Controllers\DatosPagoController;
+use App\Http\Controllers\ImagenQrController;
+use App\Models\ImagenQr;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -88,6 +90,7 @@ Route::group(['middelware'=>['auth']],function(){
 
 
 
+Route::get('qr', [ImagenQrController::class, 'guardar'])->name('guardardasd');
 
 
 
