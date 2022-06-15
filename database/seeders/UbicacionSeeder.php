@@ -127,7 +127,7 @@ class UbicacionSeeder extends Seeder
             'precio' => '0',
             'latitud' => '-17.80293471806719',
             'longitud' => '-63.198996300471464',
-            'evento_id' => '2',
+            'evento_id' => '3',
         ]);
 
         Sector::create([

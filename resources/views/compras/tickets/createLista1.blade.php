@@ -56,15 +56,16 @@
 
                                 {{-- SELECT Sector --}}
                                 <div id="id-sectores" class="derechaCompra" hidden>
-                                    <select name="sector_id" id="select-sectores" class="form-control" required>
+                                    <select name="sector_id" id="select-sectores" class="form-control" >
                                         <option value="">Seleccionar Sector</option>
                                     </select>
                                 </div>
 
                                 {{-- SELECT Espacio --}}
                                 <div id="id-espacios" class="derechaCompra" hidden>
-                                    <select name="espacio_id[]" id="select-espacios" class="form-control"  multiple required >
-                                        <option value="">Seleccionar Espacio</option>
+                                    <h6>Seleccionar Espacio:</h6>
+                                    <select name="espacio_id[]" id="select-espacios" class="form-control"    multiple>
+                                        {{-- <option value="">Seleccionar Espacio</option> --}}
                                     </select>
                                 </div>
                                 {{-- INPUT CANTIDAD --}}
@@ -92,7 +93,7 @@
                                 @endif --}}
                                 {{-- oculto --}}
                                 <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
-                                <input id="ubicacion" type="hidden" name="ubicacion_id" value="">
+                                <input id="evento" type="hidden" name="evento_id" value="{{isset($ubicaciones)? $ubicaciones[0]->evento_id : ''}}">
                             </form>
                         </div>
                     </aside>
@@ -130,7 +131,7 @@
                                     </div>
                                     {{-- oculto --}}
                                     <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
-                                    <input type="hidden" name="ubicacion_id" value="1">
+                                    <input id="evento" type="hidden" name="evento_id" value="{{isset($ubicaciones)? $ubicaciones[0]->evento_id : ''}}">
                                 </form>
                         </div>
                     </div>
@@ -142,9 +143,11 @@
                         <table class="table table-striped" style="margin: 10px auto; width: 80%; border: 1px solid black;">
                             <thead>
                                 <tr>
-                                    <th scope="col">Codigo</th>
+                                    {{-- <th scope="col">Codigo</th> --}}
                                     <th scope="col">Ubicacion</th>
                                     <th scope="col">Fecha</th>
+                                    <th scope="col">Sector</th>
+                                    <th scope="col">Espacio</th>
                                     <th scope="col">cantidad</th>
                                     <th scope="col">precio</th>
                                     <th scope="col">importe</th>
@@ -155,9 +158,11 @@
                             <tbody>
                                 @foreach ($tickets as $ticket)
                                     <tr>
-                                        <td>{{ $ticket['id'] }}</td>
+                                        {{-- <td>{{ $ticket['id'] }}</td> --}}
                                         <td>{{ $ticket['ubicacion'] }}</td>
                                         <td>{{ $ticket['fecha'] }}</td>
+                                        <td>{{ $ticket['sector'] }}</td>
+                                        <td>{{ $ticket['espacio'] }}</td>
                                         <td>{{ $ticket['cantidad'] }}</td>
                                         <td>{{ $ticket['precio'] }}</td>
                                         <td>{{ $ticket['precio'] * $ticket['cantidad'] }}</td>
@@ -168,6 +173,7 @@
                                                 @csrf
                                                 {{-- oculto --}}
                                                 <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
+                                                <input id="evento" type="hidden" name="evento_id" value="{{isset($ubicaciones)? $ubicaciones[0]->evento_id : ''}}">
                                                 {{-- button --}}
                                                 <button class="btn btn-danger btn-sm"
                                                     onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" value="Borrar"
