@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Fecha;
 use App\Models\Ubicacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class FechaController extends Controller
 {

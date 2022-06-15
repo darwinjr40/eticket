@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\TipoPago;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class TipoPagoController extends Controller
 {
@@ -14,12 +16,14 @@ class TipoPagoController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('ver-tipoPago'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $tipoPagos= TipoPago::paginate(10);
         return view('tipoPagos.index', compact('tipoPagos'));
     }
 
     public function indexTipoPago()
     {
+        abort_if(Gate::denies('ver-tipoPago'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $tipoPagos= TipoPago::paginate(10);
         return view('tipoPagos.indexTipoPago', compact('tipoPagos'));
     }
@@ -30,6 +34,7 @@ class TipoPagoController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('crear-tipoPago'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         return view('tipoPagos.create');
     }
 
@@ -67,6 +72,7 @@ class TipoPagoController extends Controller
      */
     public function edit(TipoPago $tipoPago)
     {
+        abort_if(Gate::denies('editar-tipoPago'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         return view('tipoPagos.edit',compact('tipoPago'));
     }
 

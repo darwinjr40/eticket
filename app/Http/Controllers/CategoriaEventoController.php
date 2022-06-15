@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\categoriaEvento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoriaEventoController extends Controller
 {
@@ -13,7 +15,7 @@ class CategoriaEventoController extends Controller
     //     $this->middleware('permission:crear-categoriaEvento',['only'=>['create','store']]);
     //     $this->middleware('permission:editar-categoriaEvento',['only'=>['edit','update']]);
     //     $this->middleware('permission:borrar-categoriaEvento',['only'=>['destroy']]);
-        
+
     // }
 
     /**
@@ -23,6 +25,7 @@ class CategoriaEventoController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('ver-categoriaEventos'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $categorias=categoriaEvento::paginate(5);
         return view('categoriaEventos.index',compact('categorias'));
     }
