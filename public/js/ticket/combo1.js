@@ -17,10 +17,8 @@ $(function () {
 
 function onSelectProjectChange() {
     var ubicacion_id = $(this).val();
-    // document.getElementById("ubicacion").value = ubicacion_id;
     let fechas = '<option value="">Seleccionar Fecha</option>';
     let sectores = '<option value="">Seleccionar Sector</option>';
-
     //    alert(ubicacion_id);     
     if (!ubicacion_id) { //tiene un valor
         $('#select-fechas').html(fechas);        
@@ -44,10 +42,17 @@ function onSelectProjectChange() {
         let path_sectores = pathLocal + 'sectores-api?filter[id_ubicacion]=' + ubicacion_id;
         $.get(path_sectores, function (data) {
             data = data['data'];
-            if (data.length == 0) {
-                document.getElementById('id-sectores').setAttribute("hidden"); 
+            document.getElementById('id-espacios').setAttribute("hidden", "");
+            document.getElementById('id-cantidad').setAttribute("hidden", "");            
+            $('#select-espacios').html('<option value="">Seleccionar Espacio</option>');
+            if (data.length == 0) {                
+                document.getElementById('id-cantidad').removeAttribute("hidden");
+                document.getElementById('id-sectores').setAttribute("hidden", ""); 
+                document.getElementById('select-sectores').removeAttribute("required");                                 
             } else {
                 document.getElementById('id-sectores').removeAttribute("hidden");
+                document.getElementById('select-sectores').setAttribute("required", ""); 
+
                 for (let i = 0; i < data.length; i++) {
                     sectores += '<option value="' + data[i].id + '">' + data[i].nombre + '</option>'
                 }
@@ -65,7 +70,7 @@ $(function () {
 
 function SelectSector() {
     var sector_id = $(this).val();
-    let espacios = '<option value="">Seleccionar Espacio</option>';
+    let espacios ;//= '<option value="">Seleccionar Espacio</option>';
     let id_select = '#select-espacios';
     // console.log('nise');
     // console.log(sector_id);
@@ -80,18 +85,20 @@ function SelectSector() {
             if (data.length == 0) { //no existe espacios
                 document.getElementById('id-cantidad').removeAttribute("hidden");
                 document.getElementById('id-espacios').setAttribute("hidden", "");
-                document.getElementById('id-espacios').removeAttribute("required");
+                document.getElementById('select-espacios').removeAttribute("required");
+                console.log('entramos');
             } else {
-                document.getElementById('id-espacios').removeAttribute("hidden");  
                 document.getElementById('id-cantidad').setAttribute("hidden", "");
+                document.getElementById('id-espacios').removeAttribute("hidden");  
+                document.getElementById('select-espacios').setAttribute("required", "");
+
                 for (let i = 0; i < data.length; i++) {
                     espacios += '<option value="' + data[i].id + '">' + data[i].descripcion + ':  '+ data[i].numero+ '</option>'
                 }
                 $(id_select).html(espacios);
             }
         });       
-        // deleteId('input-cantidad');
-        // addId('derecha2');
+
     }
 }
 

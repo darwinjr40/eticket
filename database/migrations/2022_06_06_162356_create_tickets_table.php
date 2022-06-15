@@ -20,14 +20,14 @@ class CreateTicketsTable extends Migration
             $table->unsignedBigInteger('espacio_id')->nullable();
             $table->unsignedBigInteger('nota_venta_id')->nullable();
             $table->dateTime('fecha')->default(Date('Y-m-d\TH:i',time()));
-            $table->double('precio')->default(0);
-            $table->string('clave')->default('');
-            $table->string('cliente')->default('');
-            $table->string('evento')->default('');
-            $table->string('ubicacion')->default('');
-            $table->string('sector')->default('');
-            $table->string('espacio')->default('');
-            $table->string('tipo')->default('');
+            $table->double('precio')->nullable();
+            $table->string('clave')->nullable();
+            $table->string('cliente')->nullable();
+            $table->string('evento')->nullable();
+            $table->string('ubicacion')->nullable();
+            $table->string('sector')->nullable();
+            $table->string('espacio')->nullable();
+            $table->string('tipo')->nullable();
 
             $table->foreign('ubicacion_id')->references('id')->on('ubicacions')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('sector_id')->references('id')->on('sectors')->onDelete('cascade')->onUpdate('cascade');
