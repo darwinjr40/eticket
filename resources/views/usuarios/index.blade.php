@@ -21,7 +21,7 @@
                                         <th style="color:#fff">Rol</th>
                                         <th style="color:#fff">Acciones</th>
                                     </tr>
-                                    
+
                                 </thead>
                                 <tbody >
                                     @foreach ($usuarios as $usuario)
@@ -29,13 +29,14 @@
                                             <td style="display:none;">{{$usuario->id}}</td>
                                             <td>{{$usuario->name}}</td>
                                             <td>{{$usuario->email}}</td>
-                                            <td>
-                                                @if(!empty($usuario->getRoleNames()))
+                                            <td>{{$usuario->rol->id}}</td>
+                                            {{-- <td>
+                                               @if(!empty($usuario->getRoleNames()))
                                                     @foreach ($usuario->getRoleNames() as $rolName)
                                                         <h5><span class="badge badge-dark">{{$rolName}}</span></h5>
                                                     @endforeach
                                                 @endif
-                                            </td>
+                                            </td> --}}
                                             <td>
                                                 <a class="btn btn-info" href="{{route('usuarios.edit',$usuario->id)}}">Editar</a>
                                                 {!! Form::open(['method'=>'DELETE','route'=>['usuarios.destroy',$usuario->id],'style'=>'display:inline']) !!}

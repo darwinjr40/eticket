@@ -10,7 +10,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                             
+
                             @if ($errors->any())
                                 <div class="alert alert-dark alert-dismissible fade show" role="alert">
                                     <strong>¡Revise los campos!</strong>
@@ -63,18 +63,18 @@
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-text">
-                                                    <i class="fa fa-lock"> Roles</i>
+                                                    <i class="fa fa-bars"> Roles</i>
                                                 </span>
                                                 {!! Form::select('roles[]',$roles,[],array('class'=>'form-control')) !!}
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary">Gurardar</button>
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
                                             <a href="{{route('usuarios.index')}}" class="btn btn-danger">Cancelar</a>
                                         </div>
                                     </div>
                                 </div>
-                            </form>    
+                            </form>
 
                         </div>
                     </div>

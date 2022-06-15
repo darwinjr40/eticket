@@ -10,16 +10,18 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            @can('crear-rol')
+                            <a class="btn btn-primary" href="{{ route('categoriaEventos.create') }}"> Crear Categoria</a>
+
+                            {{-- @can('crear-rol')
                                 <a class="btn btn-primary" href="{{ route('categoriaEventos.create') }}"> Crear Categoria</a>
-                            @endcan
+                            @endcan --}}
                             <table class="table table-striped mt-2" style="width: 100%">
                                 <thead style="background-color: #6777eF">
                                     <tr>
                                         <th style="color:#fff">Nombre</th>
                                         <th style="color:#fff">Descripcion</th>
                                         <th style="color: #fff">Acciones</th>
-                                    </tr> 
+                                    </tr>
                                 </thead>
                                 <tbody >
                                     @foreach ($categorias as $cat)
@@ -39,7 +41,7 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                
+
                             </table>
                             {{$categorias->links()}}
                         </div>
