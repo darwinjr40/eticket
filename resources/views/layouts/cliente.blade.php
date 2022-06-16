@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://use.fontawesome.com/c53c06c750.js"></script>
     @yield('css')
-    
+
         <!-- Bootstrap 4.1.1 -->
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <!-- Ionicons -->
@@ -19,35 +19,49 @@
         <link href="{{ asset('assets/css/sweetalert.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('assets/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
-        
+
     <title>Eticket</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Eticket</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-              <a class="nav-link active" aria-current="page" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+            <a class="navbar-brand" href="#">
+                <img src="{{ asset('img/logo.png') }}" width="85" >
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                {{-- <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                </div> --}}
             </div>
-          </div>
-          <form class="d-flex">
-            <input class="form-control me-2" type="search" placeholder="Buscar Evento" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
-          </form>          
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Buscar Evento" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+            <br>
+            <div>
+                @if (Route::has('login'))
+                    <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                        @auth
+                            <a href="{{ url('logout') }}" class="dropdown-item has-icon text-danger"
+                                onclick="event.preventDefault(); localStorage.clear();  document.getElementById('logout-form').submit();">
+                                <i class="fas fa-sign-out-alt"></i> Cerrar Sesion
+                            </a>
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" class="d-none">
+                                {{ csrf_field() }}
+                            </form>
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-outline-secondary" >Iniciar Sesion</a>
+                            @if (Route::has('register'))
+                            <a href="{{ route('clientes.create') }}" class="btn btn-outline-secondary">Registrarse</a>
+                            @endif
+                        @endauth
+                    </div>
+                @endif
+            </div>
         </div>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="{{ route('login') }}">Iniciar Sesión</a>
-            </div>
-            <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="{{ route('clientes.create') }}">Registrarse</a>
-              </div>
-          </div>
     </nav>
     <div class="main-content">
         {{-- <p>{{session('eventos')}}</p> --}}

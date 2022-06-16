@@ -38,13 +38,13 @@ class TicketController extends Controller
                     $t['cliente']  = 'el autenticado';
                     $t['evento']  = $evento->titulo;
                     $t['ubicacion']  = $ubicacion->nombre;
-                    
+
                     $t['espacio_id']  = $espacio->id;
                     $t['precio']  = $espacio->precio;
                     $t['cantidad']  = 1;
                     $t['sector']  = $sector->nombre;
                     $t['espacio']  = $espacio->numero . '-' . $espacio->descripcion;
-                    
+
                     array_push($tickets, $t);
                 }
             } else if (isset($request['sector_id']) && $request['sector_id']) { //existe sector
@@ -95,9 +95,13 @@ class TicketController extends Controller
     public function crearEvento1($evento_id)
     {
         // $evento_id = 3;
-        $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
-        $tickets = array();
-        return view('compras.tickets.createLista1', compact('ubicaciones',  'tickets'));
+        if(\Illuminate\Support\Facades\Auth::user()) {
+            $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
+            $tickets = array();
+            return view('compras.tickets.createLista1', compact('ubicaciones',  'tickets'));
+        }else{
+            return redirect()->route('login');
+        }
     }
 
     public function destroyEvento(Request $request, $id)
