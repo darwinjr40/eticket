@@ -29,7 +29,7 @@
                                             <td style="display:none;">{{$usuario->id}}</td>
                                             <td>{{$usuario->name}}</td>
                                             <td>{{$usuario->email}}</td>
-                                            <td>{{$usuario->rol->id}}</td>
+                                            <td>{{$usuario->rol_id}}</td>
                                             {{-- <td>
                                                @if(!empty($usuario->getRoleNames()))
                                                     @foreach ($usuario->getRoleNames() as $rolName)

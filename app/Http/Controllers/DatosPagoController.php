@@ -134,7 +134,7 @@ class DatosPagoController extends Controller
         $ticket=Ticket::where('nota_venta_id',$nota->id)->get();
         $ticket->load('imagenesqr');
         Mail::to($nota->correo)->send(new EnviarMail($nota,$ticket));
-        return redirect()->route('eventosS');
+        return redirect()->route('eventosS')->with('success','Compra Procesada!: Revise su correo');
         //return view('compras.notaVentas.create', compact('tickets'));
     }
     public function storeDatoPago2(Request $request)
@@ -206,7 +206,8 @@ class DatosPagoController extends Controller
             $ticket=Ticket::where('nota_venta_id',$nota->id)->get();
             $ticket->load('imagenesqr');
             Mail::to($nota->correo)->send(new EnviarMail($nota,$ticket));
-            return redirect()->route('eventosS');
+            return redirect()->route('eventosS')->with('success','Compra Procesada!: Revise su correo');
+
             //return view('compras.notaVentas.create', compact('tickets'));
     }
 
