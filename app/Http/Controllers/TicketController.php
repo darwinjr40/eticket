@@ -25,7 +25,7 @@ class TicketController extends Controller
         } else {
             $tickets = json_decode($request['tickets'], true);
             $t = [];
-
+            $error = 'info';
             if (isset($request['espacio_id'])) { //hay espacios
                 $n = count($request['espacio_id']);
                 $v = $request['espacio_id'];
@@ -46,57 +46,68 @@ class TicketController extends Controller
                     $t['espacio']  = $espacio->numero . '-' . $espacio->descripcion;
                     
                     array_push($tickets, $t);
-                }
+                }//$request['cantidad'] <= cantidad
             } else if (isset($request['sector_id']) && $request['sector_id']) { //existe sector
-                $t['id'] = count($tickets);
-                $t['fecha']  = $fecha->fechaHora;
-                $t['clave']  = $this->generarCodigo(6);
-                $t['cliente']  = 'el autenticado';
-                $t['evento']  = $evento->titulo;
-                $t['ubicacion']  = $ubicacion->nombre;
-
-                $t['sector_id']  = $sector->id;
-                $t['precio']  = $sector->precio;
-                $t['cantidad']  = $request['cantidad'];
-                $t['sector']  = $sector->nombre;
-                $t['espacio']  = '';
-                array_push($tickets, $t);
+                if ($request['cantidad'] > $sector->capacidad_disponible) {
+                    $error = 'error';
+                } else {
+                    $t['id'] = count($tickets);
+                    $t['fecha']  = $fecha->fechaHora;
+                    $t['clave']  = $this->generarCodigo(6);
+                    $t['cliente']  = 'el autenticado';
+                    $t['evento']  = $evento->titulo;
+                    $t['ubicacion']  = $ubicacion->nombre;
+    
+                    $t['sector_id']  = $sector->id;
+                    $t['precio']  = $sector->precio;
+                    $t['cantidad']  = $request['cantidad'];
+                    $t['sector']  = $sector->nombre;
+                    $t['espacio']  = '';
+                    array_push($tickets, $t);
+                }
+                
             } else { //hay solo ubicacion
-                $t['id'] = count($tickets);
-                $t['fecha']  = $fecha->fechaHora;
-                $t['clave']  = $this->generarCodigo(6);
-                $t['cliente']  = 'el autenticado';
-                $t['evento']  = $evento->titulo;
-                $t['ubicacion']  = $ubicacion->nombre;
+                if ($request['cantidad'] > $ubicacion->capacidad_disponible) {
+                    $error = 'error';
+                } else {
+                    $t['id'] = count($tickets);
+                    $t['fecha']  = $fecha->fechaHora;
+                    $t['clave']  = $this->generarCodigo(6);
+                    $t['cliente']  = 'el autenticado';
+                    $t['evento']  = $evento->titulo;
+                    $t['ubicacion']  = $ubicacion->nombre;    
+                    $t['ubicacion_id']  = $ubicacion->id;
+                    $t['precio']  = $ubicacion->precio;
+                    $t['cantidad']  = $request['cantidad'];
+                    $t['sector']  = '';
+                    $t['espacio']  = '';
+    
+                    array_push($tickets, $t);
 
-                $t['ubicacion_id']  = $ubicacion->id;
-                $t['precio']  = $ubicacion->precio;
-                $t['cantidad']  = $request['cantidad'];
-                $t['sector']  = '';
-                $t['espacio']  = '';
-
-                array_push($tickets, $t);
+                }
             }
         }
+        $tickets = json_encode($tickets);
         // return $tickets;
         $evento_id = $evento->id;
-        $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
-        return view('compras.tickets.createLista1', compact('ubicaciones', 'tickets'));
+        // $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
+        // return back()->with('info', 'Stock insuficiente');
+        return redirect()->route('tickets.addEvento1', [$evento_id, $tickets]);
+        return view('compras.tickets.createLista1', compact('ubicaciones', 'tickets'))->with('info', 'Stock insuficiente');
     }
 
-    public function crearEvento2(Request $request)
-    {
-        $evento_id = 1;
-        $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
-        $tickets = array();
-        return view('compras.tickets.createLista', compact('ubicaciones',  'tickets'));
-    }
+    // public function crearEvento2(Request $request)
+    // {
+    //     $evento_id = 1;
+    //     $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
+    //     $tickets = array();
+    //     return view('compras.tickets.createLista', compact('ubicaciones',  'tickets'));
+    // }
 
-    public function crearEvento1($evento_id)
+    public function crearEvento1($evento_id, $tickets=array())
     {
-        // $evento_id = 3;
-        $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
-        $tickets = array();
+        $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();   
+        // $tickets = json_decode($tickets , true);
         return view('compras.tickets.createLista1', compact('ubicaciones',  'tickets'));
     }
 

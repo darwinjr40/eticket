@@ -101,7 +101,7 @@ Route::get('ubicacions/{id}/editEvento', [Ubicacion1Controller::class, 'editEven
 Route::resource('imagens', ImagenController::class);
 Route::resource('tickets', TicketController::class);
 Route::post('tickets-addEvento', [TicketController::class, 'crearEvento'])->name('tickets.addEvento');
-Route::get('tickets-addEvento1/{id}', [TicketController::class, 'crearEvento1'])->name('tickets.addEvento1');
+Route::get('tickets-addEvento1/{id}/{tickets?}', [TicketController::class, 'crearEvento1'])->name('tickets.addEvento1');
 Route::post('tickets-del/{id}', [TicketController::class, 'destroyEvento'])->name('tickets.destroyEvento');
 
 

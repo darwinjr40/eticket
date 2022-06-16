@@ -5,6 +5,8 @@
 @endsection --}}
 
 @section('content')
+
+
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card">
@@ -14,6 +16,11 @@
                 </div>
 
                 <div id="contenidoSuperior" class="card-body">
+                    @if (session('info'))
+                            <div class="alert alert-success">
+                                <strong>{{ session('info') }}</strong>
+                            </div>
+                        @endif
                     {{-- izquierda --}}
                     <section id="izquierda" class="caja">
 
@@ -26,6 +33,7 @@
 
                     {{-- derecha --}}
                     <aside id="derecha" class="caja">
+                        
                         <div id="derecha1" class="derechaClass">
                             {{-- <h1>hola</h1> --}}
                         </div>
@@ -56,7 +64,7 @@
 
                                 {{-- SELECT Sector --}}
                                 <div id="id-sectores" class="derechaCompra" hidden>
-                                    <select name="sector_id" id="select-sectores" class="form-control" >
+                                    <select name="sector_id" id="select-sectores" class="form-control">
                                         <option value="">Seleccionar Sector</option>
                                     </select>
                                 </div>
@@ -64,27 +72,27 @@
                                 {{-- SELECT Espacio --}}
                                 <div id="id-espacios" class="derechaCompra" hidden>
                                     <h6>Seleccionar Espacio:</h6>
-                                    <select name="espacio_id[]" id="select-espacios" class="form-control"    multiple>
+                                    <select name="espacio_id[]" id="select-espacios" class="form-control" multiple>
                                         {{-- <option value="">Seleccionar Espacio</option> --}}
                                     </select>
                                 </div>
                                 {{-- INPUT CANTIDAD --}}
                                 {{-- @if (isset($ubicaciones) && $ubicaciones[0]['precio'] > 0) --}}
-                                    <div id="id-cantidad" class="derechaCompra"  hidden>
-                                        <div class="form-group input-group">
-                                            <span class="input-group-text">
-                                                <i class="fa fa-arrow-up"> cantidad</i>
-                                            </span>
-                                            <input id="select-cantidad" type="number" value="1" name="cantidad" class="  form-control" min="1"
-                                                max="50">
-                                        </div>
+                                <div id="id-cantidad" class="derechaCompra" hidden>
+                                    <div class="form-group input-group">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-arrow-up"> cantidad</i>
+                                        </span>
+                                        <input id="select-cantidad" type="number" value="1" name="cantidad"
+                                            {{-- class="  form-control" min="1" max="50"> --}} class="  form-control" min="1">
                                     </div>
-                                    {{-- @error('cantidad')<p>DEBE INGRESAR LA CANTIDAD</p>@enderror --}}
-                                    {{-- BUTTON AÑADIR --}}
-                                    <div class="derechaCompra" >
-                                        <button class="btn btn-primary" type="submit" ><i class="fa fa-shopping-cart"
-                                                aria-hidden="true"></i>Añadir</button>
-                                    </div>
+                                </div>
+                                {{-- @error('cantidad')<p>DEBE INGRESAR LA CANTIDAD</p>@enderror --}}
+                                {{-- BUTTON AÑADIR --}}
+                                <div class="derechaCompra">
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-shopping-cart"
+                                            aria-hidden="true"></i>Añadir</button>
+                                </div>
                                 {{-- @else
                                     <div class="derechaCompra">
                                         <a href="#" class="btn btn-dark" type="submit">
@@ -93,7 +101,8 @@
                                 @endif --}}
                                 {{-- oculto --}}
                                 <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
-                                <input id="evento" type="hidden" name="evento_id" value="{{isset($ubicaciones)? $ubicaciones[0]->evento_id : ''}}">
+                                <input id="evento" type="hidden" name="evento_id"
+                                    value="{{ isset($ubicaciones) ? $ubicaciones[0]->evento_id : '' }}">
                             </form>
                         </div>
                     </aside>
@@ -109,84 +118,85 @@
                 <br>
 
 
-                    <div class="row">
-                        <div class="col-9">
-                            <h2 class="font-weight-bold" style="margin-left: 45%">Detalles de la compra</h2>
-                        </div>
-                        {{-- Button Pagar ahora --}}
-                        <div class="col-3">
-                                <form action="{{ route('tipoPagos.indexTipoPago') }}" role="form"
-                                    enctype="multipart/form-data" style="">
-                                    @csrf
-                                    <div style="margin-block: 10px">
-                                        <button type="button" class="btn btn-default" data-toggle="modal"
-                                            data-target="#modalTigoMoney">
-                                            <img src="{{ asset('img/tigo-money.png') }}" height ="30" width="75" />
-                                        </button>
-                                        <button type="button" class="btn btn-default" data-toggle="modal"
-                                            data-target="#modalTarjeta">
-                                            <img src="{{ asset('img/tarjeta.png') }}" height ="30" width="75" />
-                                        </button>
-                                    </div>
-                                    {{-- oculto --}}
-                                    <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
-                                    <input id="evento" type="hidden" name="evento_id" value="{{isset($ubicaciones)? $ubicaciones[0]->evento_id : ''}}">
-                                </form>
-                        </div>
+                <div class="row">
+                    <div class="col-9">
+                        <h2 class="font-weight-bold" style="margin-left: 45%">Detalles de la compra</h2>
                     </div>
+                    {{-- Button Pagar ahora --}}
+                    <div class="col-3">
+                        <form action="{{ route('tipoPagos.indexTipoPago') }}" role="form" enctype="multipart/form-data"
+                            style="">
+                            @csrf
+                            <div style="margin-block: 10px">
+                                <button type="button" class="btn btn-default" data-toggle="modal"
+                                    data-target="#modalTigoMoney">
+                                    <img src="{{ asset('img/tigo-money.png') }}" height="30" width="75" />
+                                </button>
+                                <button type="button" class="btn btn-default" data-toggle="modal"
+                                    data-target="#modalTarjeta">
+                                    <img src="{{ asset('img/tarjeta.png') }}" height="30" width="75" />
+                                </button>
+                            </div>
+                            {{-- oculto --}}
+                            <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
+                            <input id="evento" type="hidden" name="evento_id"
+                                value="{{ isset($ubicaciones) ? $ubicaciones[0]->evento_id : '' }}">
+                        </form>
+                    </div>
+                </div>
 
 
 
-                    {{-- tabla --}}
-                    <div style="margin-top: 2%">
-                        <table class="table table-striped" style="margin: 10px auto; width: 80%; border: 1px solid black;">
-                            <thead>
+                {{-- tabla --}}
+                <div style="margin-top: 2%">
+                    <table class="table table-striped" style="margin: 10px auto; width: 80%; border: 1px solid black;">
+                        <thead>
+                            <tr>
+                                {{-- <th scope="col">Codigo</th> --}}
+                                <th scope="col">Ubicacion</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Sector</th>
+                                <th scope="col">Espacio</th>
+                                <th scope="col">cantidad</th>
+                                <th scope="col">precio</th>
+                                <th scope="col">importe</th>
+                                <th scope="col" width='3%'></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach ($tickets as $ticket)
                                 <tr>
-                                    {{-- <th scope="col">Codigo</th> --}}
-                                    <th scope="col">Ubicacion</th>
-                                    <th scope="col">Fecha</th>
-                                    <th scope="col">Sector</th>
-                                    <th scope="col">Espacio</th>
-                                    <th scope="col">cantidad</th>
-                                    <th scope="col">precio</th>
-                                    <th scope="col">importe</th>
-                                    <th scope="col" width='3%'></th>
+                                    {{-- <td>{{ $ticket['id'] }}</td> --}}
+                                    <td>{{ $ticket['ubicacion'] }}</td>
+                                    <td>{{ $ticket['fecha'] }}</td>
+                                    <td>{{ $ticket['sector'] }}</td>
+                                    <td>{{ $ticket['espacio'] }}</td>
+                                    <td>{{ $ticket['cantidad'] }}</td>
+                                    <td>{{ $ticket['precio'] }}</td>
+                                    <td>{{ $ticket['precio'] * $ticket['cantidad'] }}</td>
+                                    <td>
+                                        <form method="POST" action="{{ route('tickets.destroyEvento', $ticket['id']) }}"
+                                            role="form" enctype="multipart/form-data">
+                                            @csrf
+                                            {{-- oculto --}}
+                                            <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
+                                            <input id="evento" type="hidden" name="evento_id"
+                                                value="{{ isset($ubicaciones) ? $ubicaciones[0]->evento_id : '' }}">
+                                            {{-- button --}}
+                                            <button class="btn btn-danger btn-sm"
+                                                onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" value="Borrar"
+                                                title="Borrar">
+                                                {{-- <i class="fas fa-times"></i> --}}
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
-                            </thead>
-
-                            <tbody>
-                                @foreach ($tickets as $ticket)
-                                    <tr>
-                                        {{-- <td>{{ $ticket['id'] }}</td> --}}
-                                        <td>{{ $ticket['ubicacion'] }}</td>
-                                        <td>{{ $ticket['fecha'] }}</td>
-                                        <td>{{ $ticket['sector'] }}</td>
-                                        <td>{{ $ticket['espacio'] }}</td>
-                                        <td>{{ $ticket['cantidad'] }}</td>
-                                        <td>{{ $ticket['precio'] }}</td>
-                                        <td>{{ $ticket['precio'] * $ticket['cantidad'] }}</td>
-                                        <td>
-                                            <form method="POST"
-                                                action="{{ route('tickets.destroyEvento', $ticket['id']) }}" role="form"
-                                                enctype="multipart/form-data">
-                                                @csrf
-                                                {{-- oculto --}}
-                                                <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
-                                                <input id="evento" type="hidden" name="evento_id" value="{{isset($ubicaciones)? $ubicaciones[0]->evento_id : ''}}">
-                                                {{-- button --}}
-                                                <button class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('¿ESTA SEGURO DE  BORRAR?')" value="Borrar"
-                                                    title="Borrar">
-                                                    {{-- <i class="fas fa-times"></i> --}}
-                                                    <i class="far fa-trash-alt"></i>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
         </div>
@@ -212,7 +222,8 @@
                                         </span>
                                         <input type="number" id="ci" name="ci" class="form-control">
                                     </div>
-                                </div><div class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-text">
                                             <i class="fa fa-user-circle"> Nombre</i>
@@ -231,7 +242,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
                                     <button class="btn btn-info" type="submit"><i class="fa fa-credit-card"
-                                        aria-hidden="true"></i> Pagar ahora</button>
+                                            aria-hidden="true"></i> Pagar ahora</button>
                                 </div>
 
                                 {{-- oculto --}}
@@ -265,7 +276,8 @@
                                         </span>
                                         <input type="number" id="ci" name="ci" class="form-control">
                                     </div>
-                                </div><div class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-text">
                                             <i class="fa fa-user-circle"> Nombre</i>
@@ -288,7 +300,7 @@
                                             <i class="fa fa-calendar"> Fecha de Expiracion</i>
                                         </span>
                                         <input type="datetime-local" id="expiracion" name="expiracion"
-                                            class="form-control" value="{{Date('Y-m-d\TH:i',time())}}">
+                                            class="form-control" value="{{ Date('Y-m-d\TH:i', time()) }}">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -302,7 +314,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                     <button class="btn btn-info" type="submit"><i class="fa fa-credit-card"
-                                        aria-hidden="true"></i> Pagar ahora</button>
+                                            aria-hidden="true"></i> Pagar ahora</button>
                                 </div>
                                 {{-- oculto --}}
                                 <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
