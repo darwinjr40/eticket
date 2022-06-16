@@ -44,7 +44,10 @@
                     <aside id="derecha" class="caja">
 
                         <div id="derecha1" class="derechaClass">
-                            {{-- <h1>hola</h1> --}}
+                            <h2 class="font-weight-bold" >{{$evento['titulo']}}</h2>
+                            <h5>Categoria: <strong>{{$evento['categoria']}}</strong></h5>
+                            <h5>Descripcion:  <strong>{{$evento['descripcion']}}</strong></h5>
+
                         </div>
                         {{-- <div class="clearfix"></div> --}}
 
@@ -55,7 +58,7 @@
                                 {{-- <div class="row row justify-content-center"> --}}
                                 {{-- SELECT UBICACION --}}
                                 <div class="derechaCompra">
-                                    <select name="ubicacion_id" id="select-ubicaciones" class="form-control" autofocus
+                                    <select name="ubicacion_id" id="select-ubicaciones" class="form-control select-control" autofocus
                                         required>
                                         <option value="">Seleccionar Ubicacion</option>
                                         @foreach ($ubicaciones as $ubicacion)
@@ -66,14 +69,14 @@
                                 </div>
                                 {{-- SELECT FECHA --}}
                                 <div class="derechaCompra">
-                                    <select name="fecha_id" id="select-fechas" class="form-control" required>
+                                    <select name="fecha_id" id="select-fechas" class="form-control select-control" required>
                                         <option value="">Seleccionar Fecha</option>
                                     </select>
                                 </div>
 
                                 {{-- SELECT Sector --}}
                                 <div id="id-sectores" class="derechaCompra" hidden>
-                                    <select name="sector_id" id="select-sectores" class="form-control">
+                                    <select name="sector_id" id="select-sectores" class="form-control select-control" >
                                         <option value="">Seleccionar Sector</option>
                                     </select>
                                 </div>
@@ -81,7 +84,7 @@
                                 {{-- SELECT Espacio --}}
                                 <div id="id-espacios" class="derechaCompra" hidden>
                                     <h6>Seleccionar Espacio:</h6>
-                                    <select name="espacio_id[]" id="select-espacios" class="form-control" multiple>
+                                    <select name="espacio_id[]" id="select-espacios" class="form-control select-control" multiple>
                                         {{-- <option value="">Seleccionar Espacio</option> --}}
                                     </select>
                                 </div>
@@ -93,7 +96,7 @@
                                             <i class="fa fa-arrow-up"> cantidad</i>
                                         </span>
                                         <input id="select-cantidad" type="number" value="1" name="cantidad"
-                                            {{-- class="  form-control" min="1" max="50"> --}} class="  form-control" min="1">
+                                            {{-- class="  form-control" min="1" max="50"> --}} class="  form-control select-control" min="1">
                                     </div>
                                 </div>
                                 {{-- @error('cantidad')<p>DEBE INGRESAR LA CANTIDAD</p>@enderror --}}
@@ -126,7 +129,8 @@
                 <br>
                 <br>
 
-
+                @if (isset($tickets) && count($tickets) > 0)
+                    
                 <div class="row">
                     <div class="col-9">
                         <h2 class="font-weight-bold" style="margin-left: 45%">Detalles de la compra</h2>
@@ -211,12 +215,14 @@
         </div>
     </div>
 
+    @endif
+    
     <div class="modal fade" id="modalTigoMoney" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tigo Money</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><img src="{{ asset('img/tigo-money.png') }}" height="35" width="95"/></h5>
                 </div>
                 <div class="modal-body">
 
@@ -270,7 +276,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tarjeta</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <img src="{{ asset('img/tarjeta.png') }}" height="35" width="95" /></h5>
                 </div>
                 <div class="modal-body">
 

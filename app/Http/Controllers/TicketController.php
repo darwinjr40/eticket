@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\categoriaEvento;
 use App\Models\Espacio;
 use App\Models\Evento;
 use App\Models\Fecha;
@@ -92,7 +93,9 @@ class TicketController extends Controller
         $evento_id = $evento->id;
         $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
         $imagenes = Imagen::where('evento_id', $evento_id)->get();
-        return view('compras.tickets.createLista1', compact('imagenes', 'ubicaciones', 'tickets'), $mensaje);
+        $evento = Evento::where('id', $evento_id)->first();
+            $evento['categoria'] = categoriaEvento::find($evento['id_categoria'])->nombre;
+        return view('compras.tickets.createLista1', compact('evento', 'imagenes', 'ubicaciones', 'tickets'), $mensaje);
     }
 
     // public function crearEvento2(Request $request)
@@ -109,7 +112,9 @@ class TicketController extends Controller
         if(\Illuminate\Support\Facades\Auth::user()) {
             $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
             $imagenes = Imagen::where('evento_id', $evento_id)->get();
-            return view('compras.tickets.createLista1', compact('imagenes','ubicaciones',  'tickets'));
+            $evento = Evento::where('id', $evento_id)->first();
+            $evento['categoria'] = categoriaEvento::find($evento['id_categoria'])->nombre;
+            return view('compras.tickets.createLista1', compact('evento','imagenes','ubicaciones',  'tickets'));
         }else{
             return redirect()->route('login');
         }
