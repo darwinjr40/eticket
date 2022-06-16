@@ -108,18 +108,18 @@ class DatosPagoController extends Controller
         $nota->correo = 'falta guardar';
         $nota->save();
 
-        // $tipoPago=TipoPago::where('forma','Tigo Money');
-        // // return $tipoPago;
-        // $datoPago = new DatosPago();
-        // $datoPago->id_tipoPago = $tipoPago->id;
-        // $datoPago->id_notaVenta = 1;
-        // $datoPago->ci = $request->ci;
-        // $datoPago->nombre = $request->nombre;
-        // $datoPago->nro = $request->nro;
+        // $tipoPago=TipoPago::where('forma','Tigo Money')->firts();
+        // return $tipoPago;
+        $datoPago = new DatosPago();
+        $datoPago->id_tipoPago = 1;//$tipoPago->id;
+        $datoPago->id_notaVenta = $nota->id;
+        $datoPago->ci = $request->ci;
+        $datoPago->nombre = $request->nombre;
+        $datoPago->nro = $request->nro;
         // $datoPago->expiracion="--";
         // $datoPago->cvc="--";
-        // $datoPago->estado="Procesado";
-        // $datoPago->save();
+        $datoPago->estado="Procesado";
+        $datoPago->save();
         return 'se creo bien';
         return view('compras.notaVentas.create', compact('tickets'));
     }
