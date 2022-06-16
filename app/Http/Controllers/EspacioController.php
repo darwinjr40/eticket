@@ -6,6 +6,8 @@ use App\Models\Espacio;
 use App\Models\Sector;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class EspacioController extends Controller
 {
@@ -16,18 +18,20 @@ class EspacioController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('ver-espacio'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $espacios=Espacio::paginate(15);
         return view('espacios.index',compact('espacios'));
     }
 
     public function indexSector($id_sector){
-        // $espacios = Espacio::paginate(10);
+        abort_if(Gate::denies('ver-espacio'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $espacios = Espacio::all()->where('id_sector', $id_sector);
         return view('espacios.indexSector',compact('espacios', 'id_sector'));
     }
 
     public function create()
     {
+        abort_if(Gate::denies('crear-espacio'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         return view('espacios.create');
     }
 
@@ -79,7 +83,7 @@ class EspacioController extends Controller
         }else{
             return back()->with('danger','Capacidad Excedidad...');
         }
- 
+
         return back();
     }
 
@@ -102,6 +106,7 @@ class EspacioController extends Controller
      */
     public function edit(Espacio $espacio)
     {
+        abort_if(Gate::denies('editar-espacio'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         return view('espacios.edit',compact('espacio'));
     }
 

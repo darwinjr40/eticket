@@ -7,6 +7,8 @@ use App\Models\rol;
 use App\Models\rolPermiso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class RolController extends Controller
 {
@@ -28,6 +30,7 @@ class RolController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('acceso-rol'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $roles= rol::paginate(5);
         $permission=permiso::get();
         return view('roles.index',compact('roles'));
@@ -41,6 +44,7 @@ class RolController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('acceso-rol'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $permission = permiso::get();
         return view('roles.create',compact('permission'));
     }
@@ -82,6 +86,7 @@ class RolController extends Controller
      */
     public function edit($id)
     {
+        abort_if(Gate::denies('acceso-rol'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $role=rol::find($id);
         $permission=permiso::get();
         $rolePermissions=rolpermiso::where('rolpermiso.rol_id',$id)->pluck('rolpermiso.permission_id')->all();

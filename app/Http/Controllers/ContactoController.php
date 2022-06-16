@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Contacto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class ContactoController extends Controller
 {
@@ -14,6 +16,7 @@ class ContactoController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('ver-contactos'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $contactos=Contacto::paginate(5);
         return view('contactos.index',compact('contactos'));
     }
@@ -25,6 +28,7 @@ class ContactoController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('crear-contactos'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         return view('contactos.create');
     }
 
@@ -65,6 +69,7 @@ class ContactoController extends Controller
      */
     public function edit($id)
     {
+        abort_if(Gate::denies('editar-contactos'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $contacto=Contacto::find($id);
         return view('contactos.edit',compact('contacto'));
     }

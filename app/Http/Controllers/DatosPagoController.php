@@ -6,6 +6,8 @@ use App\Models\DatosPago;
 use App\Models\TipoPago;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class DatosPagoController extends Controller
 {
@@ -16,11 +18,13 @@ class DatosPagoController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('ver-datosPago'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $datoPagos=DatosPago::paginate(15);
         return view('datosPagos.index',compact('datoPagos'));
     }
 
     public function indexPago($id_tipoPago){
+        abort_if(Gate::denies('ver-datosPago'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $datoPagos = DatosPago::all()->where('id_tipoPago', $id_tipoPago);
         return view('datosPagos.indexPago',compact('datoPagos', 'id_tipoPago'));
     }
@@ -32,6 +36,7 @@ class DatosPagoController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('crear-datosPago'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         return view('datosPagos.create');
     }
 
