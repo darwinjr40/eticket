@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://use.fontawesome.com/c53c06c750.js"></script>
+    <script src="https://use.fontawesome.com/908890c963.js"></script>
     @yield('css')
     
         <!-- Bootstrap 4.1.1 -->
@@ -25,14 +25,13 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Eticket</a>
+          <a class="navbar-brand" href="/"><img src="https://website-available.com/images/logo/e-ticket-logo.png" alt="" width="120px" height="50px"></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-              <a class="nav-link active" aria-current="page" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+              <a class="nav-link active" aria-current="page" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Compras</a>
             </div>
           </div>
           <form class="d-flex">
@@ -77,7 +76,7 @@
                 <div class="footer-col-4">
                     <h3>Redes Sociales</h3>
                     <ul>
-                        <li><i class="fa fa-facebook"> </i></li>
+                        <li><i class="fa fa-facebook-official" aria-hidden="true"></i></li>
                         <li><i class="fa fa-twitter"></i></li>
                         <li><i class="fa fa-instagram"></i></li>
                         <li><i class="fa fa-youtube"></i></li>
@@ -98,7 +97,6 @@
     </script> --}}
 
 </body>
-<<<<<<< HEAD
 
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/popper.min.js') }}"></script>
@@ -116,6 +114,4 @@
 @yield('scripts')
 
 </html>
-=======
 </html>
->>>>>>> 22f0f31c4ecc38fef7b52332e7516aec4135e5c8

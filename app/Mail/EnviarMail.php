@@ -11,10 +11,13 @@ class EnviarMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $detalle; 
-    public function __construct($x)
+    public $Nota;//nota de venta
+    public $tickets; 
+
+    public function __construct($nota,$ticket)
     {
-        $this->detalle = $x;        
+        $this->nota = $nota;      
+        $this->tickets=$ticket;  
     }
 
     /**

@@ -11,6 +11,6 @@ class ImagenQr extends Model
     protected $fillable = ['ticket_id','path','pathPrivate'];
 
     public function ticket(){
-        return $this->belongsTo(Ticket::class);
+        return $this->belongsTo(Ticket::class,'ticket_id');
     }
 }

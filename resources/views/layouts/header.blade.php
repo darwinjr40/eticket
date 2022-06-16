@@ -32,8 +32,8 @@
             </div>
         </li>
     @else
-        <li class="dropdown"><a href="#" data-toggle="dropdown"
-                                class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown"class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                 {{--                <img alt="image" src="#" class="rounded-circle mr-1">--}}
                 <div class="d-sm-none d-lg-inline-block">{{ __('messages.common.hello') }}</div>
             </a>
