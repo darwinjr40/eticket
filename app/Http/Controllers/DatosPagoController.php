@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\EnviarMail;
+use App\Models\ImagenQr;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Http\UploadedFile;
+
 class DatosPagoController extends Controller
 {
     /**
@@ -85,6 +94,7 @@ class DatosPagoController extends Controller
                     $t = Ticket::create($tickets[$i]);
                     $t->nota_venta_id = $nota['id'];
                     $t->save();
+                    $this->GuardarQR($t);
                 }
                 // $this->GuardarQR($t);
                 if (isset($tickets[$i]['espacio_id'])) { //hay espacios                    
@@ -105,7 +115,7 @@ class DatosPagoController extends Controller
             }
         }
         $nota->total = $total;
-        $nota->correo = 'falta guardar';
+        $nota->correo = \Illuminate\Support\Facades\Auth::user()->email;
         $nota->save();
 
         // $tipoPago=TipoPago::where('forma','Tigo Money')->firts();
@@ -120,8 +130,12 @@ class DatosPagoController extends Controller
         // $datoPago->cvc="--";
         $datoPago->estado="Procesado";
         $datoPago->save();
-        return 'se creo bien';
-        return view('compras.notaVentas.create', compact('tickets'));
+        //correp
+        $ticket=Ticket::where('nota_venta_id',$nota->id)->get();
+        $ticket->load('imagenesqr');
+        Mail::to($nota->correo)->send(new EnviarMail($nota,$ticket));
+        return redirect()->route('eventosS');
+        //return view('compras.notaVentas.create', compact('tickets'));
     }
     public function storeDatoPago2(Request $request)
     {
@@ -145,19 +159,42 @@ class DatosPagoController extends Controller
         $datoPago->estado = "Procesado";
         $datoPago->save();
 
+
+
         $tickets = json_decode($request['tickets'], true);
         // if (isset($request['ubicacion_id']) && $request['ubicacion_id']) {
         // }
         return view('compras.notaVentas.create', compact('tickets'));
     }
 
+    public function GuardarQR($ticket)
+    {
+        // $cadenaDesencriptada = Crypt::decryptString('i2bHjCNHs0cOtKTj0VkNH8PLSIVa');
+        $urlLocal = public_path() . '/qrcodes/q.png';
+        $cadenaEncriptada = Crypt::encryptString($ticket->clave);
+        QrCode::format('png')->size(100)->generate($cadenaEncriptada, $urlLocal);
+        $file = $this->pathToUploadedFile($urlLocal);
+        //crea el archiva en aws
+        $pathPrivate = Storage::disk('s3')->put('qr', $file, 'public');
+        $pathPublic =  Storage::disk('s3')->url($pathPrivate);
+        $i = ImagenQr::create([
+            'ticket_id' => $ticket->id,
+            'path' => $pathPublic,
+            'pathPrivate' => $pathPrivate,
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\DatosPago  $datosPago
-     * @return \Illuminate\Http\Response
-     */
+    }
+   
+    public function pathToUploadedFile( $path, $test = true ) {
+        $filesystem = new Filesystem;
+        
+        $name = $filesystem->name( $path );
+        $extension = $filesystem->extension( $path );
+        $originalName = $name . '.' . $extension;
+        $mimeType = $filesystem->mimeType( $path );
+        $error = null;    
+        return new UploadedFile( $path, $originalName, $mimeType, $error, $test );
+    }
     public function show(DatosPago $datosPago)
     {
         //

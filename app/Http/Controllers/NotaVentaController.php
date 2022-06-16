@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Imagen;
 use App\Models\ImagenQr;
 use App\Models\NotaVenta;
 use App\Models\Ticket;
@@ -12,6 +11,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\EnviarMail;
 
 class NotaVentaController extends Controller
 {
@@ -27,24 +27,14 @@ class NotaVentaController extends Controller
 
     public function index()
     {
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $nota = NotaVenta::create($request->all());
@@ -65,8 +55,9 @@ class NotaVentaController extends Controller
                 }
             }
         }
-        
-        Mail::to("erickvidal328@gmail")->send(new EnviarMail($nota));
+        $ticket=Ticket::where($nota->id,'nota_venta_id')->get();
+        $ticket->load('imagenes');
+        Mail::to("erickvidal328@gmail")->send(new EnviarMail($nota,$ticket));
         return redirect()->route('eventosS');
     }
 

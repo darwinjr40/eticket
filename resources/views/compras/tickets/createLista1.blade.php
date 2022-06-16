@@ -16,16 +16,25 @@
                 </div>
 
                 <div id="contenidoSuperior" class="card-body">
-                    @if (session('info'))
-                            <div class="alert alert-success">
-                                <strong>{{ session('info') }}</strong>
-                            </div>
-                        @endif
+                    {{-- message --}}
+                    @if (isset($error))
+                        <div class="alert alert-success">
+                            <strong>{{ $error }}</strong>
+                        </div>
+                    @endif
+
+                    @if (isset($success))
+                        <h1>precio</h1>
+                        <div class="alert alert-success">
+                            <strong>{{ $success }}</strong>
+                        </div>
+                    @endif
                     {{-- izquierda --}}
                     <section id="izquierda" class="caja">
 
                         <img class="izquierdaClass"
-                            src="https://w7.pngwing.com/pngs/981/736/png-transparent-logo-clinic-family-medicine-physician-family-walk-text-trademark-logo.png">
+                            src="{{$imagenes[0]['path']}}">
+                            {{-- src="https://w7.pngwing.com/pngs/981/736/png-transparent-logo-clinic-family-medicine-physician-family-walk-text-trademark-logo.png"> --}}
 
 
                         <div id="map" class="izquierdaClass"></div>
@@ -33,7 +42,7 @@
 
                     {{-- derecha --}}
                     <aside id="derecha" class="caja">
-                        
+
                         <div id="derecha1" class="derechaClass">
                             {{-- <h1>hola</h1> --}}
                         </div>

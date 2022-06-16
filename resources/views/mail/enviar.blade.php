@@ -10,30 +10,51 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Correo de prueba</h1>
     <table class="table">
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>email</th>
+                <th>Nit</th>
+                <th>Correo</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{$nota->nombre}}</td>
+                <td>{{$nota->nit}}</td>
+                <td>{{$nota->correo}}</td>
+                <td>{{$nota->Total}}</td>
+                
+            </tr>
+        </tbody>
+    </table>
+    <h1>Tickets Comprados</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Precio</th>
 
             </tr>
         </thead>
         <tbody>
-            @foreach ($details as $item)
+            @foreach ($ticket as $item)
                 <tr>
-                    <td>{{$item->name}}</td>
-                    <td>{{$item->email}}</td>
+                    <td>{{$item->fecha}}</td>
+                    <td>{{$item->precio}}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     <div class="container">
         <div class="row">
-            @for ($i = 0; $i <5; $i++)
-                
-                <img src="https://es.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/core_market/generator/dist/generator/assets/images/websiteQRCode_noFrame.png">
-            @endfor
+            @foreach ($ticket as $item)
+                @foreach ($item->imagenesqr as $img)
+                    <img src="{{$img->path}}" alt="" width="100px" height="100px">
+                @endforeach
+            @endforeach
+
         </div>
 
     </div>

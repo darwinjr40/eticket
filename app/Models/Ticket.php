@@ -24,6 +24,10 @@ class Ticket extends Model
         'tipo' => 'required',
     ];
 
-    protected $fillable = ['ubicacion_id', 'sector_id', 'espacio_id', 'nota_venta_id', 'fecha', 'precio','clave','cliente','evento','ubicacion','sector', 'espacio','tipo'];
-
+    protected $fillable = ['ubicacion_id', 'sector_id', 'espacio_id', 'nota_venta_id', 'fecha', 'precio','clave','cliente','evento','ubicacion','espacio','tipo'];
+    
+    public function imagenesqr()
+    {
+        return $this->hasMany(ImagenQr::class);
+    }
 }

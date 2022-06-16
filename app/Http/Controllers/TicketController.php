@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Espacio;
 use App\Models\Evento;
 use App\Models\Fecha;
+use App\Models\Imagen;
 use App\Models\Sector;
 use App\Models\Ticket;
 use App\Models\Ubicacion;
@@ -25,7 +26,7 @@ class TicketController extends Controller
         } else {
             $tickets = json_decode($request['tickets'], true);
             $t = [];
-            $error = 'info';
+            $mensaje = [];
             if (isset($request['espacio_id'])) { //hay espacios
                 $n = count($request['espacio_id']);
                 $v = $request['espacio_id'];
@@ -38,18 +39,18 @@ class TicketController extends Controller
                     $t['cliente']  = 'el autenticado';
                     $t['evento']  = $evento->titulo;
                     $t['ubicacion']  = $ubicacion->nombre;
-                    
+
                     $t['espacio_id']  = $espacio->id;
                     $t['precio']  = $espacio->precio;
                     $t['cantidad']  = 1;
                     $t['sector']  = $sector->nombre;
                     $t['espacio']  = $espacio->numero . '-' . $espacio->descripcion;
-                    
                     array_push($tickets, $t);
+                    $mensaje['success'] = '!Exito, Se agrego a la lista';
                 }//$request['cantidad'] <= cantidad
             } else if (isset($request['sector_id']) && $request['sector_id']) { //existe sector
                 if ($request['cantidad'] > $sector->capacidad_disponible) {
-                    $error = 'error';
+                    $mensaje['error'] = '!Error, Stock insuficiente';
                 } else {
                     $t['id'] = count($tickets);
                     $t['fecha']  = $fecha->fechaHora;
@@ -64,11 +65,12 @@ class TicketController extends Controller
                     $t['sector']  = $sector->nombre;
                     $t['espacio']  = '';
                     array_push($tickets, $t);
+                    $mensaje['success'] = '!Exito, Se agrego a la lista';
                 }
                 
             } else { //hay solo ubicacion
                 if ($request['cantidad'] > $ubicacion->capacidad_disponible) {
-                    $error = 'error';
+                    $mensaje['error'] = '!Error, Stock insuficiente';
                 } else {
                     $t['id'] = count($tickets);
                     $t['fecha']  = $fecha->fechaHora;
@@ -81,19 +83,16 @@ class TicketController extends Controller
                     $t['cantidad']  = $request['cantidad'];
                     $t['sector']  = '';
                     $t['espacio']  = '';
-    
                     array_push($tickets, $t);
-
+                    $mensaje['success'] = '!Exito, Se agrego a la lista';
                 }
             }
         }
-        $tickets = json_encode($tickets);
         // return $tickets;
         $evento_id = $evento->id;
-        // $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
-        // return back()->with('info', 'Stock insuficiente');
-        return redirect()->route('tickets.addEvento1', [$evento_id, $tickets]);
-        return view('compras.tickets.createLista1', compact('ubicaciones', 'tickets'))->with('info', 'Stock insuficiente');
+        $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
+        $imagenes = Imagen::where('evento_id', $evento_id)->get();
+        return view('compras.tickets.createLista1', compact('imagenes', 'ubicaciones', 'tickets'), $mensaje);
     }
 
     // public function crearEvento2(Request $request)
@@ -106,9 +105,14 @@ class TicketController extends Controller
 
     public function crearEvento1($evento_id, $tickets=array())
     {
-        $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();   
-        // $tickets = json_decode($tickets , true);
-        return view('compras.tickets.createLista1', compact('ubicaciones',  'tickets'));
+        // $evento_id = 3;
+        if(\Illuminate\Support\Facades\Auth::user()) {
+            $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
+            $imagenes = Imagen::where('evento_id', $evento_id)->get();
+            return view('compras.tickets.createLista1', compact('imagenes','ubicaciones',  'tickets'));
+        }else{
+            return redirect()->route('login');
+        }
     }
 
     public function destroyEvento(Request $request, $id)
