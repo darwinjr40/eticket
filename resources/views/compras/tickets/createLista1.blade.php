@@ -216,7 +216,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tigo Money</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"><img src="{{ asset('img/tigo-money.png') }}" height="35" width="95"/></h5>
                 </div>
                 <div class="modal-body">
 
@@ -270,7 +270,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tarjeta</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        <img src="{{ asset('img/tarjeta.png') }}" height="35" width="95" /></h5>
                 </div>
                 <div class="modal-body">
 
