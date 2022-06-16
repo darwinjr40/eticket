@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Mail;
 
 class NotaVentaController extends Controller
 {
-
+    
     public function crear(Request $request)
     {
         // return $request;
