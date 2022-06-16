@@ -233,6 +233,9 @@
                                     <button class="btn btn-info" type="submit"><i class="fa fa-credit-card"
                                         aria-hidden="true"></i> Pagar ahora</button>
                                 </div>
+
+                                {{-- oculto --}}
+                                <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
                             </div>
                         </div>
                     </form>
@@ -301,6 +304,8 @@
                                     <button class="btn btn-info" type="submit"><i class="fa fa-credit-card"
                                         aria-hidden="true"></i> Pagar ahora</button>
                                 </div>
+                                {{-- oculto --}}
+                                <input type="hidden" name="tickets" value="{{ json_encode($tickets) }}">
                             </div>
                         </div>
                     </form>

@@ -18,7 +18,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        abort_if(Gate::denies('borrar-categoriaEvento'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('ver-clientes'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $user= User::paginate(10);
         $clientes= Cliente::paginate(10);
         return view('clientes.index', compact('user','clientes'));
@@ -31,6 +31,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('crear-cliente'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         return view('clientes.create');
     }
 
@@ -77,6 +78,7 @@ class ClienteController extends Controller
      */
     public function edit(int $id)
     {
+        abort_if(Gate::denies('editar-cliente'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $cliente = Cliente::findOrFail($id);
         $user = User::findOrFail($id);
         return view('clientes.edit',compact('cliente','user'));

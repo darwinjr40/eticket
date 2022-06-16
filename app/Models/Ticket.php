@@ -26,7 +26,8 @@ class Ticket extends Model
 
     protected $fillable = ['ubicacion_id', 'sector_id', 'espacio_id', 'nota_venta_id', 'fecha', 'precio','clave','cliente','evento','ubicacion','espacio','tipo'];
     
-    public function imagenes(){
+    public function imagenesqr()
+    {
         return $this->hasMany(ImagenQr::class);
     }
 }

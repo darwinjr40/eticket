@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\ApiTrait;
 class Espacio extends Model
 {
-    use ApiTrait;
+    use ApiTrait;    
+     const DISPONIBLE = 0;
+     const OCUPADO = 1; 
     //para la api, por el cual se va poder filtrar
     protected $allowIncluded = ['sector'];
-    protected $allowFilter = ['id','numero','descripcion','capacidad', 'id_sector'];
-    protected $allowSort = ['id','numero','descripcion','capacidad', 'id_sector'];
+    protected $allowFilter = ['id','numero','descripcion','capacidad', 'id_sector', 'estado'];
+    protected $allowSort = ['id','numero','descripcion','capacidad', 'id_sector', 'estado'];
     //Fin para filtrar api
     static $rules = [
 		'numero' => 'required',

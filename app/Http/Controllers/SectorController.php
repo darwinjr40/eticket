@@ -6,6 +6,8 @@ use App\Models\Sector;
 use App\Models\Ubicacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class SectorController extends Controller
 {
@@ -16,12 +18,14 @@ class SectorController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('ver-sector'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $sectors= Sector::paginate(5);
         return view('sectors.index',compact('sectors'));
     }
 
     public function indexUbicacion($id_ubicacion){
 
+        abort_if(Gate::denies('ver-sector'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         // $sectors=Sector::paginate(10);
         $sectors=Sector::all()->where('id_ubicacion', $id_ubicacion);
         // return $sectors;
@@ -35,6 +39,7 @@ class SectorController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('crear-sector'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         return view('sectors.create');
     }
 
@@ -99,6 +104,7 @@ class SectorController extends Controller
      */
     public function edit(Sector $sector)
     {
+        abort_if(Gate::denies('editar-sector'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         return view('sectors.edit',compact('sector'));
     }
 

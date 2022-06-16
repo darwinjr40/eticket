@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Models\permiso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class PermissionController extends Controller
 {
@@ -15,6 +17,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('acceso-permisos'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $permission=permiso::paginate(5);
         return view('permisos.index', compact('permission'));
     }
@@ -26,6 +29,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('acceso-permisos'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         return view('permisos.create');
     }
 
@@ -65,6 +69,7 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
+        abort_if(Gate::denies('acceso-permisos'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $permission=permiso::find($id);
         return view('permisos.edit', compact('permission'));
     }

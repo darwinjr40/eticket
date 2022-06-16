@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 
 
@@ -20,6 +22,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('ver-users'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $usuarios= User::paginate(5);
         $roles = rol::paginate(5);
         return view('usuarios.index',compact('usuarios','roles'));
@@ -32,6 +35,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('crear-users'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $roles=rol::pluck('name','name')->all();
         return view('usuarios.create',compact('roles'));
 
@@ -80,6 +84,7 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
+        abort_if(Gate::denies('editar-users'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $user=User::find($id);
         $roles=rol::pluck('name','name')->all();
 

@@ -15,7 +15,7 @@ use App\Mail\EnviarMail;
 
 class NotaVentaController extends Controller
 {
-
+    
     public function crear(Request $request)
     {
         // return $request;

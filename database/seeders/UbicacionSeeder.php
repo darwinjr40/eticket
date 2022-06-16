@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Espacio;
+use App\Models\Estado;
 use App\Models\Sector;
 use App\Models\Ubicacion;
 use Illuminate\Database\Seeder;
@@ -177,7 +178,7 @@ class UbicacionSeeder extends Seeder
                 'numero' => 'a'.$i,
                 'descripcion' => 'silla',
                 'capacidad' => 1,
-                'estado' => 'disponible',
+                'estado' => Espacio::DISPONIBLE,
                 'precio' => 200,
                 'id_sector' => 7,     
             ]);
@@ -188,7 +189,7 @@ class UbicacionSeeder extends Seeder
                 'numero' => 'a'.($i+5),
                 'descripcion' => 'mesa',
                 'capacidad' => 5,
-                'estado' => 'disponible',
+                'estado' => Espacio::DISPONIBLE,
                 'precio' => 800,
                 'id_sector' => 7,     
             ]);
@@ -208,7 +209,7 @@ class UbicacionSeeder extends Seeder
                 'numero' => 'a'.$i,
                 'descripcion' => 'silla',
                 'capacidad' => 1,
-                'estado' => 'disponible',
+                'estado' => Espacio::DISPONIBLE,
                 'precio' => 100,
                 'id_sector' => 8,     
             ]);

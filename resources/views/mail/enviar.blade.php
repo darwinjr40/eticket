@@ -10,7 +10,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Correo de prueba</h1>
     <table class="table">
         <thead>
             <tr>
@@ -40,7 +39,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($tickets as $item)
+            @foreach ($ticket as $item)
                 <tr>
                     <td>{{$item->fecha}}</td>
                     <td>{{$item->precio}}</td>
@@ -50,13 +49,12 @@
     </table>
     <div class="container">
         <div class="row">
-            @foreach ($tickets->imagenes as $item)
-                <img src="{{$item->path}}" alt="">
+            @foreach ($ticket as $item)
+                @foreach ($item->imagenesqr as $img)
+                    <img src="{{$img->path}}" alt="" width="100px" height="100px">
+                @endforeach
             @endforeach
-            {{-- @for ($i = 0; $i <5; $i++)
-                
-                <img src="https://es.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/core_market/generator/dist/generator/assets/images/websiteQRCode_noFrame.png">
-            @endfor --}}
+
         </div>
 
     </div>

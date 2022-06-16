@@ -79,7 +79,7 @@ function SelectSector() {
         $(id_select).html(espacios);       
     } else {
           // cargar espacios
-        let path_espacios = pathLocal + 'espacios-api?filter[id_sector]=' + sector_id;
+        let path_espacios = pathLocal + 'espacios-api?filter[id_sector]=' + sector_id + '&filter[estado]=0';
         $.get(path_espacios, function (data) {
             data = data['data'];
             if (data.length == 0) { //no existe espacios
