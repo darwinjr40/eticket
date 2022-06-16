@@ -18,14 +18,14 @@
                 <div id="contenidoSuperior" class="card-body">
                     {{-- message --}}
                     @if (isset($error))
-                        <div class="alert alert-success">
+                        <div class="alert alert-danger">
                             <strong>{{ $error }}</strong>
                         </div>
                     @endif
 
                     @if (isset($success))
                         <h1>precio</h1>
-                        <div class="alert alert-success">
+                        <div class="alert alert-dark">
                             <strong>{{ $success }}</strong>
                         </div>
                     @endif
