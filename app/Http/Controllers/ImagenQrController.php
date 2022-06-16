@@ -25,13 +25,13 @@ class ImagenQrController extends Controller
         $url = public_path().'/qrcodes/q.png';
         $file = $this->pathToUploadedFile($url);
         //crea el archiva en aws
-        $pathNube = Storage::disk('s3')->put('qr', $file, 'public');
-        $inquiry->path =  Storage::disk('s3')->url($pathNube);
-        $inquiry->pathLocal =  'storage/'.$inquiry_id.'/'.$name_file;
-        $inquiry->name_file = $name_file;
-        $inquiry->fecha_file = date('d-m-y H:i:s', time());
-        $inquiry->save();
-        return redirect()->route('patients.show', $patient['id'])->with('info', 'Guardado Exitosamente');
+        // $pathNube = Storage::disk('s3')->put('qr', $file, 'public');
+        // $inquiry->path =  Storage::disk('s3')->url($pathNube);
+        // $inquiry->pathLocal =  'storage/'.$inquiry_id.'/'.$name_file;
+        // $inquiry->name_file = $name_file;
+        // $inquiry->fecha_file = date('d-m-y H:i:s', time());
+        // $inquiry->save();
+        // return redirect()->route('patients.show', $patient['id'])->with('info', 'Guardado Exitosamente');
     }
 
     public function pathToUploadedFile( $path, $test = true ) {

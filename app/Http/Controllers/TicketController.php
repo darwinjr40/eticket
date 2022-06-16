@@ -92,9 +92,9 @@ class TicketController extends Controller
         return view('compras.tickets.createLista', compact('ubicaciones',  'tickets'));
     }
 
-    public function crearEvento1(Request $request)
+    public function crearEvento1($evento_id)
     {
-        $evento_id = 3;
+        // $evento_id = 3;
         $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
         $tickets = array();
         return view('compras.tickets.createLista1', compact('ubicaciones',  'tickets'));
