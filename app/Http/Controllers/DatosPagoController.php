@@ -97,13 +97,13 @@ class DatosPagoController extends Controller
                     $this->GuardarQR($t);
                 }
                 // $this->GuardarQR($t);
-                if (isset($tickets[$i]['espacio_id'])) { //hay espacios                    
+                if (isset($tickets[$i]['espacio_id'])) { //hay espacios
                     $espacio = Espacio::where('id', $tickets[$i]['espacio_id'])->first();
                     if ($espacio) {
                         $espacio->estado = Espacio::OCUPADO;
                         $espacio->save();
                     }
-                } else {                    
+                } else {
                     $obj = (isset($tickets[$i]['sector_id'])) ?
                         Sector::where('id', $tickets[$i]['sector_id'])->first() :
                         Ubicacion::where('id', $tickets[$i]['ubicacion_id'])->first();
@@ -139,32 +139,75 @@ class DatosPagoController extends Controller
     }
     public function storeDatoPago2(Request $request)
     {
-        // return $request;
-        $tipoPago = TipoPago::where('forma', 'Tarjeta Debito o Credito');
-        $this->validate($request, [
-            'ci' => 'required',
-            'nombre' => 'required',
-            'nro' => 'required',
-            'expiracion' => 'required',
-            'cvc' => 'required',
-        ]);
-        $datoPago = new DatosPago();
-        $datoPago->id_tipoPago = $tipoPago;
-        $datoPago->id_notaVenta = 1;
-        $datoPago->ci = $request->ci;
-        $datoPago->nombre = $request->nombre;
-        $datoPago->nro = $request->nro;
-        $datoPago->expiracion = $request->expiracion;
-        $datoPago->cvc = $request->cvc;
-        $datoPago->estado = "Procesado";
-        $datoPago->save();
+            // return $request;
+            // return json_decode($request['tickets'], true);
+            $this->validate($request, [
+                'ci' => 'required',
+                'nombre' => 'required',
+                'nro' => 'required'
+            ]);
 
+            $nota = NotaVenta::create([
+                'nombre' => $request->nombre,
+                'nit' => $request->ci,
+                // 'correo' => '',
+                // 'total' => ''
+            ]);
 
+            $total = 0;
+            if (isset($request['tickets'])) {
+                $tickets = json_decode($request['tickets'], true);
+                // return $tickets;
+                $n = count($tickets);
+                for ($i = 0; $i < $n; $i++) {
+                    $total += $tickets[$i]['cantidad'] * $tickets[$i]['precio'];
+                    // return $tickets[$j]
+                    for ($j = 0; $j < $tickets[$i]['cantidad']; $j++) {
+                        $t = Ticket::create($tickets[$i]);
+                        $t->nota_venta_id = $nota['id'];
+                        $t->save();
+                        $this->GuardarQR($t);
+                    }
+                    // $this->GuardarQR($t);
+                    if (isset($tickets[$i]['espacio_id'])) { //hay espacios
+                        $espacio = Espacio::where('id', $tickets[$i]['espacio_id'])->first();
+                        if ($espacio) {
+                            $espacio->estado = Espacio::OCUPADO;
+                            $espacio->save();
+                        }
+                    } else {
+                        $obj = (isset($tickets[$i]['sector_id'])) ?
+                            Sector::where('id', $tickets[$i]['sector_id'])->first() :
+                            Ubicacion::where('id', $tickets[$i]['ubicacion_id'])->first();
+                        if ($obj) {
+                            $obj->capacidad_disponible = $obj->capacidad_disponible - $tickets[$i]['cantidad'];
+                            $obj->save();
+                        }
+                    }
+                }
+            }
+            $nota->total = $total;
+            $nota->correo = \Illuminate\Support\Facades\Auth::user()->email;
+            $nota->save();
 
-        $tickets = json_decode($request['tickets'], true);
-        // if (isset($request['ubicacion_id']) && $request['ubicacion_id']) {
-        // }
-        return view('compras.notaVentas.create', compact('tickets'));
+            // $tipoPago=TipoPago::where('forma','Tarjeta Debito o Credito'')->firts();
+            // return $tipoPago;
+            $datoPago = new DatosPago();
+            $datoPago->id_tipoPago = 2;//$tipoPago->id;
+            $datoPago->id_notaVenta = $nota->id;
+            $datoPago->ci = $request->ci;
+            $datoPago->nombre = $request->nombre;
+            $datoPago->nro = $request->nro;
+            $datoPago->expiracion = $request->expiracion;
+            $datoPago->cvc = $request->cvc;
+            $datoPago->estado = "Procesado";
+            $datoPago->save();
+            //correp
+            $ticket=Ticket::where('nota_venta_id',$nota->id)->get();
+            $ticket->load('imagenesqr');
+            Mail::to($nota->correo)->send(new EnviarMail($nota,$ticket));
+            return redirect()->route('eventosS');
+            //return view('compras.notaVentas.create', compact('tickets'));
     }
 
     public function GuardarQR($ticket)
@@ -184,15 +227,15 @@ class DatosPagoController extends Controller
         ]);
 
     }
-   
+
     public function pathToUploadedFile( $path, $test = true ) {
         $filesystem = new Filesystem;
-        
+
         $name = $filesystem->name( $path );
         $extension = $filesystem->extension( $path );
         $originalName = $name . '.' . $extension;
         $mimeType = $filesystem->mimeType( $path );
-        $error = null;    
+        $error = null;
         return new UploadedFile( $path, $originalName, $mimeType, $error, $test );
     }
     public function show(DatosPago $datosPago)

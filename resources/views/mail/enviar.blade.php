@@ -24,8 +24,8 @@
                 <td>{{$nota->nombre}}</td>
                 <td>{{$nota->nit}}</td>
                 <td>{{$nota->correo}}</td>
-                <td>{{$nota->Total}}</td>
-                
+                <td>{{$nota->total}}</td>
+
             </tr>
         </tbody>
     </table>
