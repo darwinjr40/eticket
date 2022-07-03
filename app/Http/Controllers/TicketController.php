@@ -12,6 +12,8 @@ use App\Models\Ticket;
 use App\Models\Ubicacion;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\returnSelf;
+
 class TicketController extends Controller
 {
 
@@ -33,6 +35,8 @@ class TicketController extends Controller
                 $v = $request['espacio_id'];
                 for ($i = 0; $i < $n; $i++) {
                     $espacio = Espacio::find($v[$i]);
+                    $espacio->estado = Espacio::PROCESO;
+                    $espacio->save();
                     $t = [];
                     $t['id'] = count($tickets);
                     $t['fecha']  = $fecha->fechaHora;
@@ -110,7 +114,8 @@ class TicketController extends Controller
     {
         // $evento_id = 3;
         if(\Illuminate\Support\Facades\Auth::user()) {
-            $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
+            $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();               
+            $this->LimpiarEspacios($ubicaciones);
             $imagenes = Imagen::where('evento_id', $evento_id)->get();
             $evento = Evento::where('id', $evento_id)->first();
             $evento['categoria'] = categoriaEvento::find($evento['id_categoria'])->nombre;
@@ -183,5 +188,24 @@ class TicketController extends Controller
             $key .= $pattern[mt_rand(0, $max)];
         }
         return $key;
+    }
+
+    public function LimpiarEspacios($ubicaciones)
+    {         
+       foreach ($ubicaciones as $ubicacion) {
+        $espacios = Espacio::join('sectors as s', 's.id', '=', 'espacios.id_sector')
+         ->join('ubicacions as u', 'u.id', '=', 's.id_ubicacion')
+         ->where('u.id', $ubicacion->id)
+         ->select('espacios.*')
+         ->orderBy('id', 'asc')
+         ->get();
+         foreach($espacios as $espacio){
+            if ($espacio['estado'] == Espacio::PROCESO) {
+                $espacio['estado'] = Espacio::DISPONIBLE;
+                $espacio->save();
+             }  
+         }
+                               
+       } 
     }
 }

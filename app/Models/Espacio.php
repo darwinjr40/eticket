@@ -10,6 +10,7 @@ class Espacio extends Model
     use ApiTrait;    
      const DISPONIBLE = 0;
      const OCUPADO = 1; 
+     const PROCESO = 2;
     //para la api, por el cual se va poder filtrar
     protected $allowIncluded = ['sector'];
     protected $allowFilter = ['id','numero','descripcion','capacidad', 'id_sector', 'estado'];

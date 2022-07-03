@@ -36,7 +36,7 @@ trait ApiTrait{
 
         foreach ($filters as $filter => $value) {
             if ($allowFilter->contains($filter)) {
-                $query->where($filter, 'LIKE' , '%' . $value . '%');
+                $query->where($filter, 'LIKE' , '%' . $value . '%')->orderBy('id', 'asc');
             }
         }
     }
