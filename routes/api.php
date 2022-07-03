@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\EspacioApiController;
 use App\Http\Controllers\Api\EventoApiController;
 use App\Http\Controllers\Api\FechaApiController;
@@ -26,14 +27,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+Route::post('login-api', [LoginController::class, 'store'])->name('api.login');
 Route::apiResource('eventos-api', EventoApiController::class)->names('api.eventos');
 Route::apiResource('imagenes-api', ImagenApiController::class)->names('api.imagenes');
 Route::apiResource('ubicaciones', UbicacionApiController::class)->names('api.ubicaciones');
+
 
 
 Route::apiResource('fechas-api', FechaApiController::class)->names('api.fechas');
 Route::apiResource('sectores-api', SectorApiController::class)->names('api.sectores');
 Route::apiResource('espacios-api', EspacioApiController::class)->names('api.espacios');
 Route::apiResource('tickets-api', TicketApiController::class)->names('api.tickets');
-
-
