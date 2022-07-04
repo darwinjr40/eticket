@@ -28,7 +28,12 @@ class LoginController extends Controller
                 'message' => 'Contraseña incorrecta',
             ], 402);
         }
-        return $user;
+        $token = $user->createToken('Android SDK built for x86')->plainTextToken;
+        // $token = $user->createToken('Android SDK built for x86')->accessToken;
+        return response([
+            'user' => $user,
+            'token' => $token
+        ], 201);
 
     }
 }
