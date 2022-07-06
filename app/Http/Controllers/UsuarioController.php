@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evento;
+use App\Models\EventoUser;
 use App\Models\rol;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -21,11 +23,12 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {        
         abort_if(Gate::denies('ver-users'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
         $usuarios= User::paginate(5);
         $roles = rol::paginate(5);
-        return view('usuarios.index',compact('usuarios','roles'));
+        $rol_empleado = User::EMPLEADO; 
+        return view('usuarios.index',compact('usuarios','rol_empleado'));
     }
 
     /**
@@ -136,4 +139,30 @@ class UsuarioController extends Controller
         User::find($id)->delete();
         return redirect()->route('usuarios.index');
     }
+
+
+    public function addEvento($user_id)
+    {
+        $eventos = Evento::all();
+        $eventos_id =  EventoUser::where('user_id', $user_id)->pluck('evento_id')->all();
+        return view('usuarios.addEvento', compact('eventos', 'eventos_id', 'user_id'));
+    }
+
+    public function UserEventoStore(Request $request, $user_id)
+    {
+        $EventoUser =  EventoUser::where('user_id', $user_id)->get();
+        foreach ($EventoUser as $eventoUser) $eventoUser->delete();
+        if (isset($request->eventos)) { //existen eventos desde el form
+            foreach ($request['eventos'] as $evento_id) {
+                // $existe = EventoUser::where('user_id',$user_id)->where('evento_id', $evento_id)->first();
+                    EventoUser::create([
+                        'user_id' => $user_id,
+                        'evento_id' => $evento_id,
+                        'fecha' => now()->format("Y-m-d H:m:s"),
+                    ]);
+            }
+        }
+        return redirect()->route('usuarios.index');        
+    }
+
 }

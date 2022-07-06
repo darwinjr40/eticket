@@ -7,23 +7,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+
 //use Spatie\Permission\Traits\HasRoles;
+
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    CONST ADMINISTRADOR = 1;
+    CONST CLIENTE = 2;
+    CONST EMPLEADO = 3;
     protected $fillable = [
         'name',
         'email',
         'password',
         'rol_id'
     ];
-
+    
+    public function Rol()
+    {
+       return  $this->belongsTo(rol::class);
+    }
+    
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -43,3 +49,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 }
+
+
+
+

@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h3 class="page__heading">Crear Usuario</h3>
+            <h3 class="page__heading">Crear Rol</h3>
         </div>
         <div class="section-body">
             <div class="row">
@@ -48,6 +48,8 @@
                                             
                                             <br/>   
                                         </div>
+
+                                        
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-primary">Guardar</button>
                                             <a href="{{route('roles.index')}}" class="btn btn-danger">Cancelar</a>

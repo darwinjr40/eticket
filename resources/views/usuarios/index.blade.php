@@ -29,7 +29,7 @@
                                             <td style="display:none;">{{$usuario->id}}</td>
                                             <td>{{$usuario->name}}</td>
                                             <td>{{$usuario->email}}</td>
-                                            <td>{{$usuario->rol_id}}</td>
+                                            <td>{{$usuario->rol->name}}</td>
                                             {{-- <td>
                                                @if(!empty($usuario->getRoleNames()))
                                                     @foreach ($usuario->getRoleNames() as $rolName)
@@ -38,6 +38,13 @@
                                                 @endif
                                             </td> --}}
                                             <td>
+                                                @if ($usuario->rol->id == $rol_empleado)                                                    
+                                                <a class="btn  btn-success"
+                                                    href="{{ route('usuarios.addEvento', $usuario->id) }}"
+                                                    title="modificar">
+                                                    <i class="fa fa-fw fa-edit"></i>
+                                                </a>
+                                                @endif
                                                 <a class="btn btn-info" href="{{route('usuarios.edit',$usuario->id)}}">Editar</a>
                                                 {!! Form::open(['method'=>'DELETE','route'=>['usuarios.destroy',$usuario->id],'style'=>'display:inline']) !!}
                                                     {!! Form::submit('Borrar',['Class'=>'btn btn-danger']) !!}

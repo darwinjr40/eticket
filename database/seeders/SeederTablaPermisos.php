@@ -100,7 +100,9 @@ class SeederTablaPermisos extends Seeder
             //Administrador
             'Administrador',
             //Cliente
-            'Cliente'
+            'Cliente',
+            //empleado
+            'Empleado'
         ];
         foreach($roles as $rol){
             rol::create(['name'=>$rol]);

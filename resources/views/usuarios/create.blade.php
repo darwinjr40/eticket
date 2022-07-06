@@ -67,6 +67,9 @@
                                                 {!! Form::select('roles[]',$roles,[],array('class'=>'form-control')) !!}
                                             </div>
                                         </div>
+
+                                        
+
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-primary">Guardar</button>
                                             <a href="{{route('usuarios.index')}}" class="btn btn-danger">Cancelar</a>

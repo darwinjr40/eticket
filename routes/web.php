@@ -44,6 +44,9 @@ Auth::routes();
 Route::group(['middelware'=>['auth']],function(){
     Route::resource('roles',RolController::class);
     Route::resource('usuarios',UsuarioController::class);
+    Route::get('usuarios-addEvento/{user_id}',[UsuarioController::class, 'addEvento'])->name('usuarios.addEvento');
+    Route::post('usuarios-UserEventoStore/{user_id}',[UsuarioController::class, 'UserEventoStore'])->name('usuarios.UserEventoStore');
+
     Route::resource('categoriaEventos',CategoriaEventoController::class);
     Route::resource('permisos',PermissionController::class);
     Route::resource('sectors',SectorController::class);
