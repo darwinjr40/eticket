@@ -34,7 +34,7 @@ class Evento extends Model
     {
         return $this->hasMany(Ubicacion::class);
     }
-
+   
     public function imagenes()
     {
         return $this->hasMany(Imagen::class);

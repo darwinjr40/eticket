@@ -32,6 +32,15 @@ class Ubicacion extends Model
 	public function fechas(){
         return $this->hasMany(Fecha::class,'id_ubicacion');
     }
+    //retorna la fecha mayor de una ubicacion
+    public function getFechaMayor(){
+        // return Fecha::where('id_ubicacion', $this->id)->max('fechaHora');
+        return $this->fechas->max('fechaHora');
+    }
+    public function fechaMayor(){
+        $fecha_mayor = $this->fechas->max('fechaHora'); 
+        return $this->fechas->where('fechaHora', '>=', $fecha_mayor);
+    }
     public function sectores(){
         return $this->hasMany(Sector::class,'id_ubicacion');
     }
