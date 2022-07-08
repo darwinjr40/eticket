@@ -17,11 +17,14 @@ use Symfony\Component\HttpFoundation\Response;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\EnviarMail;
+// use Illuminate\Support\Facades\Mail;
+// use App\Mail\EnviarMail;
 use App\Models\ImagenQr;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\UploadedFile;
+
+use Barryvdh\DomPDF\Facade\Pdf;
+use Mail;
 
 class DatosPagoController extends Controller
 {
@@ -131,9 +134,40 @@ class DatosPagoController extends Controller
         $datoPago->estado="Procesado";
         $datoPago->save();
         //correp
-        $ticket=Ticket::where('nota_venta_id',$nota->id)->get();
-        $ticket->load('imagenesqr');
-        Mail::to($nota->correo)->send(new EnviarMail($nota,$ticket));
+        $tickets=Ticket::where('nota_venta_id',$nota->id)->get();
+        $tickets->load('imagenesqr');
+        $data["email"]=\Illuminate\Support\Facades\Auth::user()->email;
+        $data["name"]= \Illuminate\Support\Facades\Auth::user()->name;
+        $data["subject"]="Recibo de compra con Eticket";
+        $descripcion='';
+        $tipo=0;
+        foreach ($tickets as $ticket) {
+            if ($ticket->ubicacion_id) {
+                $descripcion=Ubicacion::find($ticket->ubicacion_id);
+                $tipo=1;
+            }
+            if ($ticket->sector_id) {
+                $descripcion=Sector::find($ticket->sector_id);
+                $tipo=2;
+            }
+            if ($ticket->espacio_id) {
+                $descripcion=Espacio::find($ticket->espacio_id);
+                $tipo=3;
+            }
+
+            $pdf = Pdf::loadView('datosPagos.pdf',compact('ticket','descripcion','tipo'));
+            //return $pdf->download('datosPagos.pdf');
+            Mail::send('mail.enviar', $data, function($message)use($data,$pdf) {
+                $message->to($data["email"],$data["name"])
+                ->subject($data["subject"])
+                ->attachData($pdf->output(), "Recibo.pdf");
+                });
+        }
+
+
+        //$pdf = Pdf::loadView('datosPagos.pdf',$data);
+        //return $pdf->download('datosPagos.pdf');
+        //Mail::to($nota->correo)->send(new EnviarMail($nota,$ticket));
         return redirect()->route('eventosS')->with('success','Compra Procesada!: Revise su correo');
         //return view('compras.notaVentas.create', compact('tickets'));
     }
@@ -203,9 +237,37 @@ class DatosPagoController extends Controller
             $datoPago->estado = "Procesado";
             $datoPago->save();
             //correp
-            $ticket=Ticket::where('nota_venta_id',$nota->id)->get();
-            $ticket->load('imagenesqr');
-            Mail::to($nota->correo)->send(new EnviarMail($nota,$ticket));
+            $tickets=Ticket::where('nota_venta_id',$nota->id)->get();
+            $tickets->load('imagenesqr');
+            $data["email"]=\Illuminate\Support\Facades\Auth::user()->email;
+            $data["name"]= \Illuminate\Support\Facades\Auth::user()->name;
+            $data["subject"]="Recibo de compra con Eticket";
+            $descripcion='';
+            $tipo=0;
+            foreach ($tickets as $ticket) {
+                if ($ticket->ubicacion_id) {
+                    $descripcion=Ubicacion::find($ticket->ubicacion_id);
+                    $tipo=1;
+                }
+                if ($ticket->sector_id) {
+                    $descripcion=Sector::find($ticket->sector_id);
+                    $tipo=2;
+                }
+                if ($ticket->espacio_id) {
+                    $descripcion=Espacio::find($ticket->espacio_id);
+                    $tipo=3;
+                }
+    
+                $pdf = Pdf::loadView('datosPagos.pdf',compact('ticket','descripcion','tipo'));
+                //return $pdf->download('datosPagos.pdf');
+                Mail::send('mail.enviar', $data, function($message)use($data,$pdf) {
+                    $message->to($data["email"],$data["name"])
+                    ->subject($data["subject"])
+                    ->attachData($pdf->output(), "Recibo.pdf");
+                    });
+            }
+
+            //Mail::to($nota->correo)->send(new EnviarMail($nota,$ticket));
             return redirect()->route('eventosS')->with('success','Compra Procesada!: Revise su correo');
 
             //return view('compras.notaVentas.create', compact('tickets'));
