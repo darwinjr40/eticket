@@ -150,16 +150,29 @@ class UsuarioController extends Controller
 
     public function UserEventoStore(Request $request, $user_id)
     {
-        $EventoUser =  EventoUser::where('user_id', $user_id)->get();
-        foreach ($EventoUser as $eventoUser) $eventoUser->delete();
         if (isset($request->eventos)) { //existen eventos desde el form
+            //eliminar eventos
+            $eventos_eliminar = Evento::whereNotIn('id', $request['eventos'])->get();
+            foreach ($eventos_eliminar as $evento) {
+                $existe = EventoUser::where('user_id',$user_id)->where('evento_id', $evento['id'])->first();
+                if ($existe)  $existe->delete();
+            }
+            //adiccionar nuevos eventos
             foreach ($request['eventos'] as $evento_id) {
-                // $existe = EventoUser::where('user_id',$user_id)->where('evento_id', $evento_id)->first();
+                $existe = EventoUser::where('user_id',$user_id)->where('evento_id', $evento_id)->first();
+                if (! $existe) {
                     EventoUser::create([
                         'user_id' => $user_id,
                         'evento_id' => $evento_id,
-                        'fecha' => now()->format("Y-m-d H:m:s"),
+                        'fecha' => now()->format("Y-m-d H:i:s"),
                     ]);
+                }
+            }
+        } else {
+            $eventos_eliminar =  Evento::all();
+            foreach ($eventos_eliminar as $evento) {
+                $existe = EventoUser::where('user_id',$user_id)->where('evento_id', $evento['id'])->first();
+                if ($existe)  $existe->delete();
             }
         }
         return redirect()->route('usuarios.index');        

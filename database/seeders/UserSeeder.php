@@ -36,6 +36,13 @@ class UserSeeder extends Seeder
             'rol_id'=> 3
         ]);
 
+        User::create([
+            'name'=> 'pedro lopez',
+            'email'=> 'pedro@gmail.com',
+            'password'=> Hash::make('00000000'),
+            'rol_id'=> 3
+        ]);
+
 
     }
 }

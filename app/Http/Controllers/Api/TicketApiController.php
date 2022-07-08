@@ -47,4 +47,23 @@ class TicketApiController extends Controller
         $ticket->delete();
         return TicketResource::make($ticket);
     }
+
+    public function verificarTicket($user_id, $clave_ticket)
+    {
+        $ticket = Ticket::find1('clave', $clave_ticket);
+        if (!$ticket) {
+            return response(['error' => '! Error al buscar ticket','message' => '!Error, No se encuentra ningun resultado'],
+                400);
+        }
+        $user = $ticket->correspondeUser($user_id);
+        if (!$user) {
+            return response(['error' => '! Error al confirmar usuario','message' => '!Error, El usuario no tiene acceso para registrar'],
+                401);
+        }
+
+        return response([
+            'user' => $user,
+            'success' => '! Exito'
+        ], 201);
+    }
 }

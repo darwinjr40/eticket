@@ -35,4 +35,6 @@ class Sector extends Model
     public function espacios(){
         return $this->hasMany(Espacio::class, 'id_sector');
     }
+
+    
 }

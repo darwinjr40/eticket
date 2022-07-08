@@ -25,15 +25,15 @@ class NotaVentaSeeder extends Seeder
             'correo' => 'erick@gmail.com',
             'total' => '500',
         ]);
-
+        //
         Ticket::create([
-            'ubicacion_id' => '6',
+            // 'ubicacion_id' => '6',
             'sector_id' => '5',
             // 'espacio_id' => '',
             'nota_venta_id' => '1',
             // 'fecha' => '',
             'precio' => '200',
-            'clave' => 'aerasfasdreafd3',
+            'clave' => $this->generarCodigo(10),
             'cliente' => 'darwin mamani',
             'evento' => 'concierto',
             'ubicacion' => 'Clinica melendres',
@@ -43,13 +43,13 @@ class NotaVentaSeeder extends Seeder
         ]);
 
         Ticket::create([
-            'ubicacion_id' => '6',
+            // 'ubicacion_id' => '6',
             'sector_id' => '6',
             // 'espacio_id' => '',
             'nota_venta_id' => '1',
             // 'fecha' => '',
             'precio' => '50',
-            'clave' => 'asdfgarfas12fdsaf',
+            'clave' => $this->generarCodigo(10),
             'cliente' => 'darwin mamani',
             'evento' => 'concierto',
             'ubicacion' => 'Clinica melendres',
@@ -59,13 +59,13 @@ class NotaVentaSeeder extends Seeder
         ]);
 
         Ticket::create([
-            'ubicacion_id' => '7',
-            'sector_id' => '7',
+            // 'ubicacion_id' => '7',
+            // 'sector_id' => '7',
             'espacio_id' => '1',
             'nota_venta_id' => '1',
             // 'fecha' => '',
             'precio' => '200',
-            'clave' => 'asdfgarfas12fdsaf',
+            'clave' => $this->generarCodigo(10),
             'cliente' => 'darwin mamani',
             'evento' => 'concierto',
             'ubicacion' => 'san aurelio',
@@ -75,13 +75,13 @@ class NotaVentaSeeder extends Seeder
         ]);
 
         Ticket::create([
-            'ubicacion_id' => '7',
-            'sector_id' => '7',
+            // 'ubicacion_id' => '7',
+            // 'sector_id' => '7',
             'espacio_id' => '6',
             'nota_venta_id' => '1',
             // 'fecha' => '',
             'precio' => '800',
-            'clave' => 'asdfgarfas12fdsaf',
+            'clave' => $this->generarCodigo(10),
             'cliente' => 'darwin mamani',
             'evento' => 'concierto',
             'ubicacion' => 'san aurelio',
@@ -92,13 +92,13 @@ class NotaVentaSeeder extends Seeder
 
 
         Ticket::create([
-            'ubicacion_id' => '7',
-            'sector_id' => '8',
+            // 'ubicacion_id' => '7',
+            // 'sector_id' => '8',
             'espacio_id' => '25',
             'nota_venta_id' => '1',
             // 'fecha' => '',
             'precio' => '100',
-            'clave' => 'asdfgarfas12fdsaf',
+            'clave' => $this->generarCodigo(10),
             'cliente' => 'darwin mamani',
             'evento' => 'concierto',
             'ubicacion' => 'san aurelio',
@@ -107,8 +107,47 @@ class NotaVentaSeeder extends Seeder
             // 'tipo' => '',
         ]);
 
+        //nota venta 2
+        Ticket::create([
+            'ubicacion_id' => '1',
+            'nota_venta_id' => '2',
+            // 'fecha' => '',
+            'precio' => '100',
+            'clave' => $this->generarCodigo(10),
+            'cliente' => 'darwin mamani',
+            'evento' => 'Conferencias Uagrm',
+            'ubicacion' => 'Mercado Ramada',
+            'sector' => '',
+            'espacio' => '',
+            // 'tipo' => '',
+        ]);
+        Ticket::create([
+            'ubicacion_id' => '1',
+            'nota_venta_id' => '2',
+            // 'fecha' => '',
+            'precio' => '100',
+            'clave' => $this->generarCodigo(10),
+            'cliente' => 'darwin mamani',
+            'evento' => 'Conferencias Uagrm',
+            'ubicacion' => 'Mercado Ramada',
+            'sector' => '',
+            'espacio' => '',
+            // 'tipo' => '',
+        ]);
 
 
 
+    }
+
+    //funcion que genera codigo
+    public function generarCodigo($longitud)
+    {
+        $key = '';
+        $pattern = '1234567890abcdefghijklmnopqrstuvwxyz';
+        $max = strlen($pattern) - 1;
+        for ($i = 0; $i < $longitud; $i++) {
+            $key .= $pattern[mt_rand(0, $max)];
+        }
+        return $key;
     }
 }

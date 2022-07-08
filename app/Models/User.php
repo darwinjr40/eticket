@@ -58,6 +58,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Evento::class)->orderBy('id', 'desc')->as('relation')->withPivot(['fecha'])->withTimestamps();
     }
+    
     public function eventosDisponibles()
     {
          $lista_ubicacion_id =  DB::table('fechas as f')
