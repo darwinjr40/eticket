@@ -31,12 +31,17 @@
                                             <td>
 
                                                 <form action="{{ route('eventos.destroy', $sec->id) }}" method="POST">
-
+                                                    @csrf                                                    
                                                     <a class="btn btn-sm btn-success"
                                                         href="{{ route('eventos.edit', $sec->id) }}" title="modificar">
                                                         <i class="fa fa-fw fa-edit"></i>
                                                     </a>
-                                                    @csrf
+                                                    
+                                                    <a class="btn btn-sm btn-success"
+                                                        href="{{ route('eventos.generarReporte', $sec->id) }}" title="Reporte">
+                                                        <i class="fa fa-file" aria-hidden="true"></i>
+                                                    </a>
+                                                    
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm" title="eliminar">
                                                         <i class="fa fa-fw fa-trash"></i> </button>

@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Evento;
 use App\Models\categoriaEvento;
 use App\Models\Contacto;
+use App\Models\Espacio;
+use App\Models\Sector;
+use App\Models\Ticket;
 use App\Models\Ubicacion;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class EventoController extends Controller
 {
@@ -132,5 +137,30 @@ class EventoController extends Controller
         // $buscador=Evento::where('estado','inicio')->pluck('id','titulo');
         // Session::put('eventos', json_encode($buscador));
         return view("eventos.showcliente",compact('eventos'));
+    }
+
+
+    public function generarReporte($evento_id)
+    {
+        $evento = Evento::find($evento_id);
+        $ubicaciones = $evento->ubicaciones;    
+        $ubicaciones_id = $ubicaciones->pluck('id');
+        $Tickets = Ticket::whereIn('ubicacion_id', $ubicaciones_id)->get();
+        
+        $lista = new Collection();
+        foreach ($Tickets as $ticket) $lista->prepend($ticket);
+
+        $sectores = Sector::whereIn('id_ubicacion', $ubicaciones_id)->get();
+        $sectores_id = $sectores->pluck('id');
+        $Tickets = Ticket::whereIn('sector_id', $sectores_id)->get();
+        foreach ($Tickets as $ticket) $lista->prepend($ticket);
+        
+        $espacios = Espacio::whereIn('id_sector', $sectores_id)->get();
+        $espacios_id = $espacios->pluck('id');
+        $Tickets = Ticket::whereIn('espacio_id', $espacios_id)->get(); 
+        foreach ($Tickets as $ticket) $lista->prepend($ticket);
+        // return $lista;
+        $pdf = Pdf::loadView('eventos.pdf',compact('lista', 'evento'));
+        return $pdf->download('eventos.pdf');
     }
 }

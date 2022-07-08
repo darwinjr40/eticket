@@ -55,6 +55,7 @@ Route::group(['middelware'=>['auth']],function(){
 
     //Eventos
     Route::resource('eventos',EventoController::class);
+    Route::get('eventos-reporte/{evento_id}', [EventoController::class, 'generarReporte'])->name('eventos.generarReporte');
     Route::get('home/Eventos',[EventoController::class,'showcliente'])->name('eventosS');
 
     Route::get('espacios_sector/{id_sector}',[EspacioController::class,'indexSector'])->name('espacios.indexSector');
