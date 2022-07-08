@@ -39,7 +39,7 @@ class UsuarioController extends Controller
     public function create()
     {
         abort_if(Gate::denies('crear-users'), Response::HTTP_FORBIDDEN, 'Error de Acesso');
-        $roles=rol::pluck('name','name')->all();
+        $roles=rol::all();
         return view('usuarios.create',compact('roles'));
 
     }
@@ -56,15 +56,15 @@ class UsuarioController extends Controller
             'name'=>'required',
             'email'=>'required|email|unique:users,email',
             'password'=>'required|same:confirm-password',
-            'roles'=>'required'
+            'rol_id'=>'required'
         ]);
 
-        return $request->input('roles');
+        //return $request->input('roles');
         $input=$request->all();
         $input['password']=Hash::make($input['password']);
         $user=User::create($input);
-        $user->assignRole($request->input('roles'));
-
+        //$user->rol_id=$request->rol_id;
+        $user->save();
         return redirect()->route('usuarios.index');
     }
 

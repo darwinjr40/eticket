@@ -64,7 +64,12 @@
                                                 <span class="input-group-text">
                                                     <i class="fa fa-bars"> Roles</i>
                                                 </span>
-                                                {!! Form::select('roles[]',$roles,[],array('class'=>'form-control')) !!}
+                                                <select name="rol_id" id="rol_id" class="form-control">
+                                                    @foreach ($roles as $item)
+                                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                                {{-- {!! Form::select('roles[]',$roles,[],array('class'=>'form-control')) !!} --}}
                                             </div>
                                         </div>
 
