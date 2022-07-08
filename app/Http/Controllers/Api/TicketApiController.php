@@ -55,14 +55,19 @@ class TicketApiController extends Controller
             return response(['error' => '! Error al buscar ticket','message' => '!Error, No se encuentra ningun resultado'],
                 400);
         }
+        // if (!$ticket['fecha_lectura']) {
+        //     return response(['error' => '! Error al buscar ticket','message' => '!Error, El ticket ya fue leido'],
+        //         401);
+        // }
+
         $user = $ticket->correspondeUser($user_id);
         if (!$user) {
             return response(['error' => '! Error al confirmar usuario','message' => '!Error, El usuario no tiene acceso para registrar'],
-                401);
+                402);
         }
 
         return response([
-            'user' => $user,
+            'ticket' => $ticket,
             'success' => '! Exito'
         ], 201);
     }
