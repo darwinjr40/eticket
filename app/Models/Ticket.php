@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\ApiTrait;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Ticket extends Model
 {
@@ -68,6 +70,8 @@ class Ticket extends Model
         }
         return null;
     }
+
+ 
 
 
 }

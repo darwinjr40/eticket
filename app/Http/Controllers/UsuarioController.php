@@ -58,8 +58,8 @@ class UsuarioController extends Controller
             'password'=>'required|same:confirm-password',
             'roles'=>'required'
         ]);
-
-        return $request->input('roles');
+        // return $request;
+        // return $request->input('roles');
         $input=$request->all();
         $input['password']=Hash::make($input['password']);
         $user=User::create($input);
