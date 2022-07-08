@@ -37,3 +37,5 @@ Route::apiResource('fechas-api', FechaApiController::class)->names('api.fechas')
 Route::apiResource('sectores-api', SectorApiController::class)->names('api.sectores');
 Route::apiResource('espacios-api', EspacioApiController::class)->names('api.espacios');
 Route::apiResource('tickets-api', TicketApiController::class)->names('api.tickets');
+Route::get('tickets-api-verificar/{user_id}/{clave_ticket}', [TicketApiController::class, 'verificarTicket'])->name('api.tickets.verificarTicket');
+Route::get('tickets-api-validar/{user_id}/{ticket_id}', [TicketApiController::class, 'validarTicket'])->name('api.tickets.validarTicket');
