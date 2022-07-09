@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('login-api', [LoginController::class, 'store'])->name('api.login');
+Route::post('login-evento-disponible', [LoginController::class, 'eventoDisponible'])->name('api.login.eventoDisponible');
 Route::apiResource('eventos-api', EventoApiController::class)->names('api.eventos');
 Route::apiResource('imagenes-api', ImagenApiController::class)->names('api.imagenes');
 Route::apiResource('ubicaciones', UbicacionApiController::class)->names('api.ubicaciones');
@@ -37,5 +38,5 @@ Route::apiResource('fechas-api', FechaApiController::class)->names('api.fechas')
 Route::apiResource('sectores-api', SectorApiController::class)->names('api.sectores');
 Route::apiResource('espacios-api', EspacioApiController::class)->names('api.espacios');
 Route::apiResource('tickets-api', TicketApiController::class)->names('api.tickets');
-Route::get('tickets-api-verificar/{user_id}/{clave_ticket}', [TicketApiController::class, 'verificarTicket'])->name('api.tickets.verificarTicket');
-Route::get('tickets-api-validar/{user_id}/{ticket_id}', [TicketApiController::class, 'validarTicket'])->name('api.tickets.validarTicket');
+Route::post('tickets-api-verificar', [TicketApiController::class, 'verificarTicket'])->name('api.tickets.verificarTicket');
+Route::post('tickets-api-validar', [TicketApiController::class, 'validarTicket'])->name('api.tickets.validarTicket');

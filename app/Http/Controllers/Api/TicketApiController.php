@@ -49,8 +49,14 @@ class TicketApiController extends Controller
         return TicketResource::make($ticket);
     }
     //----------------------------------------------------------------------
-    public function verificarTicket($user_id, $clave_ticket)
+    public function verificarTicket(Request $request)
     {
+        request()->validate([
+            'user_id' => 'required',
+            'clave_ticket' => 'required'
+        ]);
+
+        $clave_ticket = $request['clave_ticket'];
         $clave_desencriptada = Crypt::decryptString($clave_ticket);
         $ticket = Ticket::find1('clave', $clave_desencriptada);
         if (!$ticket) {
@@ -59,7 +65,7 @@ class TicketApiController extends Controller
                 400
             );
         }
-
+        $user_id = $request['user_id'];
         $user = $ticket->correspondeUser($user_id);
         if (!$user) {
             return response(
@@ -74,8 +80,13 @@ class TicketApiController extends Controller
         ], 201);
     }
     //----------------------------------------------------------------------
-    public function validarTicket($user_id, $ticket_id)
+    public function validarTicket(Request $request)
     {
+        request()->validate([
+            'user_id' => 'required',
+            'ticket_id' => 'required'
+        ]);
+        $ticket_id = $request['ticket_id'];
         $ticket = Ticket::find($ticket_id);
         if (!$ticket['fecha_lectura']) {
             return response(
@@ -83,7 +94,8 @@ class TicketApiController extends Controller
                 402
             );
         }
-
+        
+        $user_id = $request['user_id'];
         $ticket['fecha_lectura'] = now()->format("Y-m-d H:i:s");
         $ticket['user_id'] = $user_id;
         $ticket->save();

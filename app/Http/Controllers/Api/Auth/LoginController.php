@@ -36,4 +36,17 @@ class LoginController extends Controller
         ], 201);
 
     }
+
+    public function eventoDisponible(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required',        
+        ]);  
+        if ($request['user_id']) {            
+            $user = User::find($request['user_id']);
+            return $user->eventosDisponibles();
+        }
+        return response(['message' => 'no existe'], 400);
+    }
+
 }
