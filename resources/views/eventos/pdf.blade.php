@@ -53,6 +53,7 @@
                     <th scope="col">Ubicacion</th>
                     <th scope="col">Sector</th>
                     <th scope="col">Espacio</th>
+                    <th scope="col">Compra</th>
                     <th scope="col">Ingreso</th>
                 </tr>
             </thead>
@@ -64,6 +65,7 @@
                     <td>{{$ticket->ubicacion}}</td>
                     <td>{{$ticket->sector}}</td>
                     <td>{{$ticket->espacio}}</td>
+                    <td>{{$ticket['created_at']}}</td>
                     <td>{{$ticket->fecha_lectura}}</td>                    
                 </tr>
                 @endforeach

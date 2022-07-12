@@ -161,6 +161,7 @@ class EventoController extends Controller
         foreach ($Tickets as $ticket) $lista->prepend($ticket);
         // return $lista;
         $pdf = Pdf::loadView('eventos.pdf',compact('lista', 'evento'));
-        return $pdf->download('eventos.pdf');
+        return $pdf->stream('eventos.pdf');
+        // return $pdf->download('eventos.pdf');
     }
 }

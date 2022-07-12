@@ -8,15 +8,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Gate;
+use PhpParser\Node\Stmt\Return_;
 use Symfony\Component\HttpFoundation\Response;
 
 class ImagenController extends Controller
 {
-
     public function index()
     {
+        $url = config('services.endpoint.service').'/api/imagenes-api';
         // $files = Imagen::all();//File::whereUserId(Auth::id()) -> latest()->get();
-        $coleccion = Http::get('http://127.0.0.1:8000/api/imagenes-api');
+        $coleccion = Http::get($url);
         $files = $coleccion["data"];
         return view('imagen.index', compact('files'));
     }
@@ -40,7 +41,8 @@ class ImagenController extends Controller
             }
             $request['datos'] = $imagen;
         }
-        $response = Http::post('http://127.0.0.1:8000/api/imagenes-api', $request->all());
+        $url = config('services.endpoint.service').'/api/imagenes-api';
+        $response = Http::post($url, $request->all());
         if (isset($response['errors'])) {
             return back()->withErrors($response->json()['errors']);
         } else {
@@ -51,7 +53,8 @@ class ImagenController extends Controller
 
     public function show($id)
     {
-        $data = Http::get('http://127.0.0.1:8000/api/imagenes-api/'.$id);
+        $url = config('services.endpoint.service').'/api/imagenes-api/'.$id;
+        $data = Http::get($url);
         $imagen = $data->json();
         if (isset($imagen['errors'])) {
             abort(403);
@@ -73,7 +76,8 @@ class ImagenController extends Controller
 
     public function destroy( $id)
     {
-        $response = Http::delete('http://127.0.0.1:8000/api/imagenes-api/'.$id);
+        $url = config('services.endpoint.service').'/api/imagenes-api/'.$id;
+        $response = Http::delete($url);
         if (isset($response['errors'])) {
             return back()->withErrors($response->json()['errors']);
         } else {

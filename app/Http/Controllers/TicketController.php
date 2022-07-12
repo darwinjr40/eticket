@@ -131,7 +131,10 @@ class TicketController extends Controller
         unset($tickets[$id]);
         $evento_id = $request['evento_id'];
         $ubicaciones = Ubicacion::where('evento_id', $evento_id)->get();
-        return view('compras.tickets.createLista1', compact('ubicaciones', 'tickets'));
+        $imagenes = Imagen::where('evento_id', $evento_id)->get();
+        $evento = Evento::where('id', $evento_id)->first();
+        $evento['categoria'] = categoriaEvento::find($evento['id_categoria'])->nombre;
+        return view('compras.tickets.createLista1', compact('evento','imagenes','ubicaciones', 'tickets'));
     }
 
     public function index()
