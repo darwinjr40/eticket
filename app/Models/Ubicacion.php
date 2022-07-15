@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Http\Resources\TicketResource;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Crypt;
 
 use App\Traits\ApiTrait;
 class Ubicacion extends Model
@@ -45,4 +47,9 @@ class Ubicacion extends Model
         return $this->hasMany(Sector::class,'id_ubicacion');
     }
 
+    public function correspondeTicket($ticket_key)
+    {
+        
+        
+    }
 }

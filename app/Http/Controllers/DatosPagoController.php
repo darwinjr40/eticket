@@ -96,6 +96,7 @@ class DatosPagoController extends Controller
                 for ($j = 0; $j < $tickets[$i]['cantidad']; $j++) {
                     $t = Ticket::create($tickets[$i]);
                     $t->nota_venta_id = $nota['id'];
+                    $t->clave = $this->generarCodigo(10);
                     $t->save();
                     $this->GuardarQR($t);
                 }
@@ -338,5 +339,16 @@ class DatosPagoController extends Controller
     public function destroy(DatosPago $datosPago)
     {
         //
+    }
+
+    public function generarCodigo($longitud)
+    {
+        $key = '';
+        $pattern = '1234567890abcdefghijklmnopqrstuvwxyz';
+        $max = strlen($pattern) - 1;
+        for ($i = 0; $i < $longitud; $i++) {
+            $key .= $pattern[mt_rand(0, $max)];
+        }
+        return $key;
     }
 }

@@ -44,4 +44,11 @@ class Evento extends Model
     {
         return $this->belongsToMany(User::class);
     }
+    
+    public function ubicacionesDisponibles()
+    {
+        $fechas = Fecha::all()->where('fechaHora','>=', now())->pluck('id_ubicacion');
+        $ubicaciones = $this->ubicaciones()->whereIn('id', $fechas);        
+        return $ubicaciones;
+    }
 }

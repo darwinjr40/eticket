@@ -59,12 +59,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Evento::class)->orderBy('id', 'desc')->as('relation')->withPivot(['fecha'])->withTimestamps();
     }
     
+    //eventos disponibles del usuario 
     public function eventosDisponibles()
     {
          $lista_ubicacion_id =  DB::table('fechas as f')
         ->select('f.id_ubicacion', DB::raw('Max(f."fechaHora") as fecha_maxima'))
         ->groupBy('f.id_ubicacion')
-        ->havingRaw('Max(f."fechaHora") <= ?', [now()])
+        ->havingRaw('Max(f."fechaHora") >= ?', [now()])
         ->pluck('f.id_ubicacion');    
         $lista = new Collection();
         foreach ($this->eventos as $evento) {

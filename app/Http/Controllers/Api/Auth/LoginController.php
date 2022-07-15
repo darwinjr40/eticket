@@ -20,33 +20,48 @@ class LoginController extends Controller
         if (!$user) {
             return response()->json([
                 'message' => 'Correo electronico no encontrado',
+                'error' => 'Ocurrio un problema',
             ], 401);
         }
 
         if (!Hash::check($request['password'], $user->password)) {
             return response([
                 'message' => 'Contraseña incorrecta',
+                'error' => 'Ocurrio un problema'
             ], 402);
+        }
+
+        if ($user['rol_id'] != User::EMPLEADO) {
+            return response([
+                'message' => 'El usuario no es empleado',
+                'error' => 'Ocurrio un problema'
+            ], 403);
         }
         $token = $user->createToken('Android SDK built for x86')->plainTextToken;
         // $token = $user->createToken('Android SDK built for x86')->accessToken;
         return response([
             'user' => $user,
-            'token' => $token
+            'token' => $token,
+            'success' => 'Exito'
         ], 201);
 
     }
 
-    public function eventoDisponible(Request $request)
+    public function eventoDisponible($user_id)
     {
-        $request->validate([
-            'user_id' => 'required',        
-        ]);  
-        if ($request['user_id']) {            
-            $user = User::find($request['user_id']);
-            return $user->eventosDisponibles();
+        
+        $user = User::find($user_id);
+        if ($user) {            
+            return response([
+                'message' => 'Se encontraron eventos',
+                'success' => 'Exito',
+                'eventos' => $user->eventosDisponibles(),
+            ], 200);
         }
-        return response(['message' => 'no existe'], 400);
+        return response([
+            'message' => '!No Existe el Usuario',
+            'error' => 'Ocurrio un problema'
+        ], 400);
     }
 
 }

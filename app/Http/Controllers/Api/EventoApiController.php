@@ -48,4 +48,20 @@ class EventoApiController extends Controller
         $evento -> delete();
         return EventoResource::make($evento);
     }
+    
+    public function UbicacionesDisponibles($id)
+    {       
+        $evento = Evento::find($id);
+        if ($evento) {
+            return response([
+                'message' => 'Se encontraron ubicaciones',
+                'success' => 'Exito',
+                'ubicaciones' => $evento->ubicacionesDisponibles,
+            ], 200);
+        }
+        return response([
+            'message' => '!No Existe la Ubicacion',
+            'error' => 'Ocurrio un problema'
+        ], 400);    
+    }
 }

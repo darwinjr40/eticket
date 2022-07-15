@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
         $this->call(UbicacionSeeder::class);
         $this->call(TipoPagoSeeder::class);
         $this->call(NotaVentaSeeder::class);
+        $this->call(EventoUserSeeder::class);
+
 
         //crea 10 registros de fechas
         Fecha::factory(15)->create();

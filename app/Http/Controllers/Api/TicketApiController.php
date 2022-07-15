@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TicketResource;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -88,19 +89,33 @@ class TicketApiController extends Controller
         ]);
         $ticket_id = $request['ticket_id'];
         $ticket = Ticket::find($ticket_id);
-        if (!$ticket['fecha_lectura']) {
+        // return $ticket;
+        if (!$ticket) {
             return response(
-                ['error' => '! Error al buscar ticket', 'message' => '!Error, El ticket ya fue leido'],
-                402
+                ['error' => '! Error al buscar ticket', 'message' => '!Error, El ticket No existe'],
+                401
             );
         }
+        if ($ticket['fecha_lectura']) {
+            return response( [
+                'error' => '! Error al buscar ticket', 
+                'message' => '!Error, El ticket ya fue leido'
+            ], 402 );
+        }
         
-        $user_id = $request['user_id'];
+        $user = User::find($request['user_id']);
+        if (!$user) {
+            return response( [
+                'error' => '!Error, usuario no valido', 
+                'message' => '!El Usuarion no existe'
+            ], 403);
+        }
         $ticket['fecha_lectura'] = now()->format("Y-m-d H:i:s");
-        $ticket['user_id'] = $user_id;
+        $ticket['user_id'] = $user->id;
         $ticket->save();
         return response([
-            'success' => '! Exito'
+            'success' => '! Exito',
+            'message' => 'Se Registro correctamente el Ticket',
         ], 202);
     }
 }

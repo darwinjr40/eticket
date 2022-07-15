@@ -11,6 +11,7 @@ use App\Models\Sector;
 use App\Models\Ticket;
 use App\Models\Ubicacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use function PHPUnit\Framework\returnSelf;
 
@@ -41,7 +42,7 @@ class TicketController extends Controller
                     $t['id'] = count($tickets);
                     $t['fecha']  = $fecha->fechaHora;
                     $t['clave']  = $this->generarCodigo(6);
-                    $t['cliente']  = 'el autenticado';
+                    $t['cliente']  = Auth::user()->name;
                     $t['evento']  = $evento->titulo;
                     $t['ubicacion']  = $ubicacion->nombre;
 
@@ -60,7 +61,7 @@ class TicketController extends Controller
                     $t['id'] = count($tickets);
                     $t['fecha']  = $fecha->fechaHora;
                     $t['clave']  = $this->generarCodigo(6);
-                    $t['cliente']  = 'el autenticado';
+                    $t['cliente']  = Auth::user()->name;
                     $t['evento']  = $evento->titulo;
                     $t['ubicacion']  = $ubicacion->nombre;
     
@@ -80,7 +81,7 @@ class TicketController extends Controller
                     $t['id'] = count($tickets);
                     $t['fecha']  = $fecha->fechaHora;
                     $t['clave']  = $this->generarCodigo(6);
-                    $t['cliente']  = 'el autenticado';
+                    $t['cliente']  = Auth::user()->name;
                     $t['evento']  = $evento->titulo;
                     $t['ubicacion']  = $ubicacion->nombre;    
                     $t['ubicacion_id']  = $ubicacion->id;

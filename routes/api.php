@@ -27,10 +27,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('login-api', [LoginController::class, 'store'])->name('api.login');
-Route::post('login-evento-disponible', [LoginController::class, 'eventoDisponible'])->name('api.login.eventoDisponible');
+Route::get('login-evento-disponible/{user_id}', [LoginController::class, 'eventoDisponible'])->name('api.login.eventoDisponible');
 Route::apiResource('eventos-api', EventoApiController::class)->names('api.eventos');
+Route::get('eventos-api-disponibles/{evento_id}', [EventoApiController::class, 'UbicacionesDisponibles'])->name('api.eventos.disponibles');
 Route::apiResource('imagenes-api', ImagenApiController::class)->names('api.imagenes');
 Route::apiResource('ubicaciones', UbicacionApiController::class)->names('api.ubicaciones');
+Route::get('ubicaciones-corresponde/{ubicacion_id}/{ticket_key}', [UbicacionApiController::class, 'correspondeTicket'])->name('api.ubicaciones.corresponde');
 
 
 
