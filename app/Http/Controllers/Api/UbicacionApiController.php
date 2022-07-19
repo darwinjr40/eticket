@@ -66,7 +66,7 @@ class UbicacionApiController extends Controller
                 'error' => 'Ocurrio un problema',
             ], 401);
         }
-
+        return 'nise';
         $ticket = Ticket::where('clave', $desencriptada)->first();
         if (!$ticket) {
             return response()->json([
@@ -74,7 +74,7 @@ class UbicacionApiController extends Controller
                 'error' => 'Ocurrio un problema',
             ], 401);
         }
-        
+
         $ubicacion = Ubicacion::where('id', $ubicacion_id)->first();
         if (!$ubicacion) {
             return response()->json([
@@ -97,7 +97,7 @@ class UbicacionApiController extends Controller
                 'error' => 'Ocurrio un problema',
             ], 401);
         }
-
+        return $ticket;
         return response()->json([
             'ticket' => TicketResource::make($ticket),
             'message' => 'Ticket encontrado',
