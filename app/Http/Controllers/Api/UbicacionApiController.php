@@ -81,7 +81,8 @@ class UbicacionApiController extends Controller
                 'error' => 'Ocurrio un problema',
             ], 401);
         }
-        $ubicacion = Ubicacion::findOrFail($ubicacion_id);
+        // $ubicacion = Ubicacion::findOrFail($ubicacion_id);
+        $ubicacion = null;
         if ($ticket->espacio_id) {
             $ubicacion = $ticket->Espacio->Sector->Ubicacion->where('id', $ubicacion_id)->first();
         } else if ($ticket->sector_id) {
