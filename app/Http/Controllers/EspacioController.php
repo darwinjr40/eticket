@@ -77,7 +77,7 @@ class EspacioController extends Controller
             $espa->descripcion = $request->descripcion;
             $espa->capacidad = $request->capacidad;
             $espa->precio=$request->precio;
-            $espa->estado="indispuesto";
+            $espa->estado= Espacio::DISPONIBLE;
             $espa->id_sector = $id_sector;
             $espa->save();
         }else{
