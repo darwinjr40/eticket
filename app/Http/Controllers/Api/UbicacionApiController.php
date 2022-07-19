@@ -73,7 +73,7 @@ class UbicacionApiController extends Controller
                 'error' => 'Ocurrio un problema',
             ], 401);
         } 
-        return 'nise';
+        return $ticket;
         
         $ubicacion = Ubicacion::where('id', $ubicacion_id)->first();
         if (!$ubicacion) {
