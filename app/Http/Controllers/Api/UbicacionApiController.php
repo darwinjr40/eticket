@@ -58,7 +58,6 @@ class UbicacionApiController extends Controller
 
     public function correspondeTicket($ubicacion_id, $ticket_key)
     {
-        return 'nise';
         try {
             $desencriptada = Crypt::decryptString($ticket_key);  
         } catch (\Throwable $th) {
@@ -67,6 +66,7 @@ class UbicacionApiController extends Controller
                 'error' => 'Ocurrio un problema',
             ], 401);
         }
+
         $ticket = Ticket::where('clave', $desencriptada)->first();
         if (!$ticket) {
             return response()->json([
@@ -74,6 +74,7 @@ class UbicacionApiController extends Controller
                 'error' => 'Ocurrio un problema',
             ], 401);
         }
+        
         $ubicacion = Ubicacion::where('id', $ubicacion_id)->first();
         if (!$ubicacion) {
             return response()->json([
