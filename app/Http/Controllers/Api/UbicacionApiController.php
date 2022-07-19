@@ -66,15 +66,15 @@ class UbicacionApiController extends Controller
                 'error' => 'Ocurrio un problema',
             ], 401);
         }
-        return 'nise';
         $ticket = Ticket::where('clave', $desencriptada)->first();
         if (!$ticket) {
             return response()->json([
                 'message' => 'Ticket no encontrado',
                 'error' => 'Ocurrio un problema',
             ], 401);
-        }
-
+        } 
+        return 'nise';
+        
         $ubicacion = Ubicacion::where('id', $ubicacion_id)->first();
         if (!$ubicacion) {
             return response()->json([
