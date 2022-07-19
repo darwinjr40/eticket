@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\EventoUser;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -35,7 +36,7 @@ class UserSeeder extends Seeder
             'password'=> Hash::make('00000000'),
             'rol_id'=> 3
         ]);
-
+        
         User::create([
             'name'=> 'pedro lopez',
             'email'=> 'pedro@gmail.com',
@@ -43,6 +44,6 @@ class UserSeeder extends Seeder
             'rol_id'=> 3
         ]);
 
-
+        
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Contacto;
+use App\Models\EventoUser;
 use App\Models\Fecha;
 use Illuminate\Database\Seeder;
 //use Spatie\Permission\Models\Permission;
@@ -31,5 +32,6 @@ class DatabaseSeeder extends Seeder
 
         //crea 10 registros de fechas
         Fecha::factory(15)->create();
+
     }
 }

@@ -15,16 +15,24 @@ class EventoUserSeeder extends Seeder
     public function run()
     {
         EventoUser::create([
-            'user_id' => 4, 
+            'user_id' => 3, 
             'evento_id' => 1,
+            'fecha' => now()->format("Y-m-d H:i:s"),
         ]);
         EventoUser::create([
             'user_id' => 3, 
             'evento_id' => 2,
+            'fecha' => now()->format("Y-m-d H:i:s"),
         ]);
         EventoUser::create([
-            'user_id' => 3, 
+            'user_id' => 4, 
+            'evento_id' => 2,
+            'fecha' => now()->format("Y-m-d H:i:s"),
+        ]);
+        EventoUser::create([
+            'user_id' => 4, 
             'evento_id' => 3,
+            'fecha' => now()->format("Y-m-d H:i:s"),
         ]);
     }
 }
