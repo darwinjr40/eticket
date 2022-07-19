@@ -94,8 +94,15 @@ class UbicacionApiController extends Controller
             $ubicacion = $ticket->Ubicacion;
         }
         
-        return $ubicacion;
-        if (!$ubicacion || ($ubicacion->id != $ubicacion_id)) {
+        // return $ubicacion;
+        if (!$ubicacion) {
+            return response()->json([
+                'message' => 'Ticket no encontrado.',
+                'error' => 'Ocurrio un problema',
+            ], 401);
+        }
+        
+        if ($ubicacion_id != $ubicacion->id) {
             return response()->json([
                 'message' => 'Ticket no corresponde a la ubicacion',
                 'error' => 'Ocurrio un problema',
