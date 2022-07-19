@@ -12,12 +12,14 @@ class TicketResource extends JsonResource
         return[
             'id' => $this->id,
             'fecha_compra' => $this->created_at->format("Y-m-d H:i:s"),
-            'fecha_lectura' => (!$this->fecha_lectura)? null : $this->fecha_lectura->format("Y-m-d H:i:s"),
+            // 'fecha_lectura' => (!$this->fecha_lectura)? null : $this->fecha_lectura->format("Y-m-d H:i:s"),
+            'fecha_lectura' => null,
             'precio' => $this->precio,
             // 'clave' => $this->clave,
             'cliente' => $this->cliente,
             'evento' => $this->evento,
             'ubicacion' => $this->ubicacion,
+            'sector' => $this->sector,
             'espacio' => $this->espacio,
             'tipo' => $this->tipo,
             //es para que nos retorne las relaciones.

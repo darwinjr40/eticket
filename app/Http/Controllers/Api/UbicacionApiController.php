@@ -10,8 +10,7 @@ use App\Models\Ubicacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
-class UbicacionApiController extends Controller
-// {       
+class UbicacionApiController extends Controller       
 {
     public function __construct(){
         // $this->middleware('auth:api');
@@ -73,18 +72,37 @@ class UbicacionApiController extends Controller
                 'message' => 'Ticket no encontrado',
                 'error' => 'Ocurrio un problema',
             ], 401);
-        }
+        } 
         
-        // $ubicacion = Ubicacion::findOrFail($ubicacion_id);
-        if ($ticket->espacio_id) {
-            $ubicacion = $ticket->Espacio->Sector->Ubicacion->where('id', $ubicacion_id)->first();
-        } else if ($ticket->sector_id) {
-            $ubicacion = $ticket->Sector->Ubicacion->where('id', $ubicacion_id)->first();
-        } else if ($ticket->ubicacion_id) {
-            $ubicacion = $ticket->Ubicacion->where('id', $ubicacion_id)->first();
-        }
-        
+        $ubicacion = Ubicacion::where('id', $ubicacion_id)->first();
         if (!$ubicacion) {
+            return response()->json([
+                'message' => 'No existe la ubicacion',
+                'error' => 'Ocurrio un problema',
+            ], 401);
+        }
+        // $ubicacion = Ubicacion::findOrFail($ubicacion_id);
+        $ubicacion = null;
+        if ($ticket->espacio_id) {
+            // $ubicacion = $ticket->Espacio->Sector->Ubicacion->where('id', $ubicacion_id)->first();
+            $ubicacion = $ticket->Espacio->Sector->Ubicacion;
+        } else if ($ticket->sector_id) {
+            // $ubicacion = $ticket->Sector->Ubicacion->where('id', $ubicacion_id)->first();
+            $ubicacion = $ticket->Sector->Ubicacion;
+        } else if ($ticket->ubicacion_id) {
+            // $ubicacion = $ticket->Ubicacion->where('id', $ubicacion_id)->first();
+            $ubicacion = $ticket->Ubicacion;
+        }
+        
+        // return $ubicacion;
+        if (!$ubicacion) {
+            return response()->json([
+                'message' => 'Ticket no encontrado.',
+                'error' => 'Ocurrio un problema',
+            ], 401);
+        }
+        
+        if ($ubicacion_id != $ubicacion->id) {
             return response()->json([
                 'message' => 'Ticket no corresponde a la ubicacion',
                 'error' => 'Ocurrio un problema',
