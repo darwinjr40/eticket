@@ -10,8 +10,7 @@ use App\Models\Ubicacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
-class UbicacionApiController extends Controller
-// {       
+class UbicacionApiController extends Controller       
 {
     public function __construct(){
         // $this->middleware('auth:api');
@@ -59,6 +58,7 @@ class UbicacionApiController extends Controller
 
     public function correspondeTicket($ubicacion_id, $ticket_key)
     {
+        return 'nise';
         try {
             $desencriptada = Crypt::decryptString($ticket_key);  
         } catch (\Throwable $th) {
