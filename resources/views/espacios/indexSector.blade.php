@@ -44,7 +44,7 @@
                                                 <span class="input-group-text">
                                                     <i class="fa fa-credit-card" aria-hidden="true"> Precio</i>
                                                 </span>
-                                                <input type="number" id="precio" name="precio" class="form-control">
+                                                <input type="number" id="precio" name="precio" class="form-control" min="0">
                                             </div>
                                         </div>
                                     </div>

@@ -88,7 +88,7 @@
 
                     <td>
                         @foreach ($ticket->imagenesqr as $img)
-                            <img src="{{$img->path}}" width="100px" height="100px">
+                            <img src="{{$img->path}}" width="200px" height="200px">
                         @endforeach
                     </td>
                 </tr>
