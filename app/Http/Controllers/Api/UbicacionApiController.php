@@ -84,13 +84,17 @@ class UbicacionApiController extends Controller
         // $ubicacion = Ubicacion::findOrFail($ubicacion_id);
         $ubicacion = null;
         if ($ticket->espacio_id) {
-            $ubicacion = $ticket->Espacio->Sector->Ubicacion->where('id', $ubicacion_id)->first();
+            // $ubicacion = $ticket->Espacio->Sector->Ubicacion->where('id', $ubicacion_id)->first();
+            $ubicacion = $ticket->Espacio->Sector->Ubicacion;
         } else if ($ticket->sector_id) {
-            $ubicacion = $ticket->Sector->Ubicacion->where('id', $ubicacion_id)->first();
+            // $ubicacion = $ticket->Sector->Ubicacion->where('id', $ubicacion_id)->first();
+            $ubicacion = $ticket->Sector->Ubicacion;
         } else if ($ticket->ubicacion_id) {
-            $ubicacion = $ticket->Ubicacion->where('id', $ubicacion_id)->first();
+            // $ubicacion = $ticket->Ubicacion->where('id', $ubicacion_id)->first();
+            $ubicacion = $ticket->Ubicacion;
         }
         
+        return $ubicacion;
         if (!$ubicacion || ($ubicacion->id != $ubicacion_id)) {
             return response()->json([
                 'message' => 'Ticket no corresponde a la ubicacion',
