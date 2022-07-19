@@ -76,12 +76,11 @@
                                                     <i class="fa fa-bars"> Estado</i>
                                                 </span>
                                                 <select name="estado" id="estado" class="form-control">
-                                                    <option value="{{ $evento->estado }}">
-                                                        {{ old('estado', $evento->estado) }}</option>
-                                                    <option value="{{($evento->estado == 'desactivado')? 'activado': 'desactivado'}}">{{ ($evento->estado == 'desactivado')? 'activado': 'desactivado'  }}</option>
-                                                    {{-- <option value="inicio">Inicio</option>
-                                                        <option value="proceso">Proceso</option>
-                                                        <option value="fin">Fin</option> --}}
+                                                    <option value="{{ $evento->estado }}">{{ old('estado', $evento->estado) }}</option>
+                                                    {{-- <option value="{{($evento->estado == 'desactivado')? 'activado': 'desactivado'}}">{{ ($evento->estado == 'desactivado')? 'activado': 'desactivado'  }}</option> --}}
+                                                    <option value="inicio">Inicio</option>
+                                                    <option value="proceso">Proceso</option>
+                                                    <option value="fin">Fin</option>
                                                 </select>
                                             </div>
                                         </div>
