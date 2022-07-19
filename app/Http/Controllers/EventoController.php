@@ -130,7 +130,7 @@ class EventoController extends Controller
     }
 
     public function showcliente(){
-        $eventos=Evento::where('estado','Inicio')->get();
+        $eventos=Evento::where('estado','inicio')->get();
         $eventos->load('imagenes');
         // return $eventos;
         // return $eventos;//[0]['imagenes'][0];
