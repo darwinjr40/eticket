@@ -18,6 +18,7 @@ class TicketResource extends JsonResource
             'cliente' => $this->cliente,
             'evento' => $this->evento,
             'ubicacion' => $this->ubicacion,
+            'sector' => $this->sector,
             'espacio' => $this->espacio,
             'tipo' => $this->tipo,
             //es para que nos retorne las relaciones.
