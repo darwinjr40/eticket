@@ -74,15 +74,21 @@ class UbicacionApiController extends Controller
                 'error' => 'Ocurrio un problema',
             ], 401);
         }
-        
-        // $ubicacion = Ubicacion::findOrFail($ubicacion_id);
-        if ($ticket->espacio_id) {
-            $ubicacion = $ticket->Espacio->Sector->Ubicacion->where('id', $ubicacion_id)->first();
-        } else if ($ticket->sector_id) {
-            $ubicacion = $ticket->Sector->Ubicacion->where('id', $ubicacion_id)->first();
-        } else if ($ticket->ubicacion_id) {
-            $ubicacion = $ticket->Ubicacion->where('id', $ubicacion_id)->first();
+        $ubicacion = Ubicacion::where('id', $ubicacion_id)->first();
+        if (!$ubicacion) {
+            return response()->json([
+                'message' => 'No existe la ubicacion',
+                'error' => 'Ocurrio un problema',
+            ], 401);
         }
+        // $ubicacion = Ubicacion::findOrFail($ubicacion_id);
+        // if ($ticket->espacio_id) {
+        //     $ubicacion = $ticket->Espacio->Sector->Ubicacion->where('id', $ubicacion_id)->first();
+        // } else if ($ticket->sector_id) {
+        //     $ubicacion = $ticket->Sector->Ubicacion->where('id', $ubicacion_id)->first();
+        // } else if ($ticket->ubicacion_id) {
+        //     $ubicacion = $ticket->Ubicacion->where('id', $ubicacion_id)->first();
+        // }
         
         if (!$ubicacion) {
             return response()->json([
